@@ -1,3 +1,27 @@
+<?php echo $this->Html->css(array('bootstrap-editable.css'), 'stylesheet', array('inline' => false)); ?>
+<?php echo $this->Html->script(array('bootstrap-editable.js'), array('inline' => false)); ?>
+
+<script>
+$(document).ready(function() {
+
+	$('.name').editable({
+		type: 'text',
+		name: 'name',
+		url: '/admin/products/editable',
+		title: 'Name',
+		placement: 'right',
+	});
+
+	$('.price').editable({
+		type: 'text',
+		name: 'price',
+		url: '/admin/products/editable',
+		title: 'Price',
+		placement: 'left',
+	});
+
+});
+</script>
 <h2>Products</h2>
 
 <table class="table-striped table-bordered table-condensed table-hover">
@@ -17,12 +41,12 @@
 	</tr>
 	<?php foreach ($products as $product): ?>
 	<tr>
-		<td><?php echo $this->Html->Image('/images/' . $product['Product']['image'], array('width' => 100, 'height' => 100, 'alt' => $product['Product']['name'], 'class' => 'image')); ?></td>
-		<td><?php echo h($product['Product']['name']); ?></td>
+		<td><?php echo $this->Html->Image('/images/' . $product['Product']['image'], array('width' => 100, 'height' => 100, 'alt' => $product['Product']['image'], 'class' => 'image')); ?></td>
+		<td><span class="name" data-value="<?php echo $product['Product']['name']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['name']; ?></span></td>
 		<td><?php echo h($product['Product']['slug']); ?></td>
 		<td><?php echo h($product['Product']['description']); ?></td>
 		<td><?php echo h($product['Product']['image']); ?></td>
-		<td><?php echo h($product['Product']['price']); ?></td>
+		<td><span class="price" data-value="<?php echo $product['Product']['price']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['price']; ?></span></td>
 		<td><?php echo h($product['Product']['weight']); ?></td>
 		<td><?php echo h($product['Product']['views']); ?></td>
 		<td><?php echo $this->Html->link($this->Html->image('icon_' . $product['Product']['active'] . '.png'), array('controller' => 'products', 'action' => 'switch', 'active', $product['Product']['id']), array('class' => 'status', 'escape' => false)); ?></td>
