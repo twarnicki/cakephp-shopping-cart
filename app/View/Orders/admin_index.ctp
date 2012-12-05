@@ -13,7 +13,7 @@
 		<th><?php echo $this->Paginator->sort('status');?></th>
 		<th><?php echo $this->Paginator->sort('created');?></th>
 		<th><?php echo $this->Paginator->sort('modified');?></th>
-		<th class="actions"><?php echo __('Actions');?></th>
+		<th class="actions">Actions</th>
 	</tr>
 	<?php foreach ($orders as $order): ?>
 	<tr>

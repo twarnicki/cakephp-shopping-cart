@@ -3,57 +3,46 @@
 	<dt><?php echo __('Id'); ?></dt>
 	<dd>
 		<?php echo h($order['Order']['id']); ?>
-		&nbsp;
 	</dd>
 	<dt><?php echo __('First Name'); ?></dt>
 	<dd>
 		<?php echo h($order['Order']['first_name']); ?>
-		&nbsp;
 	</dd>
 	<dt><?php echo __('Last Name'); ?></dt>
 	<dd>
 		<?php echo h($order['Order']['last_name']); ?>
-		&nbsp;
 	</dd>
 	<dt><?php echo __('Email'); ?></dt>
 	<dd>
 		<?php echo h($order['Order']['email']); ?>
-		&nbsp;
 	</dd>
 	<dt><?php echo __('Subtotal'); ?></dt>
 	<dd>
 		<?php echo h($order['Order']['subtotal']); ?>
-		&nbsp;
 	</dd>
 	<dt><?php echo __('Tax'); ?></dt>
 	<dd>
 		<?php echo h($order['Order']['tax']); ?>
-		&nbsp;
 	</dd>
 	<dt><?php echo __('Shipping'); ?></dt>
 	<dd>
 		<?php echo h($order['Order']['shipping']); ?>
-		&nbsp;
 	</dd>
 	<dt><?php echo __('Total'); ?></dt>
 	<dd>
 		<?php echo h($order['Order']['total']); ?>
-		&nbsp;
 	</dd>
 	<dt><?php echo __('Status'); ?></dt>
 	<dd>
 		<?php echo h($order['Order']['status']); ?>
-		&nbsp;
 	</dd>
-	<dt><?php echo __('Created'); ?></dt>
+	<dt>Created</dt>
 	<dd>
 		<?php echo h($order['Order']['created']); ?>
-		&nbsp;
 	</dd>
-	<dt><?php echo __('Modified'); ?></dt>
+	<dt>Modified</dt>
 	<dd>
 		<?php echo h($order['Order']['modified']); ?>
-		&nbsp;
 	</dd>
 </dl>
 
@@ -81,8 +70,8 @@
 		<th><?php echo __('Name'); ?></th>
 		<th><?php echo __('Quantity'); ?></th>
 		<th><?php echo __('Price'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Modified'); ?></th>
+		<th>Created</th>
+		<th>Modified</th>
 		<th class="actions">Actions</th>
 	</tr>
 	<?php foreach ($order['OrderItem'] as $orderItem): ?>
