@@ -10,6 +10,11 @@ class ShopController extends AppController {
 		'AuthorizeNet'
 	);
 
+	public function aaa () {
+		echo
+		parent
+	}
+ 
 //////////////////////////////////////////////////
 
 	public $uses = 'Product';
