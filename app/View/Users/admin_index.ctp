@@ -1,6 +1,6 @@
 <h2>Users</h2>
 
-<table class="table table-striped table-bordered table-condensed table-hover">
+<table class="table-striped table-bordered table-condensed table-hover">
 	<tr>
 		<th><?php echo $this->Paginator->sort('id');?></th>
 		<th><?php echo $this->Paginator->sort('username');?></th>
