@@ -56,7 +56,8 @@ class Product extends AppModel {
 			'foreignKey' => 'manufacturer_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => '',
+			'counterCache' => true
 		)
 	);
 
