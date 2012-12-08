@@ -4,6 +4,15 @@
 <script>
 $(document).ready(function() {
 
+	$('.category').editable({
+		type: 'select',
+		name: 'category_id',
+		url: '<?php echo $this->webroot; ?>admin/products/editable',
+		title: 'Category',
+		source: <?php echo json_encode($categorieseditable); ?>,
+		placement: 'right',
+	});
+
 	$('.manufacturer').editable({
 		type: 'select',
 		name: 'manufacturer_id',
@@ -104,6 +113,7 @@ $(document).ready(function() {
 <table class="table-striped table-bordered table-condensed table-hover">
 	<tr>
 		<th><?php echo $this->Paginator->sort('image'); ?></th>
+		<th><?php echo $this->Paginator->sort('category_id'); ?></th>
 		<th><?php echo $this->Paginator->sort('manufacturer_id'); ?></th>
 		<th><?php echo $this->Paginator->sort('name'); ?></th>
 		<th><?php echo $this->Paginator->sort('slug'); ?></th>
@@ -120,6 +130,7 @@ $(document).ready(function() {
 	<?php foreach ($products as $product): ?>
 	<tr>
 		<td><?php echo $this->Html->Image('/images/small/' . $product['Product']['image'], array('width' => 100, 'height' => 100, 'alt' => $product['Product']['image'], 'class' => 'image')); ?></td>
+		<td><span class="category" data-value="<?php echo $product['Category']['id']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Category']['name']; ?></span></td>
 		<td><span class="manufacturer" data-value="<?php echo $product['Manufacturer']['id']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Manufacturer']['name']; ?></span></td>
 		<td><span class="name" data-value="<?php echo $product['Product']['name']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['name']; ?></span></td>
 		<td><?php echo h($product['Product']['slug']); ?></td>

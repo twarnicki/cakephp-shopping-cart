@@ -246,7 +246,8 @@ class ProductsController extends AppController {
 
 		$this->paginate = array(
 			'contain' => array(
-				'Manufacturer'
+				'Category',
+				'Manufacturer',
 			),
 			'recursive' => -1,
 			'limit' => 50,
@@ -268,7 +269,21 @@ class ProductsController extends AppController {
 			);
 		}
 
-		$this->set(compact('products', 'manufacturers', 'manufacturerseditable'));
+		$categories = $this->Product->Category->find('list', array(
+			'recursive' => -1,
+			'order' => array(
+				'Category.name' => 'ASC'
+			)
+		));
+		$categorieseditable = array();
+		foreach ($categories as $key => $value) {
+			$categorieseditable[] = array(
+				'value' => $key,
+				'text' => $value,
+			);
+		}
+
+		$this->set(compact('products', 'manufacturers', 'manufacturerseditable', 'categorieseditable'));
 
 	}
 
@@ -310,8 +325,17 @@ class ProductsController extends AppController {
 		if (!$this->Product->exists($id)) {
 			throw new NotFoundException(__('Invalid product'));
 		}
-		$options = array('conditions' => array('Product.' . $this->Product->primaryKey => $id));
-		$this->set('product', $this->Product->find('first', $options));
+		$product = $this->Product->find('first', array(
+			'recursive' => -1,
+			'contain' => array(
+				'Category',
+				'Manufacturer',
+			),
+			'conditions' => array(
+				'Product.id' => $id
+			)
+		));
+		$this->set(compact('product'));
 	}
 
 ////////////////////////////////////////////////////////////
@@ -328,6 +352,9 @@ class ProductsController extends AppController {
 		}
 		$manufacturers = $this->Product->Manufacturer->find('list');
 		$this->set(compact('manufacturers'));
+
+		$categories = $this->Product->Category->find('list');
+		$this->set(compact('categories'));
 	}
 
 ////////////////////////////////////////////////////////////
@@ -353,6 +380,10 @@ class ProductsController extends AppController {
 		}
 		$manufacturers = $this->Product->Manufacturer->find('list');
 		$this->set(compact('manufacturers'));
+
+		$categories = $this->Product->Category->find('list');
+		$this->set(compact('categories'));
+
 	}
 
 ////////////////////////////////////////////////////////////

@@ -4,6 +4,7 @@
 
 <?php echo $this->Form->create('Product'); ?>
 <?php echo $this->Form->input('id'); ?>
+<?php echo $this->Form->input('category_id'); ?>
 <?php echo $this->Form->input('manufacturer_id'); ?>
 <?php echo $this->Form->input('name'); ?>
 <?php echo $this->Form->input('slug'); ?>

@@ -66,6 +66,14 @@ class Product extends AppModel {
 ////////////////////////////////////////////////////////////
 
 	public $belongsTo = array(
+		'Category' => array(
+			'className' => 'Category',
+			'foreignKey' => 'category_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'counterCache' => true
+		),
 		'Manufacturer' => array(
 			'className' => 'Manufacturer',
 			'foreignKey' => 'manufacturer_id',
@@ -73,7 +81,7 @@ class Product extends AppModel {
 			'fields' => '',
 			'order' => '',
 			'counterCache' => true
-		)
+		),
 	);
 
 ////////////////////////////////////////////////////////////
