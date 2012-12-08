@@ -6,7 +6,7 @@ class ManufacturersController extends AppController {
 
 	public function index() {
 		$manufacturers = $this->Manufacturer->find('all', array(
-			'recursive' => 1,
+			'recursive' => -1,
 			'order' => array(
 				'Manufacturer.name' => 'ASC'
 			)
@@ -31,7 +31,7 @@ class ManufacturersController extends AppController {
 ////////////////////////////////////////////////////////////
 
 	public function admin_index() {
-		$this->Manufacturer->recursive = 0;
+		$this->Manufacturer->recursive = -1;
 		$this->set('manufacturers', $this->paginate());
 	}
 

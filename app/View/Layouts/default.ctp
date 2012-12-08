@@ -43,6 +43,7 @@
 					<a class="brand" href="<?php echo $this->Html->url('/'); ?>"><?php echo Configure::read('Settings.SHOP_TITLE'); ?></a>
 						<ul class="nav">
 							<li><?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?></li>
+							<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index')); ?></li>
 							<li><?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?></li>
 							<li><?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart')); ?></li>
 						</ul>
