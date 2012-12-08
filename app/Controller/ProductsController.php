@@ -181,7 +181,10 @@ class ProductsController extends AppController {
 		);
 		$products = $this->paginate('Product');
 
-		$this->set(compact('products'));
+		$manufacturers = $this->Product->Manufacturer->findList();
+
+		$this->set(compact('products', 'manufacturers'));
+
 	}
 
 ////////////////////////////////////////////////////////////

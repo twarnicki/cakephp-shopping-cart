@@ -4,19 +4,44 @@
 <script>
 $(document).ready(function() {
 
+	$('.manufacturer').editable({
+		type: 'select',
+		name: 'manufacturer_id',
+		url: '<?php echo $this->webroot; ?>admin/products/editable',
+		title: 'Manufacturer',
+		source: <?php echo json_encode($manufacturers); ?>,
+		placement: 'right',
+	});
+
 	$('.name').editable({
 		type: 'text',
 		name: 'name',
-		url: '/admin/products/editable',
+		url: '<?php echo $this->webroot; ?>admin/products/editable',
 		title: 'Name',
+		placement: 'right',
+	});
+
+	$('.description').editable({
+		type: 'textarea',
+		name: 'description',
+		url: '<?php echo $this->webroot; ?>admin/photographs/editable',
+		title: 'Description',
 		placement: 'right',
 	});
 
 	$('.price').editable({
 		type: 'text',
 		name: 'price',
-		url: '/admin/products/editable',
+		url: '<?php echo $this->webroot; ?>admin/products/editable',
 		title: 'Price',
+		placement: 'left',
+	});
+
+	$('.weight').editable({
+		type: 'text',
+		name: 'weight',
+		url: '<?php echo $this->webroot; ?>admin/products/editable',
+		title: 'Weight',
 		placement: 'left',
 	});
 
@@ -43,13 +68,13 @@ $(document).ready(function() {
 	<?php foreach ($products as $product): ?>
 	<tr>
 		<td><?php echo $this->Html->Image('/images/small/' . $product['Product']['image'], array('width' => 100, 'height' => 100, 'alt' => $product['Product']['image'], 'class' => 'image')); ?></td>
-		<td><?php echo h($product['Manufacturer']['name']); ?></td>
+		<td><span class="manufacturer" data-value="<?php echo $product['Manufacturer']['id']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Manufacturer']['name']; ?></span></td>
 		<td><span class="name" data-value="<?php echo $product['Product']['name']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['name']; ?></span></td>
 		<td><?php echo h($product['Product']['slug']); ?></td>
-		<td><?php echo h($product['Product']['description']); ?></td>
+		<td><span class="description" data-value="<?php echo $product['Product']['description']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['description']; ?></span></td>
 		<td><?php echo h($product['Product']['image']); ?></td>
 		<td><span class="price" data-value="<?php echo $product['Product']['price']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['price']; ?></span></td>
-		<td><?php echo h($product['Product']['weight']); ?></td>
+		<td><span class="weight" data-value="<?php echo $product['Product']['weight']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['weight']; ?></span></td>
 		<td><?php echo h($product['Product']['views']); ?></td>
 		<td><?php echo $this->Html->link($this->Html->image('icon_' . $product['Product']['active'] . '.png'), array('controller' => 'products', 'action' => 'switch', 'active', $product['Product']['id']), array('class' => 'status', 'escape' => false)); ?></td>
 		<td><?php echo h($product['Product']['created']); ?></td>
