@@ -43,7 +43,12 @@
 	</tr>
 </table>
 
-<?php echo $this->Html->Image('/images/' . $product['Product']['image'], array('alt' => $product['Product']['name'], 'class' => 'image')); ?>
+<?php echo $this->Html->Image('/images/small/' . $product['Product']['image'], array('alt' => $product['Product']['name'], 'class' => 'image')); ?>
+
+<br />
+<br />
+
+<?php echo $this->Html->Image('/images/large/' . $product['Product']['image'], array('alt' => $product['Product']['name'], 'class' => 'image')); ?>
 
 <br />
 <br />

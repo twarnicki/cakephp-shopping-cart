@@ -71,7 +71,7 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 
 <?php foreach ($shop['OrderItem'] as $item): ?>
 <div class="row">
-<div class="span1"><?php echo $this->Html->image('/images/' . $item['Product']['image'], array('height' => 60, 'class' => 'px60')); ?></div>
+<div class="span1"><?php echo $this->Html->image('/images/small/' . $item['Product']['image'], array('height' => 60, 'class' => 'px60')); ?></div>
 <div class="span6"><?php echo $item['Product']['name']; ?></div>
 <div class="span1"><?php echo $item['Product']['weight']; ?></div>
 <div class="span1"><?php echo $item['totalweight']; ?></div>

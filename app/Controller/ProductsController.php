@@ -17,7 +17,7 @@ class ProductsController extends AppController {
 	public function index() {
 		$this->paginate = array(
 			'recursive' => -1,
-			'limit' => 5,
+			'limit' => 40,
 			'conditions' => array(
 				'Product.active' => 1
 			),
@@ -189,7 +189,8 @@ class ProductsController extends AppController {
 			$upload = $this->Img->upload($this->request->data['Product']['image']['tmp_name'], $targetdir, $origFile);
 
 			if($upload == 'Success') {
-				$this->Img->resampleGD($targetdir . DS . $origFile, WWW_ROOT . 'images/', $dst, 600, 600, 1, 0);
+				$this->Img->resampleGD($targetdir . DS . $origFile, WWW_ROOT . 'images/large/', $dst, 800, 800, 1, 0);
+				$this->Img->resampleGD($targetdir . DS . $origFile, WWW_ROOT . 'images/small/', $dst, 180, 180, 1, 0);
 				$this->request->data['Product']['image'] = $dst;
 			} else {
 				$this->request->data['Product']['image'] = '';

@@ -10,7 +10,7 @@ $(document).ready(function(){
 			$.ajax({
 				url: Shop.basePath + "products/searchjson",
 				data: {
-					search: request.term,
+					search: request.term
 				},
 				dataType: "json",
 				success: function(data) {
@@ -27,7 +27,7 @@ $(document).ready(function(){
 	}).data("autocomplete")._renderItem = function (ul, item) {
 		return $("<li />")
 			.data("item.autocomplete", item)
-			.append("<a><img width='25' src='" + Shop.basePath + "images/" + item.image + "' /> " + item.name + "</a>")
+			.append("<a><img width='25' src='" + Shop.basePath + "images/small/" + item.image + "' /> " + item.name + "</a>")
 			.appendTo(ul);
 	};
 
