@@ -6,7 +6,7 @@ class Product extends AppModel {
 
 	public $validate = array(
 		'name' => array(
-			'notempty' => array(
+			'rule1' => array(
 				'rule' => array('notempty'),
 				'message' => 'Name is invalid',
 				//'allowEmpty' => false,
@@ -14,11 +14,27 @@ class Product extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'rule2' => array(
+				'rule' => array('isUnique'),
+				'message' => 'Name is not uniqie',
+				//'allowEmpty' => false,
+				//'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
 		),
 		'slug' => array(
-			'notempty' => array(
+			'rule1' => array(
 				'rule' => array('notempty'),
 				'message' => 'Slug is invalid',
+				//'allowEmpty' => false,
+				//'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+			'rule2' => array(
+				'rule' => array('isUnique'),
+				'message' => 'Slug is not uniqie',
 				//'allowEmpty' => false,
 				//'required' => true,
 				//'last' => false, // Stop validation after this rule
@@ -46,7 +62,6 @@ class Product extends AppModel {
 			),
 		),
 	);
-
 
 ////////////////////////////////////////////////////////////
 

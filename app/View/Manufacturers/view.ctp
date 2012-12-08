@@ -1,11 +1,22 @@
 
-<h2><?php echo h($manufacturer['Manufacturer']['name']); ?><small> Manufacturer</small></h2>
+<h1><?php echo $manufacturer['Manufacturer']['name']; ?><small> Products</small></h1>
 
-<h3>Related Products</h3>
+<br />
+
 <?php if (!empty($manufacturer['Product'])): ?>
 
 <?php foreach ($manufacturer['Product'] as $product): ?>
-<?php echo $this->Html->link($product['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $product['slug'])); ?><br />
+<div class="row">
+	<div class="span1">
+		<?php echo $this->Html->image('/images/small/' . $product['image'], array('url' => array('controller' => 'products', 'action' => 'view', 'slug' => $product['slug']), 'alt' => $product['name'], 'width' => 150, 'height' => 150, 'class' => 'image')); ?>
+	</div>
+	<div class="span10">
+		<?php echo $this->Html->link($product['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $product['slug'])); ?>
+		<br />
+		$<?php echo $product['price']; ?>
+	</div>
+</div>
+<br />
 <?php endforeach; ?>
 
 <?php endif; ?>

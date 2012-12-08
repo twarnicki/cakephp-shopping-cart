@@ -1,4 +1,6 @@
-<h2>Manufacturers</h2>
+<h1>Manufacturers</h1>
+
+<br />
 
 <table class="table-striped table-bordered table-condensed table-hover">
 	<tr>
@@ -6,7 +8,7 @@
 	</tr>
 	<?php foreach ($manufacturers as $manufacturer): ?>
 	<tr>
-		<td><?php echo $this->Html->link($manufacturer['Manufacturer']['name'], array('action' => 'view', $manufacturer['Manufacturer']['id'])); ?></td>
+		<td><?php echo $this->Html->link($manufacturer['Manufacturer']['name'], array('action' => 'view', 'slug' => $manufacturer['Manufacturer']['slug'])); ?></td>
 	</tr>
 	<?php endforeach; ?>
 </table>

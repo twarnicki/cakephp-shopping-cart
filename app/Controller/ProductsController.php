@@ -17,12 +17,16 @@ class ProductsController extends AppController {
 	public function index() {
 		$this->paginate = array(
 			'recursive' => -1,
-			'limit' => 40,
+			'contain' => array(
+				'Manufacturer'
+			),
+			'limit' => 20,
 			'conditions' => array(
-				'Product.active' => 1
+				'Product.active' => 1,
+				'Manufacturer.active' => 1
 			),
 			'order' => array(
-				'Product.views' => 'ASC'
+				'Product.name' => 'ASC'
 			),
 			'paramType' => 'querystring',
 		);
@@ -40,7 +44,11 @@ class ProductsController extends AppController {
 
 		$product = $this->Product->find('first', array(
 			'recursive' => -1,
+			'contain' => array(
+				'Manufacturer'
+			),
 			'conditions' => array(
+				'Manufacturer.active' => 1,
 				'Product.active' => 1,
 				'Product.slug' => $id
 			)
@@ -73,16 +81,20 @@ class ProductsController extends AppController {
 			$terms = explode(' ', trim($search));
 			$terms = array_diff($terms, array(''));
 			$conditions = array(
-				'Product.active' => 1
+				'Manufacturer.active' => 1,
+				'Product.active' => 1,
 			);
 			foreach($terms as $term) {
 				$terms1[] = preg_replace('/[^a-zA-Z0-9]/', '', $term);
 				$conditions[] = array('Product.name LIKE' => '%' . $term . '%');
 			}
 			$products = $this->Product->find('all', array(
+				'recursive' => -1,
+				'contain' => array(
+					'Manufacturer'
+				),
 				'conditions' => $conditions,
 				'limit' => 200,
-				'recursive' => -1
 			));
 			if(count($products) == 1) {
 				$this->redirect(array('controller' => 'products', 'action' => 'view', 'slug' => $products[0]['Product']['slug']));
@@ -118,19 +130,23 @@ class ProductsController extends AppController {
 			$terms = explode(' ', trim($search));
 			$terms = array_diff($terms, array(''));
 			$conditions = array(
+				'Manufacturer.active' => 1,
 				'Product.active' => 1
 			);
 			foreach($terms as $term) {
 				$conditions[] = array('Product.name LIKE' => '%' . $term . '%');
 			}
 			$products = $this->Product->find('all', array(
+				'recursive' => -1,
+				'contain' => array(
+					'Manufacturer'
+				),
 				'fields' => array(
 					'Product.name',
 					'Product.image'
 				),
 				'conditions' => $conditions,
 				'limit' => 200,
-				'recursive' => -1
 			));
 		}
 		echo json_encode($products);
@@ -143,10 +159,14 @@ class ProductsController extends AppController {
 	public function sitemap() {
 		$products = $this->Product->find('all', array(
 			'recursive' => -1,
+			'contain' => array(
+				'Manufacturer'
+			),
 			'fields' => array(
 				'Product.slug'
 			),
 			'conditions' => array(
+				'Manufacturer.active' => 1,
 				'Product.active' => 1
 			),
 			'order' => array(

@@ -13,13 +13,13 @@
 	</tr>
 	<?php foreach ($manufacturers as $manufacturer): ?>
 	<tr>
-		<td><?php echo h($manufacturer['Manufacturer']['id']); ?>&nbsp;</td>
-		<td><?php echo h($manufacturer['Manufacturer']['name']); ?>&nbsp;</td>
-		<td><?php echo h($manufacturer['Manufacturer']['slug']); ?>&nbsp;</td>
-		<td><?php echo h($manufacturer['Manufacturer']['product_count']); ?>&nbsp;</td>
-		<td><?php echo h($manufacturer['Manufacturer']['active']); ?>&nbsp;</td>
-		<td><?php echo h($manufacturer['Manufacturer']['created']); ?>&nbsp;</td>
-		<td><?php echo h($manufacturer['Manufacturer']['modified']); ?>&nbsp;</td>
+		<td><?php echo h($manufacturer['Manufacturer']['id']); ?></td>
+		<td><?php echo h($manufacturer['Manufacturer']['name']); ?></td>
+		<td><?php echo h($manufacturer['Manufacturer']['slug']); ?></td>
+		<td><?php echo h($manufacturer['Manufacturer']['product_count']); ?></td>
+		<td><?php echo $this->Html->link($this->Html->image('icon_' . $manufacturer['Manufacturer']['active'] . '.png'), array('controller' => 'manufacturers', 'action' => 'switch', 'active', $manufacturer['Manufacturer']['id']), array('class' => 'status', 'escape' => false)); ?></td>
+		<td><?php echo h($manufacturer['Manufacturer']['created']); ?></td>
+		<td><?php echo h($manufacturer['Manufacturer']['modified']); ?></td>
 		<td class="actions">
 			<?php echo $this->Html->link('View', array('action' => 'view', $manufacturer['Manufacturer']['id']), array('class' => 'btn btn-mini')); ?>
 			<?php echo $this->Html->link('Edit', array('action' => 'edit', $manufacturer['Manufacturer']['id']), array('class' => 'btn btn-mini')); ?>

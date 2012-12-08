@@ -7,6 +7,9 @@ class ManufacturersController extends AppController {
 	public function index() {
 		$manufacturers = $this->Manufacturer->find('all', array(
 			'recursive' => -1,
+			'conditions' => array(
+				'Manufacturer.active' => 1
+			),
 			'order' => array(
 				'Manufacturer.name' => 'ASC'
 			)
@@ -16,15 +19,17 @@ class ManufacturersController extends AppController {
 
 ////////////////////////////////////////////////////////////
 
-	public function view($id = null) {
-
+	public function view($slug = null) {
 		$manufacturer =  $this->Manufacturer->find('first', array(
 			'contain' => array('Product'),
 			'conditions' => array(
-				'Manufacturer.id' => $id
+				'Manufacturer.active' => 1,
+				'Manufacturer.slug' => $slug
 			)
 		));
-
+		if(empty($manufacturer)) {
+			$this->redirect(array('action' => 'index'));
+		}
 		$this->set(compact('manufacturer'));
 	}
 
