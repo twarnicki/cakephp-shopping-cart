@@ -44,6 +44,7 @@
 						<ul class="nav">
 							<li><?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?></li>
 							<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index')); ?></li>
+							<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index')); ?></li>
 							<li><?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?></li>
 							<li><?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart')); ?></li>
 						</ul>

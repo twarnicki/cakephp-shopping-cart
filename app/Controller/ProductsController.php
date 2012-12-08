@@ -269,12 +269,14 @@ class ProductsController extends AppController {
 			);
 		}
 
-		$categories = $this->Product->Category->find('list', array(
-			'recursive' => -1,
-			'order' => array(
-				'Category.name' => 'ASC'
-			)
-		));
+		// $categories= $this->Product->Category->find('list', array(
+		// 	'recursive' => -1,
+		// 	'order' => array(
+		// 		'Category.name' => 'ASC'
+		// 	)
+		// ));
+		$categories = $this->Product->Category->generateTreeList(null, null, null, '--');
+
 		$categorieseditable = array();
 		foreach ($categories as $key => $value) {
 			$categorieseditable[] = array(
@@ -353,7 +355,7 @@ class ProductsController extends AppController {
 		$manufacturers = $this->Product->Manufacturer->find('list');
 		$this->set(compact('manufacturers'));
 
-		$categories = $this->Product->Category->find('list');
+		$categories = $this->Product->Category->generateTreeList(null, null, null, '--');
 		$this->set(compact('categories'));
 	}
 
@@ -381,7 +383,7 @@ class ProductsController extends AppController {
 		$manufacturers = $this->Product->Manufacturer->find('list');
 		$this->set(compact('manufacturers'));
 
-		$categories = $this->Product->Category->find('list');
+		$categories = $this->Product->Category->generateTreeList(null, null, null, '--');
 		$this->set(compact('categories'));
 
 	}
