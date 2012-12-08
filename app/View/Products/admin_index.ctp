@@ -9,7 +9,7 @@ $(document).ready(function() {
 		name: 'manufacturer_id',
 		url: '<?php echo $this->webroot; ?>admin/products/editable',
 		title: 'Manufacturer',
-		source: <?php echo json_encode($manufacturers); ?>,
+		source: <?php echo json_encode($manufacturerseditable); ?>,
 		placement: 'right',
 	});
 
@@ -48,6 +48,58 @@ $(document).ready(function() {
 });
 </script>
 <h2>Products</h2>
+
+<div class="row">
+
+	<?php echo $this->Form->create('Product', array()); ?>
+	<?php echo $this->Form->hidden('search', array('value' => 1)); ?>
+
+	<div class="span2">
+		<?php echo $this->Form->input('active', array('label' => false, 'class' => 'span2', 'empty' => 'All Status', 'options' => array(1 => 'Active', 0 => 'Not Active'), 'selected' => $all['active'])); ?>
+	</div>
+
+	<div class="span2">
+		<?php echo $this->Form->input('manufacturer_id', array('label' => false, 'class' => 'span2', 'empty' => 'Manufacturer', 'selected' => $all['manufacturer_id'])); ?>
+	</div>
+
+	<div class="span2">
+		<?php echo $this->Form->input('filter', array(
+			'label' => false,
+			'class' => 'span2',
+			'options' => array(
+				'name' => 'Name',
+				'description' => 'Description',
+				'price' => 'Price',
+				'created' => 'Created',
+			),
+			'selected' => $all['filter']
+		)); ?>
+
+	</div>
+
+	<div class="span2">
+		<?php echo $this->Form->input('name', array('label' => false, 'id' => false, 'class' => 'span2', 'value' => $all['name'])); ?>
+
+	</div>
+
+	<div class="span4">
+		<?php echo $this->Form->button('Search', array('class' => 'btn')); ?>
+		&nbsp; &nbsp;
+		<?php echo $this->Html->link('Reset Search', array('controller' => 'products', 'action' => 'reset', 'admin' => true), array('class' => 'btn')); ?>
+
+	</div>
+
+	<?php echo $this->Form->end(); ?>
+
+</div>
+
+<br />
+
+<?php echo $this->element('pagination-counter'); ?>
+
+<?php echo $this->element('pagination'); ?>
+
+<br />
 
 <table class="table-striped table-bordered table-condensed table-hover">
 	<tr>

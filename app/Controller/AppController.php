@@ -91,12 +91,12 @@ class AppController extends Controller {
 
 		$model = $this->modelClass;
 
-		$id = $this->request->data['pk'];
-		$field = $this->request->data['name'];
+		$id = trim($this->request->data['pk']);
+		$field = trim($this->request->data['name']);
 		$value = trim($this->request->data['value']);
 
 		$this->$model->id = $id;
-		$data[$model][$field] = $value;
+		$data->$model->$field = $value;
 		$this->$model->save($data, false);
 
 		$this->autoRender = false;

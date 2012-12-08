@@ -164,16 +164,73 @@ class ProductsController extends AppController {
 
 ////////////////////////////////////////////////////////////
 
+	public function admin_reset() {
+		$this->Session->delete('Product');
+		$this->redirect(array('action' => 'index'));
+	}
+
+////////////////////////////////////////////////////////////
+
 	public function admin_index() {
+
+		if ($this->request->is('post')) {
+
+			if($this->request->data['Product']['active'] == '1' || $this->request->data['Product']['active'] == '0') {
+				$conditions[] = array(
+					'Product.active' => $this->request->data['Product']['active']
+				);
+				$this->Session->write('Product.active', $this->request->data['Product']['active']);
+			} else {
+				$this->Session->write('Product.active', '');
+			}
+
+			if(!empty($this->request->data['Product']['manufacturer_id'])) {
+				$conditions[] = array(
+					'Product.manufacturer_id' => $this->request->data['Product']['manufacturer_id']
+				);
+				$this->Session->write('Product.manufacturer_id', $this->request->data['Product']['manufacturer_id']);
+			} else {
+				$this->Session->write('Product.manufacturer_id', '');
+			}
+
+			if(!empty($this->request->data['Product']['name'])) {
+				$filter = $this->request->data['Product']['filter'];
+				$this->Session->write('Product.filter', $filter);
+				$name = $this->request->data['Product']['name'];
+				$this->Session->write('Product.name', $name);
+				$conditions[] = array(
+					'Product.' . $filter . ' LIKE' => '%' . $name . '%'
+				);
+			} else {
+				$this->Session->write('Product.filter', '');
+				$this->Session->write('Product.name', '');
+			}
+
+			$this->Session->write('Product.conditions', $conditions);
+			$this->redirect(array('action' => 'index'));
+
+		}
+
+		if($this->Session->check('Product')) {
+			$all = $this->Session->read('Product');
+		} else {
+			$all = array(
+				'active' => '',
+				'manufacturer_id' => '',
+				'name' => '',
+				'filter' => '',
+				'conditions' => ''
+			);
+		}
+		$this->set(compact('all'));
+
 		$this->paginate = array(
 			'contain' => array(
 				'Manufacturer'
 			),
 			'recursive' => -1,
-			'limit' => 40,
-			'conditions' => array(
-				'Product.active' => 1
-			),
+			'limit' => 50,
+			'conditions' => $all['conditions'],
 			'order' => array(
 				'Product.name' => 'ASC'
 			),
@@ -183,7 +240,15 @@ class ProductsController extends AppController {
 
 		$manufacturers = $this->Product->Manufacturer->findList();
 
-		$this->set(compact('products', 'manufacturers'));
+		$manufacturerseditable = array();
+		foreach ($manufacturers as $key => $value) {
+			$manufacturerseditable[] = array(
+				'value' => $key,
+				'text' => $value,
+			);
+		}
+
+		$this->set(compact('products', 'manufacturers', 'manufacturerseditable'));
 
 	}
 
