@@ -2,7 +2,7 @@
 App::uses('AppModel', 'Model');
 class Product extends AppModel {
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 	public $validate = array(
 		'name' => array(
@@ -47,6 +47,19 @@ class Product extends AppModel {
 		),
 	);
 
-//////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+
+	public $belongsTo = array(
+		'Manufacturer' => array(
+			'className' => 'Manufacturer',
+			'foreignKey' => 'manufacturer_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+
+////////////////////////////////////////////////////////////
 
 }

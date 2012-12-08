@@ -27,6 +27,7 @@ $(document).ready(function() {
 <table class="table-striped table-bordered table-condensed table-hover">
 	<tr>
 		<th><?php echo $this->Paginator->sort('image'); ?></th>
+		<th><?php echo $this->Paginator->sort('manufacturer_id'); ?></th>
 		<th><?php echo $this->Paginator->sort('name'); ?></th>
 		<th><?php echo $this->Paginator->sort('slug'); ?></th>
 		<th><?php echo $this->Paginator->sort('description'); ?></th>
@@ -42,6 +43,7 @@ $(document).ready(function() {
 	<?php foreach ($products as $product): ?>
 	<tr>
 		<td><?php echo $this->Html->Image('/images/small/' . $product['Product']['image'], array('width' => 100, 'height' => 100, 'alt' => $product['Product']['image'], 'class' => 'image')); ?></td>
+		<td><?php echo h($product['Manufacturer']['name']); ?></td>
 		<td><span class="name" data-value="<?php echo $product['Product']['name']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['name']; ?></span></td>
 		<td><?php echo h($product['Product']['slug']); ?></td>
 		<td><?php echo h($product['Product']['description']); ?></td>

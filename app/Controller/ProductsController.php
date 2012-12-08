@@ -165,8 +165,23 @@ class ProductsController extends AppController {
 ////////////////////////////////////////////////////////////
 
 	public function admin_index() {
-		$this->Product->recursive = 0;
-		$this->set('products', $this->paginate());
+		$this->paginate = array(
+			'contain' => array(
+				'Manufacturer'
+			),
+			'recursive' => -1,
+			'limit' => 40,
+			'conditions' => array(
+				'Product.active' => 1
+			),
+			'order' => array(
+				'Product.name' => 'ASC'
+			),
+			'paramType' => 'querystring',
+		);
+		$products = $this->paginate('Product');
+
+		$this->set(compact('products'));
 	}
 
 ////////////////////////////////////////////////////////////
@@ -223,6 +238,8 @@ class ProductsController extends AppController {
 				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
 			}
 		}
+		$manufacturers = $this->Product->Manufacturer->find('list');
+		$this->set(compact('manufacturers'));
 	}
 
 ////////////////////////////////////////////////////////////
@@ -239,9 +256,15 @@ class ProductsController extends AppController {
 				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
 			}
 		} else {
-			$options = array('conditions' => array('Product.' . $this->Product->primaryKey => $id));
-			$this->request->data = $this->Product->find('first', $options);
+			$product = $this->Product->find('first', array(
+				'conditions' => array(
+					'Product.id' => $id
+				)
+			));
+			$this->request->data = $product;
 		}
+		$manufacturers = $this->Product->Manufacturer->find('list');
+		$this->set(compact('manufacturers'));
 	}
 
 ////////////////////////////////////////////////////////////
