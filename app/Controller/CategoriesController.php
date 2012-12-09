@@ -12,9 +12,10 @@ class CategoriesController extends AppController {
 				'Category.lft' => 'ASC'
 			),
 			'conditions' => array(
-				//'Category.product_count >' => 0
+				// 'Category.product_count >' => 0
 			),
 		));
+
 		$this->set(compact('categories'));
 	}
 
@@ -25,8 +26,14 @@ class CategoriesController extends AppController {
 		// $totalChildren = $this->Category->childCount($id);
 		// debug($totalChildren);
 
-		// $directChildren = $this->Category->children($id);
-		// debug($directChildren);
+		$directChildren = $this->Category->children($id);
+		//debug($directChildren);
+
+		$result = Hash::extract($directChildren, '{n}.Category.id');
+		// debug($result);
+
+		array_push($result, $id);
+		//debug($result);
 
 		// $parent = $this->Category->getParentNode($id);
 		// debug($parent);
@@ -36,15 +43,25 @@ class CategoriesController extends AppController {
 
 		$category = $this->Category->find('first', array(
 			'recursive' => -1,
-			'contain' => array(
-				'Product'
-			),
 			'conditions' => array(
 				'Category.id' => $id
 			),
 			'limit' => 50
 		));
 		$this->set(compact('category'));
+
+		$products = $this->Category->Product->find('all', array(
+			'recursive' => -1,
+			'conditions' => array(
+				'Product.category_id' => $result
+			),
+			'order' => array(
+				'Product.name' => 'ASC'
+			),
+			'limit' => 50
+		));
+		$this->set(compact('products'));
+
 	}
 
 ////////////////////////////////////////////////////////////
@@ -74,10 +91,10 @@ class CategoriesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Category->create();
 			if ($this->Category->save($this->request->data)) {
-				$this->Session->setFlash(__('The category has been saved'));
+				$this->Session->setFlash('The category has been saved');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The category could not be saved. Please, try again.'));
+				$this->Session->setFlash('The category could not be saved. Please, try again.');
 			}
 		}
 

@@ -293,7 +293,7 @@ class ProductsController extends AppController {
 
 	public function admin_view($id = null) {
 
-		if ($this->request->is('post') && !empty($this->request->data['Product']['image']['name'])) {
+		if (($this->request->is('post') || $this->request->is('put')) && !empty($this->request->data['Product']['image']['name'])) {
 
 			$this->Img = $this->Components->load('Img');
 
