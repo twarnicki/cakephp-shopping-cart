@@ -15,7 +15,7 @@ INCOMPLETE !
 
 CakePHP Shopping Cart Demo:
 
-http://w1.kende.com/
+http://www.shoppingcartcore.com/
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -31,6 +31,8 @@ cp Config/settings-default.php Config/settings.php
 cp Config/database.php.default Config/database.php
 
 ////////////////////////////////////////////////////////////////////
+
+http://www.shoppingcartcore.com/
 
 Andras Kende http://www.kende.com/
 
