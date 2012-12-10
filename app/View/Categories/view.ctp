@@ -1,10 +1,24 @@
 
+<?php
+$this->Html->addCrumb('Categories', '/categories/');
+foreach ($parents as $parent) {
+	$this->Html->addCrumb($parent['Category']['name'], '/category/' . $parent['Category']['slug']);
+}
+?>
+
+<div class="row">
+	<div class="span12">
+
+		<ul class="breadcrumb">
+
+			<?php echo $this->Html->getCrumbs(' / '); ?>
+
+		</ul>
+
+	</div>
+</div>
+
 <h2><?php echo $category['Category']['name']; ?><small> Category</small></h1>
-
-<br />
-<br />
-
-<h3>Related Products</h3>
 
 <?php if (!empty($products)): ?>
 

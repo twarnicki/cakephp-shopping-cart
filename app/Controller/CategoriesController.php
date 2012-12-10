@@ -15,45 +15,46 @@ class CategoriesController extends AppController {
 				// 'Category.product_count >' => 0
 			),
 		));
-
 		$this->set(compact('categories'));
 	}
 
 ////////////////////////////////////////////////////////////
 
-	public function view($id = null) {
-
-		// $totalChildren = $this->Category->childCount($id);
-		// debug($totalChildren);
-
-		$directChildren = $this->Category->children($id);
-		//debug($directChildren);
-
-		$result = Hash::extract($directChildren, '{n}.Category.id');
-		// debug($result);
-
-		array_push($result, $id);
-		//debug($result);
-
-		// $parent = $this->Category->getParentNode($id);
-		// debug($parent);
-
-		// $parents = $this->Category->getPath($id);
-		// debug($parents);
+	public function view($slug = null) {
 
 		$category = $this->Category->find('first', array(
 			'recursive' => -1,
 			'conditions' => array(
-				'Category.id' => $id
-			),
-			'limit' => 50
+				'Category.slug' => $slug
+			)
 		));
+		if(empty($category)) {
+			$this->redirect(array('action' => 'index'));
+		}
 		$this->set(compact('category'));
+
+		// $parent = $this->Category->getParentNode($category['Category']['id']);
+		// debug($parent);
+
+		$parents = $this->Category->getPath($category['Category']['id']);
+		// debug($parents);
+		$this->set(compact('parents'));
+
+		 // $totalChildren = $this->Category->childCount($category['Category']['id']);
+		 // debug($totalChildren);
+
+		$directChildren = $this->Category->children($category['Category']['id']);
+		// debug($directChildren);
+
+		$directChildrenIds = Hash::extract($directChildren, '{n}.Category.id');
+		array_push($directChildrenIds, $category['Category']['id']);
+
+		//debug($parents);
 
 		$products = $this->Category->Product->find('all', array(
 			'recursive' => -1,
 			'conditions' => array(
-				'Product.category_id' => $result
+				'Product.category_id' => $directChildrenIds
 			),
 			'order' => array(
 				'Product.name' => 'ASC'

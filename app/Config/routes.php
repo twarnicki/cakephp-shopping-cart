@@ -26,6 +26,8 @@
 
 	Router::connect('/manufacturer/:slug', array('controller' => 'manufacturers', 'action' => 'view'), array('pass' => array('slug')));
 
+	Router::connect('/category/:slug', array('controller' => 'categories', 'action' => 'view'), array('pass' => array('slug')));
+
 	Router::connect('/sitemap.xml', array('controller' => 'products', 'action' => 'sitemap'));
 
 	Router::connect('/admin', array('controller' => 'users', 'action' => 'dashboard', 'admin' => true));
