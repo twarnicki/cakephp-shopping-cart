@@ -45,6 +45,7 @@ class ProductsController extends AppController {
 		$product = $this->Product->find('first', array(
 			'recursive' => -1,
 			'contain' => array(
+				'Category',
 				'Manufacturer'
 			),
 			'conditions' => array(

@@ -22,5 +22,14 @@ $ <?php echo $product['Product']['price']; ?>
 
 <br />
 <br />
+
+Manufacturer: <?php echo $this->Html->link($product['Manufacturer']['name'], array('controller' => 'manufacturers', 'action' => 'view', 'slug' => $product['Manufacturer']['slug'])); ?>
+
+<br />
+<br />
+
+Category: <?php echo $this->Html->link($product['Category']['name'], array('controller' => 'categories', 'action' => 'view', 'slug' => $product['Category']['slug'])); ?>
+
+<br />
 <br />
 
