@@ -95,8 +95,8 @@ class AppController extends Controller {
 		$field = trim($this->request->data['name']);
 		$value = trim($this->request->data['value']);
 
-		$this->$model->id = $id;
-		$data->$model->$field = $value;
+		$data[$model]['id'] = $id;
+		$data[$model][$field] = $value;
 		$this->$model->save($data, false);
 
 		$this->autoRender = false;
