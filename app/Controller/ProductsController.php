@@ -391,6 +391,16 @@ class ProductsController extends AppController {
 
 ////////////////////////////////////////////////////////////
 
+	public function admin_csv() {
+		$products = $this->Product->find('all', array(
+			'recursive' => -1,
+		));
+		$this->set(compact('products'));
+		$this->layout = false;
+	}
+
+////////////////////////////////////////////////////////////
+
 	public function admin_delete($id = null) {
 		$this->Product->id = $id;
 		if (!$this->Product->exists()) {
