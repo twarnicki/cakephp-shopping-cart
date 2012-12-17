@@ -33,7 +33,7 @@ $(document).ready(function() {
 	$('.description').editable({
 		type: 'textarea',
 		name: 'description',
-		url: '<?php echo $this->webroot; ?>admin/photographs/editable',
+		url: '<?php echo $this->webroot; ?>admin/products/editable',
 		title: 'Description',
 		placement: 'right',
 	});
