@@ -38,10 +38,9 @@
 						<li><?php echo $this->Html->link('Shopping Carts', array('controller' => 'carts', 'action' => 'index', 'admin' => true)); ?></li>
 
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Utils<b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><?php echo $this->Html->link('TEST 1', '#'); ?></li>
-								<li><?php echo $this->Html->link('TEST 2', '#'); ?></li>
+								<li><?php echo $this->Html->link('Products CSV Export', array('controller' => 'products', 'action' => 'csv', 'admin' => true)); ?></li>
 							</ul>
 						</li>
 
