@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
-	$('.numeric').on('keypress', function(event) {
+	$('.numeric1').on('keypress', function(event) {
 		if (event.keyCode == 13) {
 			return true;
 		}
-		return /\d/.test(String.fromCharCode(event.keyCode));
+		return (/\d/.test(String.fromCharCode(event.keyCode)));
 	});
 
 	$('.numeric').on('keyup change', function(event) {
@@ -13,9 +13,9 @@ $(document).ready(function(){
 
 		if ((event.keyCode == 46 || event.keyCode == 8) && quantity > 0) {
 		} else {
-			if(/\d/.test(String.fromCharCode(event.keyCode)) == false) {
+			if(/\d/.test(String.fromCharCode(event.keyCode)) === false) {
 				return false;
-			};
+			}
 		}
 
 		var id = $(this).attr("data-id");
@@ -25,7 +25,7 @@ $(document).ready(function(){
 	});
 
 	$(".remove").each(function() {
-		 $(this).replaceWith('<a class="remove" id="' + $(this).attr('id') + '" href="' + Shop.basePath + 'shop/remove/' + $(this).attr('id') + '" title="Remove item"><img src="' + Shop.basePath + 'img/icon-remove.gif" alt="Remove" /></a>');
+		$(this).replaceWith('<a class="remove" id="' + $(this).attr('id') + '" href="' + Shop.basePath + 'shop/remove/' + $(this).attr('id') + '" title="Remove item"><img src="' + Shop.basePath + 'img/icon-remove.gif" alt="Remove" /></a>');
 	});
 
 	$(".remove").click(function() {
@@ -35,7 +35,7 @@ $(document).ready(function(){
 
 	function ajaxcart(id, quantity) {
 
-		if(quantity == 0) {
+		if(quantity === 0) {
 			$('#row-' + id).fadeOut(1000, function(){ $('#row-' + id).remove(); });
 		}
 
@@ -44,7 +44,7 @@ $(document).ready(function(){
 			url: Shop.basePath + "shop/itemupdate",
 			data: {
 				id: id,
-				quantity: quantity,
+				quantity: quantity
 			},
 			dataType: "json",
 			success: function(data) {
@@ -56,7 +56,7 @@ $(document).ready(function(){
 				});
 				$('#subtotal').html('$' + data.Order.total).animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: "#fff" }, 500);
 				$('#total').html('$' + data.Order.total).animate({ backgroundColor: "#ff8" }, 100).animate({ backgroundColor: "#fff" }, 500);
-				if(data.Order.total == 0) {
+				if(data.Order.total === 0) {
 					window.location.replace(Shop.basePath + "shop/clear");
 				}
 			},
