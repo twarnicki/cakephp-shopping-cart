@@ -9,6 +9,7 @@
 <?php foreach ($files as $file) : ?>
 <tr>
 <td><?php echo $this->Html->link($file, '/backups/' . $file); ?></td>
+<td><?php echo filesize(WWW_ROOT . 'backups/' . $file); ?> KB</td>
 <td>
 <br />
 <?php
