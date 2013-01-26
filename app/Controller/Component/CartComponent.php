@@ -33,24 +33,17 @@ class CartComponent extends Component {
 		if(!is_numeric($quantity)) {
 			$quantity = 1;
 		}
+
 		$quantity = abs($quantity);
+
 		if($quantity > $this->maxQuantity) {
 			$quantity = $this->maxQuantity;
 		}
+
 		if($quantity == 0) {
 			$this->remove($id);
 			return;
 		}
-		
-		// If item is already in the cart, get its quantity and add to the new value
-		$shop = $this->Session->read('Shop');
-		
-		foreach($shop['OrderItem'] as $item){
-			if($item['product_id'] == $id){
-				$quantity = $quantity + $item['quantity'];
-			}
-		}
-		////////////////////////////////////////////////////////////////////////////
 
 		$product = $this->controller->Product->find('first', array(
 			'recursive' => -1,
@@ -61,6 +54,7 @@ class CartComponent extends Component {
 		if(empty($product)) {
 			return false;
 		}
+
 		$data['product_id'] = $product['Product']['id'];
 		$data['name'] = $product['Product']['name'];
 		$data['weight'] = $product['Product']['weight'];
