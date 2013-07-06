@@ -7,17 +7,19 @@
  * PHP 5
  *
  * CakePHP :  Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc.
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP Project
  * @package       Cake.Model.Behavior
  * @since         CakePHP v 1.2.0.4487
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 App::uses('ModelBehavior', 'Model');
 
 /**
@@ -409,7 +411,7 @@ class TreeBehavior extends ModelBehavior {
 			extract(array_merge(array('id' => null), $id));
 		}
 		$overrideRecursive = $recursive;
-		if (empty ($id)) {
+		if (empty($id)) {
 			$id = $Model->id;
 		}
 		extract($this->settings[$Model->alias]);
@@ -442,7 +444,7 @@ class TreeBehavior extends ModelBehavior {
 			extract(array_merge(array('id' => null), $id));
 		}
 		$overrideRecursive = $recursive;
-		if (empty ($id)) {
+		if (empty($id)) {
 			$id = $Model->id;
 		}
 		extract($this->settings[$Model->alias]);
@@ -481,7 +483,7 @@ class TreeBehavior extends ModelBehavior {
 		if (!$number) {
 			return false;
 		}
-		if (empty ($id)) {
+		if (empty($id)) {
 			$id = $Model->id;
 		}
 		extract($this->settings[$Model->alias]);
@@ -539,7 +541,7 @@ class TreeBehavior extends ModelBehavior {
 		if (!$number) {
 			return false;
 		}
-		if (empty ($id)) {
+		if (empty($id)) {
 			$id = $Model->id;
 		}
 		extract($this->settings[$Model->alias]);
@@ -626,19 +628,8 @@ class TreeBehavior extends ModelBehavior {
 					$Model->updateAll(array($Model->escapeField($parent) => $missingParentAction), array($Model->escapeField($Model->primaryKey) => array_flip($missingParents)));
 				}
 			}
-			$count = 1;
-			foreach ($Model->find('all', array('conditions' => $scope, 'fields' => array($Model->primaryKey), 'order' => $left)) as $array) {
-				$lft = $count++;
-				$rght = $count++;
-				$Model->create(false);
-				$Model->id = $array[$Model->alias][$Model->primaryKey];
-				$Model->save(array($left => $lft, $right => $rght), array('callbacks' => false, 'validate' => false));
-			}
-			foreach ($Model->find('all', array('conditions' => $scope, 'fields' => array($Model->primaryKey, $parent), 'order' => $left)) as $array) {
-				$Model->create(false);
-				$Model->id = $array[$Model->alias][$Model->primaryKey];
-				$this->_setParent($Model, $array[$Model->alias][$parent]);
-			}
+
+			$this->_recoverByParentId($Model);
 		} else {
 			$db = ConnectionManager::getDataSource($Model->useDbConfig);
 			foreach ($Model->find('all', array('conditions' => $scope, 'fields' => array($Model->primaryKey, $parent), 'order' => $left)) as $array) {
@@ -651,6 +642,77 @@ class TreeBehavior extends ModelBehavior {
 			}
 		}
 		return true;
+	}
+
+/**
+ * _recoverByParentId
+ *
+ * Recursive helper function used by recover
+ *
+ * @param Model $Model
+ * @param integer $counter
+ * @param mixed $parentId
+ * @return integer $counter
+ */
+	protected function _recoverByParentId(Model $Model, $counter = 1, $parentId = null) {
+		$params = array(
+			'conditions' => array(
+				$this->settings[$Model->alias]['parent'] => $parentId
+			),
+			'fields' => array($Model->primaryKey),
+			'page' => 1,
+			'limit' => 100,
+			'order' => array($Model->primaryKey)
+		);
+
+		$scope = $this->settings[$Model->alias]['scope'];
+		if ($scope && ($scope !== '1 = 1' && $scope !== true)) {
+			$conditions[] = $scope;
+		}
+
+		$children = $Model->find('all', $params);
+		$hasChildren = (bool)$children;
+
+		if (!is_null($parentId)) {
+			if ($hasChildren) {
+				$Model->updateAll(
+					array($this->settings[$Model->alias]['left'] => $counter),
+					array($Model->escapeField() => $parentId)
+				);
+				$counter++;
+			} else {
+				$Model->updateAll(
+					array(
+						$this->settings[$Model->alias]['left'] => $counter,
+						$this->settings[$Model->alias]['right'] => $counter + 1
+					),
+					array($Model->escapeField() => $parentId)
+				);
+				$counter += 2;
+			}
+		}
+
+		while ($children) {
+			foreach ($children as $row) {
+				$counter = $this->_recoverByParentId($Model, $counter, $row[$Model->alias][$Model->primaryKey]);
+			}
+
+			if (count($children) !== $params['limit']) {
+				break;
+			}
+			$params['page']++;
+			$children = $Model->find('all', $params);
+		}
+
+		if (!is_null($parentId) && $hasChildren) {
+			$Model->updateAll(
+				array($this->settings[$Model->alias]['right'] => $counter),
+				array($Model->escapeField() => $parentId)
+			);
+			$counter++;
+		}
+
+		return $counter;
 	}
 
 /**
@@ -760,17 +822,16 @@ class TreeBehavior extends ModelBehavior {
 				array($Model->escapeField() => $id)
 			);
 			return $Model->delete($id);
-		} else {
-			$edge = $this->_getMax($Model, $scope, $right, $recursive);
-			if ($node[$right] == $edge) {
-				$edge = $edge - 2;
-			}
-			$Model->id = $id;
-			return $Model->save(
-				array($left => $edge + 1, $right => $edge + 2, $parent => null),
-				array('callbacks' => false, 'validate' => false)
-			);
 		}
+		$edge = $this->_getMax($Model, $scope, $right, $recursive);
+		if ($node[$right] == $edge) {
+			$edge = $edge - 2;
+		}
+		$Model->id = $id;
+		return $Model->save(
+			array($left => $edge + 1, $right => $edge + 2, $parent => null),
+			array('callbacks' => false, 'validate' => false)
+		);
 	}
 
 /**
@@ -864,7 +925,7 @@ class TreeBehavior extends ModelBehavior {
 		)));
 		$edge = $this->_getMax($Model, $scope, $right, $recursive, $created);
 
-		if (empty ($parentId)) {
+		if (empty($parentId)) {
 			$this->_sync($Model, $edge - $node[$left] + 1, '+', 'BETWEEN ' . $node[$left] . ' AND ' . $node[$right], $created);
 			$this->_sync($Model, $node[$right] - $node[$left] + 1, '-', '> ' . $node[$left], $created);
 		} else {

@@ -7,16 +7,17 @@
  * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake.Utility
  * @since         CakePHP(tm) v 0.10.0.1076
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 /**
@@ -36,18 +37,30 @@ class CakeNumber {
  * @var array
  */
 	protected static $_currencies = array(
+		'AUD' => array(
+			'wholeSymbol' => '$', 'wholePosition' => 'before', 'fractionSymbol' => 'c', 'fractionPosition' => 'after',
+			'zero' => 0, 'places' => 2, 'thousands' => ',', 'decimals' => '.', 'negative' => '()', 'escape' => true
+		),
+		'CAD' => array(
+			'wholeSymbol' => '$', 'wholePosition' => 'before', 'fractionSymbol' => 'c', 'fractionPosition' => 'after',
+			'zero' => 0, 'places' => 2, 'thousands' => ',', 'decimals' => '.', 'negative' => '()', 'escape' => true
+		),
 		'USD' => array(
 			'wholeSymbol' => '$', 'wholePosition' => 'before', 'fractionSymbol' => 'c', 'fractionPosition' => 'after',
 			'zero' => 0, 'places' => 2, 'thousands' => ',', 'decimals' => '.', 'negative' => '()', 'escape' => true
 		),
-		'GBP' => array(
-			'wholeSymbol' => '&#163;', 'wholePosition' => 'before', 'fractionSymbol' => 'p', 'fractionPosition' => 'after',
-			'zero' => 0, 'places' => 2, 'thousands' => ',', 'decimals' => '.', 'negative' => '()','escape' => false
-		),
 		'EUR' => array(
-			'wholeSymbol' => '&#8364;', 'wholePosition' => 'before', 'fractionSymbol' => false, 'fractionPosition' => 'after',
-			'zero' => 0, 'places' => 2, 'thousands' => '.', 'decimals' => ',', 'negative' => '()', 'escape' => false
-		)
+			'wholeSymbol' => '€', 'wholePosition' => 'before', 'fractionSymbol' => false, 'fractionPosition' => 'after',
+			'zero' => 0, 'places' => 2, 'thousands' => '.', 'decimals' => ',', 'negative' => '()', 'escape' => true
+		),
+		'GBP' => array(
+			'wholeSymbol' => '£', 'wholePosition' => 'before', 'fractionSymbol' => 'p', 'fractionPosition' => 'after',
+			'zero' => 0, 'places' => 2, 'thousands' => ',', 'decimals' => '.', 'negative' => '()','escape' => true
+		),
+		'JPY' => array(
+			'wholeSymbol' => '¥', 'wholePosition' => 'before', 'fractionSymbol' => 'c', 'fractionPosition' => 'after',
+			'zero' => 0, 'places' => 2, 'thousands' => ',', 'decimals' => '.', 'negative' => '()', 'escape' => true
+		),
 	);
 
 /**
@@ -133,7 +146,7 @@ class CakeNumber {
 			return $size * pow(1024, $i + 1);
 		}
 
-		if (substr($size, -1) == 'B' && ctype_digit(substr($size, 0, -1))) {
+		if (substr($size, -1) === 'B' && ctype_digit(substr($size, 0, -1))) {
 			$size = substr($size, 0, -1);
 			return (int)$size;
 		}
@@ -188,7 +201,8 @@ class CakeNumber {
 
 		$escape = true;
 		if (is_array($options)) {
-			$options = array_merge(array('before' => '$', 'places' => 2, 'thousands' => ',', 'decimals' => '.'), $options);
+			$defaults = array('before' => '$', 'places' => 2, 'thousands' => ',', 'decimals' => '.');
+			$options += $defaults;
 			extract($options);
 		}
 
@@ -247,7 +261,7 @@ class CakeNumber {
 			$after = substr($value, $foundDecimal);
 			$value = substr($value, 0, $foundDecimal);
 		}
-		while (($foundThousand = preg_replace('/(\d+)(\d\d\d)/', '\1 \2', $value)) != $value) {
+		while (($foundThousand = preg_replace('/(\d+)(\d\d\d)/', '\1 \2', $value)) !== $value) {
 			$value = $foundThousand;
 		}
 		$value .= $after;
@@ -280,8 +294,8 @@ class CakeNumber {
  *   the number will be wrapped with ( and )
  * - `escape` - Should the output be escaped for html special characters.
  *   The default value for this option is controlled by the currency settings.
- *   By default the EUR, and GBP contain HTML encoded symbols. If you require non HTML
- *   encoded symbols you will need to update the settings with the correct bytes.
+ *   By default all currencies contain utf-8 symbols and don't need this changed. If you require
+ *   non HTML encoded symbols you will need to update the settings with the correct bytes.
  *
  * @param float $value
  * @param string $currency Shortcut to default options. Valid values are
@@ -328,14 +342,14 @@ class CakeNumber {
 			}
 		}
 
-		$position = $options[$symbolKey . 'Position'] != 'after' ? 'before' : 'after';
+		$position = $options[$symbolKey . 'Position'] !== 'after' ? 'before' : 'after';
 		$options[$position] = $options[$symbolKey . 'Symbol'];
 
 		$abs = abs($value);
 		$result = self::format($abs, $options);
 
 		if ($value < 0) {
-			if ($options['negative'] == '()') {
+			if ($options['negative'] === '()') {
 				$result = '(' . $result . ')';
 			} else {
 				$result = $options['negative'] . $result;

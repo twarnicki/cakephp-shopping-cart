@@ -1,15 +1,16 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @since         CakePHP(tm) v 1.2.0.5012
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('AppShell', 'Console/Command');
@@ -171,7 +172,7 @@ class ConsoleShell extends AppShell {
 			switch ($command) {
 				case 'help':
 					$this->help();
-				break;
+					break;
 				case 'quit':
 				case 'exit':
 					return true;
@@ -181,7 +182,7 @@ class ConsoleShell extends AppShell {
 					foreach ($this->models as $model) {
 						$this->out(" - {$model}");
 					}
-				break;
+					break;
 				case preg_match("/^(\w+) bind (\w+) (\w+)/", $command, $tmp):
 					foreach ($tmp as $data) {
 						$data = strip_tags($data);
@@ -199,7 +200,7 @@ class ConsoleShell extends AppShell {
 					} else {
 						$this->out(__d('cake_console', "Please verify you are using valid models and association types"));
 					}
-				break;
+					break;
 				case preg_match("/^(\w+) unbind (\w+) (\w+)/", $command, $tmp):
 					foreach ($tmp as $data) {
 						$data = strip_tags($data);
@@ -227,7 +228,7 @@ class ConsoleShell extends AppShell {
 					} else {
 						$this->out(__d('cake_console', "Please verify you are using valid models, valid current association, and valid association types"));
 					}
-				break;
+					break;
 				case (strpos($command, "->find") > 0):
 					// Remove any bad info
 					$command = strip_tags($command);
@@ -284,7 +285,7 @@ class ConsoleShell extends AppShell {
 						$this->out(__d('cake_console', "%s is not a valid model", $modelToCheck));
 					}
 
-				break;
+					break;
 				case (strpos($command, '->save') > 0):
 					// Validate the model we're trying to save here
 					$command = strip_tags($command);
@@ -301,7 +302,7 @@ class ConsoleShell extends AppShell {
 						//@codingStandardsIgnoreEnd
 						$this->out(__d('cake_console', 'Saved record for %s', $modelToSave));
 					}
-				break;
+					break;
 				case preg_match("/^(\w+) columns/", $command, $tmp):
 					$modelToCheck = strip_tags(str_replace($this->badCommandChars, "", $tmp[1]));
 
@@ -320,31 +321,30 @@ class ConsoleShell extends AppShell {
 					} else {
 						$this->out(__d('cake_console', "Please verify that you selected a valid model"));
 					}
-				break;
+					break;
 				case preg_match("/^routes\s+reload/i", $command, $tmp):
 					if (!$this->_loadRoutes()) {
 						$this->err(__d('cake_console', "There was an error loading the routes config. Please check that the file exists and is free of parse errors."));
 						break;
 					}
 					$this->out(__d('cake_console', "Routes configuration reloaded, %d routes connected", count(Router::$routes)));
-				break;
+					break;
 				case preg_match("/^routes\s+show/i", $command, $tmp):
 					$this->out(print_r(Hash::combine(Router::$routes, '{n}.template', '{n}.defaults'), true));
-				break;
+					break;
 				case (preg_match("/^route\s+(\(.*\))$/i", $command, $tmp) == true):
 					//@codingStandardsIgnoreStart
 					if ($url = eval('return array' . $tmp[1] . ';')) {
 						//@codingStandardsIgnoreEnd
 						$this->out(Router::url($url));
 					}
-				break;
+					break;
 				case preg_match("/^route\s+(.*)/i", $command, $tmp):
 					$this->out(var_export(Router::parse($tmp[1]), true));
-				break;
+					break;
 				default:
 					$this->out(__d('cake_console', "Invalid command"));
 					$this->out();
-				break;
 			}
 			$command = '';
 		}

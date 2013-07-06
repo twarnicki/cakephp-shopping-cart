@@ -7,16 +7,17 @@
  * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake
  * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 /**
@@ -94,9 +95,10 @@ HTML;
 ########## DEBUG ##########
 %s
 ###########################
+
 TEXT;
 			$template = $html;
-			if (php_sapi_name() == 'cli' || $showHtml === false) {
+			if (php_sapi_name() === 'cli' || $showHtml === false) {
 				$template = $text;
 				if ($showFrom) {
 					$lineInfo = sprintf('%s (line %s)', $file, $line);
@@ -140,7 +142,7 @@ if (!function_exists('sortByKey')) {
 			$sa[$key] = $val[$sortby];
 		}
 
-		if ($order == 'asc') {
+		if ($order === 'asc') {
 			asort($sa, $type);
 		} else {
 			arsort($sa, $type);
@@ -229,8 +231,10 @@ if (!function_exists('pluginSplit')) {
 if (!function_exists('pr')) {
 
 /**
- * Print_r convenience function, which prints out <PRE> tags around
- * the output of given array. Similar to debug().
+ * print_r() convenience function
+ *
+ * In terminals this will act the same as using print_r() directly, when not run on cli
+ * print_r() will wrap <PRE> tags around the output of given array. Similar to debug().
  *
  * @see	debug()
  * @param array $var Variable to print out
@@ -238,9 +242,8 @@ if (!function_exists('pr')) {
  */
 	function pr($var) {
 		if (Configure::read('debug') > 0) {
-			echo '<pre>';
-			print_r($var);
-			echo '</pre>';
+			$template = php_sapi_name() !== 'cli' ? '<pre>%s</pre>' : "\n%s\n";
+			echo sprintf($template, print_r($var, true));
 		}
 	}
 
@@ -319,11 +322,6 @@ if (!function_exists('env')) {
 		}
 
 		switch ($key) {
-			case 'SCRIPT_FILENAME':
-				if (defined('SERVER_IIS') && SERVER_IIS === true) {
-					return str_replace('\\\\', '\\', env('PATH_TRANSLATED'));
-				}
-				break;
 			case 'DOCUMENT_ROOT':
 				$name = env('SCRIPT_NAME');
 				$filename = env('SCRIPT_FILENAME');
@@ -406,13 +404,13 @@ if (!function_exists('cache')) {
 		switch (strtolower($target)) {
 			case 'cache':
 				$filename = CACHE . $path;
-			break;
+				break;
 			case 'public':
 				$filename = WWW_ROOT . $path;
-			break;
+				break;
 			case 'tmp':
 				$filename = TMP . $path;
-			break;
+				break;
 		}
 		$timediff = $expires - $now;
 		$filetime = false;
@@ -482,30 +480,30 @@ if (!function_exists('clearCache')) {
 					}
 				}
 				return true;
-			} else {
-				$cache = array(
-					CACHE . $type . DS . '*' . $params . $ext,
-					CACHE . $type . DS . '*' . $params . '_*' . $ext
-				);
-				$files = array();
-				while ($search = array_shift($cache)) {
-					$results = glob($search);
-					if ($results !== false) {
-						$files = array_merge($files, $results);
-					}
-				}
-				if (empty($files)) {
-					return false;
-				}
-				foreach ($files as $file) {
-					if (is_file($file) && strrpos($file, DS . 'empty') !== strlen($file) - 6) {
-						//@codingStandardsIgnoreStart
-						@unlink($file);
-						//@codingStandardsIgnoreEnd
-					}
-				}
-				return true;
 			}
+			$cache = array(
+				CACHE . $type . DS . '*' . $params . $ext,
+				CACHE . $type . DS . '*' . $params . '_*' . $ext
+			);
+			$files = array();
+			while ($search = array_shift($cache)) {
+				$results = glob($search);
+				if ($results !== false) {
+					$files = array_merge($files, $results);
+				}
+			}
+			if (empty($files)) {
+				return false;
+			}
+			foreach ($files as $file) {
+				if (is_file($file) && strrpos($file, DS . 'empty') !== strlen($file) - 6) {
+					//@codingStandardsIgnoreStart
+					@unlink($file);
+					//@codingStandardsIgnoreEnd
+				}
+			}
+			return true;
+
 		} elseif (is_array($params)) {
 			foreach ($params as $file) {
 				clearCache($file, $type, $ext);

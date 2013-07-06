@@ -5,16 +5,17 @@
  * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake.View
  * @since         CakePHP(tm) v 0.10.0.1076
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('HelperCollection', 'View');
@@ -546,10 +547,12 @@ class View extends Object {
  * @return boolean Success of rendering the cached file.
  */
 	public function renderCache($filename, $timeStart) {
+		$response = $this->response;
 		ob_start();
 		include ($filename);
 
-		if (Configure::read('debug') > 0 && $this->layout != 'xml') {
+		$type = $response->mapType($response->type());
+		if (Configure::read('debug') > 0 && $type === 'html') {
 			echo "<!-- Cached Render Time: " . round(microtime(true) - $timeStart, 4) . "s -->";
 		}
 		$out = ob_get_clean();
@@ -559,15 +562,10 @@ class View extends Object {
 				//@codingStandardsIgnoreStart
 				@unlink($filename);
 				//@codingStandardsIgnoreEnd
-				unset ($out);
+				unset($out);
 				return false;
-			} else {
-				if ($this->layout === 'xml') {
-					header('Content-type: text/xml');
-				}
-				$commentLength = strlen('<!--cachetime:' . $match['1'] . '-->');
-				return substr($out, $commentLength);
 			}
+			return substr($out, strlen($match[0]));
 		}
 	}
 
@@ -754,7 +752,7 @@ class View extends Object {
  *   update/replace a script element.
  * @param string $content The content of the script being added, optional.
  * @return void
- * @deprecated Will be removed in 3.0. Supersceeded by blocks functionality.
+ * @deprecated Will be removed in 3.0. Superseded by blocks functionality.
  * @see View::start()
  */
 	public function addScript($name, $content = null) {

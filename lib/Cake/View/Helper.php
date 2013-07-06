@@ -1,16 +1,17 @@
 <?php
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake.View
  * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('Router', 'Routing');
@@ -240,10 +241,10 @@ class Helper extends Object {
 /**
  * Finds URL for specified action.
  *
- * Returns a URL pointing at the provided parameters.
+ * Returns an URL pointing at the provided parameters.
  *
  * @param string|array $url Either a relative string url like `/products/view/23` or
- *    an array of url parameters. Using an array for urls will allow you to leverage
+ *    an array of url parameters. Using an array for URLs will allow you to leverage
  *    the reverse routing features of CakePHP.
  * @param boolean $full If true, the full base URL will be prepended to the result
  * @return string  Full translated URL with base path.
@@ -296,7 +297,7 @@ class Helper extends Object {
  * @param string|array Path string or url array
  * @param array $options Options array. Possible keys:
  *   `fullBase` Return full url with domain name
- *   `pathPrefix` Path prefix for relative urls
+ *   `pathPrefix` Path prefix for relative URLs
  *   `ext` Asset extension to append
  *   `plugin` False value will prevent parsing path as a plugin
  * @return string Generated url
@@ -327,34 +328,28 @@ class Helper extends Object {
 		$path = $this->_encodeUrl($this->assetTimestamp($this->webroot($path)));
 
 		if (!empty($options['fullBase'])) {
-			$base = $this->url('/', true);
-			$len = strlen($this->request->webroot);
-			if ($len) {
-				$base = substr($base, 0, -$len);
-			}
-			$path = $base . $path;
+			$path = rtrim(Router::baseURL(), '/') . '/' . ltrim($path, '/');
 		}
 		return $path;
 	}
 
 /**
- * Encodes a URL for use in HTML attributes.
+ * Encodes an URL for use in HTML attributes.
  *
  * @param string $url The url to encode.
  * @return string The url encoded for both URL & HTML contexts.
  */
 	protected function _encodeUrl($url) {
 		$path = parse_url($url, PHP_URL_PATH);
-		$encoded = implode('/', array_map(
-			'rawurlencode',
-			explode('/', $path)
-		));
+		$parts = array_map('rawurldecode', explode('/', $path));
+		$parts = array_map('rawurlencode', $parts);
+		$encoded = implode('/', $parts);
 		return h(str_replace($path, $encoded, $url));
 	}
 
 /**
  * Adds a timestamp to a file based resource based on the value of `Asset.timestamp` in
- * Configure. If Asset.timestamp is true and debug > 0, or Asset.timestamp == 'force'
+ * Configure. If Asset.timestamp is true and debug > 0, or Asset.timestamp === 'force'
  * a timestamp will be added.
  *
  * @param string $path The file path to timestamp, the path must be inside WWW_ROOT
@@ -364,7 +359,11 @@ class Helper extends Object {
 		$stamp = Configure::read('Asset.timestamp');
 		$timestampEnabled = $stamp === 'force' || ($stamp === true && Configure::read('debug') > 0);
 		if ($timestampEnabled && strpos($path, '?') === false) {
-			$filepath = preg_replace('/^' . preg_quote($this->request->webroot, '/') . '/', '', $path);
+			$filepath = preg_replace(
+				'/^' . preg_quote($this->request->webroot, '/') . '/',
+				'',
+				urldecode($path)
+			);
 			$webrootPath = WWW_ROOT . str_replace('/', DS, $filepath);
 			if (file_exists($webrootPath)) {
 				//@codingStandardsIgnoreStart
@@ -663,18 +662,16 @@ class Helper extends Object {
 		switch ($field) {
 			case '_method':
 				$name = $field;
-			break;
+				break;
 			default:
 				$name = 'data[' . implode('][', $this->entity()) . ']';
-			break;
 		}
 
 		if (is_array($options)) {
 			$options[$key] = $name;
 			return $options;
-		} else {
-			return $name;
 		}
+		return $name;
 	}
 
 /**
@@ -730,9 +727,8 @@ class Helper extends Object {
 		if (is_array($options)) {
 			$options[$key] = $result;
 			return $options;
-		} else {
-			return $result;
 		}
+		return $result;
 	}
 
 /**
@@ -921,7 +917,7 @@ class Helper extends Object {
 		do {
 			$oldstring = $this->_cleaned;
 			$this->_cleaned = preg_replace('#</*(applet|meta|xml|blink|link|style|script|embed|object|iframe|frame|frameset|ilayer|layer|bgsound|title|base)[^>]*>#i', "", $this->_cleaned);
-		} while ($oldstring != $this->_cleaned);
+		} while ($oldstring !== $this->_cleaned);
 		$this->_cleaned = str_replace(array("&amp;", "&lt;", "&gt;"), array("&amp;amp;", "&amp;lt;", "&amp;gt;"), $this->_cleaned);
 	}
 
