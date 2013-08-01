@@ -8,15 +8,9 @@
 
 <?php echo $this->Form->create('Product', array('type' => 'GET')); ?>
 
-<div class="row">
-<div class="span3">
-<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'span3', 'autocomplete' => 'off', 'value' => $search)); ?>
-</div>
-<div class="span2">
-<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-primary')); ?>
-</div>
-</div>
-
+<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'form-control', 'autocomplete' => 'off', 'value' => $search)); ?>
+<br />
+<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-default btn-primary')); ?>
 <?php echo $this->Form->end(); ?>
 
 <br />
@@ -34,7 +28,7 @@ foreach ($products as $product):
 $i++;
 if (($i % 4) == 0) { echo "\n<div class=\"row\">\n\n";}
 ?>
-<div class="span3">
+<div class="col-lg-3">
 <?php echo $this->Html->image('/images/small/' . $product['Product']['image'], array('url' => array('controller' => 'products', 'action' => 'view', 'slug' => $product['Product']['slug']), 'alt' => $product['Product']['name'], 'width' => 150, 'height' => 150, 'class' => 'image')); ?>
 <br />
 <?php echo $this->Html->link($product['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $product['Product']['slug'])); ?>

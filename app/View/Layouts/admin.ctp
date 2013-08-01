@@ -17,53 +17,46 @@
 </head>
 <body>
 
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container-fluid">
+	<div class="navbar navbar-inverse navbar-static-top">
 
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="/admin/">SHOP ADMIN</a>
+		<a class="navbar-brand" href="/admin/">SHOP ADMIN</a>
 
-				<div class="nav-collapse">
-					<ul class="nav">
-						<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index', 'admin' => true)); ?></li>
-						<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index', 'admin' => true)); ?></li>
-						<li><?php echo $this->Html->link('Products', array('controller' => 'products', 'action' => 'index', 'admin' => true)); ?></li>
-						<li><?php echo $this->Html->link('Orders', array('controller' => 'orders', 'action' => 'index', 'admin' => true)); ?></li>
-						<li><?php echo $this->Html->link('Orders Items', array('controller' => 'order_items', 'action' => 'index', 'admin' => true)); ?></li>
-						<li><?php echo $this->Html->link('Shopping Carts', array('controller' => 'carts', 'action' => 'index', 'admin' => true)); ?></li>
+		<div class="nav-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index', 'admin' => true)); ?></li>
+				<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index', 'admin' => true)); ?></li>
+				<li><?php echo $this->Html->link('Products', array('controller' => 'products', 'action' => 'index', 'admin' => true)); ?></li>
+				<li><?php echo $this->Html->link('Orders', array('controller' => 'orders', 'action' => 'index', 'admin' => true)); ?></li>
+				<li><?php echo $this->Html->link('Orders Items', array('controller' => 'order_items', 'action' => 'index', 'admin' => true)); ?></li>
+				<li><?php echo $this->Html->link('Shopping Carts', array('controller' => 'carts', 'action' => 'index', 'admin' => true)); ?></li>
 
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Utils<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><?php echo $this->Html->link('Products CSV Export', array('controller' => 'products', 'action' => 'csv', 'admin' => true)); ?></li>
-							</ul>
-						</li>
-
-					</ul>
-				</div>
-
-				<div class="btn-group pull-right">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-user"></i> Admin
-					<span class="caret"></span>
-					</a>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Utils<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-					<li><a href="http://www.google.com/analytics/" target="_blank"><i class="icon-align-left"></i> Analytics</a></li>
-					<li class="divider"></li>
-					<li><?php echo $this->Html->link('<i class=\'icon-off\'></i> Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false), array('escape' => false)); ?></li>
+						<li><?php echo $this->Html->link('Products CSV Export', array('controller' => 'products', 'action' => 'csv', 'admin' => true)); ?></li>
 					</ul>
-				</div>
+				</li>
 
-			</div>
+			</ul>
+
+			<ul class="nav navbar-nav pull-right">
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin</a>
+					<ul class="dropdown-menu">
+						<li><a href="http://www.google.com/analytics/" target="_blank"><Analytics</a></li>
+						<li class="divider"></li>
+						<li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false)); ?></li>
+					</ul>
+				</li>
+
+			</ul>
+
 		</div>
+
 	</div>
 
-	<div class="container-fluid content">
+	<div class="content">
 
 	<?php echo $this->Session->flash(); ?>
 	<?php echo $this->fetch('content'); ?>

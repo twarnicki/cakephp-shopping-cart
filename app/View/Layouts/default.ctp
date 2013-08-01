@@ -23,11 +23,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><?php echo $title_for_layout; ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php echo $this->Html->css(array('bootstrap.css', 'css.css', 'bootstrap-responsive.css')); ?>
+<?php echo $this->Html->css(array('bootstrap.css', 'css.css')); ?>
 <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<?php echo $this->Html->script(array('bootstrap.js', 'js.js')); ?>
+<?php echo $this->Html->script(array('bootstrap.js', 'respond.min.js', 'j/s.js')); ?>
 <?php echo $this->App->js(); ?>
 <?php echo $this->fetch('meta'); ?>
 <?php echo $this->fetch('css'); ?>
@@ -39,9 +39,9 @@
   _gaq.push(['_trackPageview']);
 
   (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
 </script>
@@ -50,28 +50,33 @@
 
 	<div class="wrap">
 
-		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="brand" href="<?php echo $this->Html->url('/'); ?>"><?php echo Configure::read('Settings.SHOP_TITLE'); ?></a>
-						<ul class="nav">
-							<li><?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?></li>
-							<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index')); ?></li>
-							<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index')); ?></li>
-							<li><?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?></li>
-							<li><?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart')); ?></li>
-						</ul>
-						<?php echo $this->Form->create('Product', array('type' => 'GET', 'class' => 'navbar-form pull-right', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
-						<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'autocomplete' => 'off')); ?>
-						<?php echo $this->Form->button('<i class="icon-search icon-white"></i> Search', array('div' => false, 'class' => 'btn btn-primary', 'escape' => false)); ?>
-						<?php echo $this->Form->end(); ?>
+		<div class="navbar navbar-inverse navbar-static-top">
+			<div class="container">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="<?php echo $this->Html->url('/'); ?>">CSC</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?></li>
+						<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index')); ?></li>
+						<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index')); ?></li>
+						<li><?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?></li>
+						<li><?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart')); ?></li>
+					</ul>
+
+					<?php echo $this->Form->create('Product', array('type' => 'GET', 'class' => 'navbar-form form-inline pull-right', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
+					<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => '', 'autocomplete' => 'off')); ?>
+					<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn')); ?>
+					<?php echo $this->Form->end(); ?>
+
 				</div>
 			</div>
 		</div>
 
 		<div class="container content">
-
-			<br />
 
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $this->fetch('content'); ?>
