@@ -15,6 +15,7 @@ class ProductsController extends AppController {
 ////////////////////////////////////////////////////////////
 
 	public function index() {
+
 		$this->paginate = array(
 			'recursive' => -1,
 			'contain' => array(
@@ -77,7 +78,7 @@ class ProductsController extends AppController {
 
 		$search = null;
 		if(!empty($this->request->query['search']) || !empty($this->request->data['name'])) {
-			$search = empty($this->request->query['search']) ? $this->request->data['name'] : $this->request->query['search'] ;
+			$search = empty($this->request->query['search']) ? $this->request->data['name'] : $this->request->query['search'];
 			$search = preg_replace('/[^a-zA-Z0-9 ]/', '', $search);
 			$terms = explode(' ', trim($search));
 			$terms = array_diff($terms, array(''));
@@ -321,12 +322,12 @@ class ProductsController extends AppController {
 				$this->Session->setFlash($upload);
 				$this->redirect($this->referer());
 			} else {
-				$this->Session->setFlash(__('The Product could not be saved. Please, try again.'));
+				$this->Session->setFlash('The Product could not be saved. Please, try again.');
 			}
 		}
 
 		if (!$this->Product->exists($id)) {
-			throw new NotFoundException(__('Invalid product'));
+			throw new NotFoundException('Invalid product');
 		}
 		$product = $this->Product->find('first', array(
 			'recursive' => -1,
@@ -347,10 +348,10 @@ class ProductsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Product->create();
 			if ($this->Product->save($this->request->data)) {
-				$this->Session->setFlash(__('The product has been saved'));
+				$this->Session->setFlash('The product has been saved');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
+				$this->Session->setFlash('The product could not be saved. Please, try again.');
 			}
 		}
 		$manufacturers = $this->Product->Manufacturer->find('list');
@@ -364,14 +365,14 @@ class ProductsController extends AppController {
 
 	public function admin_edit($id = null) {
 		if (!$this->Product->exists($id)) {
-			throw new NotFoundException(__('Invalid product'));
+			throw new NotFoundException('Invalid product');
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Product->save($this->request->data)) {
-				$this->Session->setFlash(__('The product has been saved'));
+				$this->Session->setFlash('The product has been saved');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The product could not be saved. Please, try again.'));
+				$this->Session->setFlash('The product could not be saved. Please, try again.');
 			}
 		} else {
 			$product = $this->Product->find('first', array(
@@ -404,14 +405,14 @@ class ProductsController extends AppController {
 	public function admin_delete($id = null) {
 		$this->Product->id = $id;
 		if (!$this->Product->exists()) {
-			throw new NotFoundException(__('Invalid product'));
+			throw new NotFoundException('Invalid product');
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Product->delete()) {
-			$this->Session->setFlash(__('Product deleted'));
+			$this->Session->setFlash('Product deleted');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Product was not deleted'));
+		$this->Session->setFlash('Product was not deleted');
 		$this->redirect(array('action' => 'index'));
 	}
 
