@@ -4,15 +4,24 @@
 <h1>Search</h1>
 
 <br />
-<br />
+
+<div class="row">
 
 <?php echo $this->Form->create('Product', array('type' => 'GET')); ?>
 
-<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'form-control', 'autocomplete' => 'off', 'value' => $search)); ?>
-<br />
-<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-default btn-primary')); ?>
+<div class="col-lg-4">
+	<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'form-control input-small', 'autocomplete' => 'off', 'value' => $search)); ?>
+</div>
+
+<div class="col-lg-3">
+	<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-small btn-primary')); ?>
+</div>
+
 <?php echo $this->Form->end(); ?>
 
+</div>
+
+<br />
 <br />
 
 <?php endif; ?>
@@ -21,6 +30,7 @@
 
 <?php if(!empty($search)) : ?>
 <?php if(!empty($products)) : ?>
+
 <div class="row">
 <?php
 $i = 0;
@@ -37,7 +47,7 @@ $<?php echo $product['Product']['price']; ?>
 <br />
 <?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'add'))); ?>
 <?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $product['Product']['id'])); ?>
-<?php echo $this->Form->button('<i class="icon-shopping-cart icon-white"></i> Add to Cart', array('class' => 'btn btn-primary addtocart', 'id' => $product['Product']['id'], 'escape' => false));?>
+<?php echo $this->Form->button('Add to Cart', array('class' => 'btn btn-small btn-primary addtocart', 'id' => $product['Product']['id']));?>
 <?php echo $this->Form->end();?>
 <br />
 <br />

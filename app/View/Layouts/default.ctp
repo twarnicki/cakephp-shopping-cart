@@ -24,7 +24,7 @@
 <title><?php echo $title_for_layout; ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php echo $this->Html->css(array('bootstrap.css', 'css.css')); ?>
-<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
+<lin1k rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <?php echo $this->Html->script(array('bootstrap.js', 'respond.min.js', 'j/s.js')); ?>
@@ -45,6 +45,15 @@
   })();
 
 </script>
+
+<?php if($this->Session->check('Shop')) : ?>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#cartbutton').show();
+});
+</script>
+<?php endif; ?>
+
 </head>
 <body>
 
@@ -64,13 +73,22 @@
 						<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index')); ?></li>
 						<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index')); ?></li>
 						<li><?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?></li>
-						<li><?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart')); ?></li>
 					</ul>
 
-					<?php echo $this->Form->create('Product', array('type' => 'GET', 'class' => 'navbar-form form-inline pull-right', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
-					<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => '', 'autocomplete' => 'off')); ?>
-					<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn')); ?>
-					<?php echo $this->Form->end(); ?>
+					<ul class="navbar-form form-inline pull-right">
+
+						<?php echo $this->Form->create('Product', array('type' => 'GET', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
+
+						<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'input-small', 'autocomplete' => 'off')); ?>
+						<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-small btn-primary')); ?>
+						&nbsp;
+						<span id="cartbutton" style="display:none;">
+						<?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart'), array('class' => 'btn btn-small btn-success')); ?>
+						</span>
+
+						<?php echo $this->Form->end(); ?>
+
+					</ul>
 
 				</div>
 			</div>
