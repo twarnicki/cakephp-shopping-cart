@@ -1,4 +1,4 @@
 $(document).ready(function(){
-	$('#flash_msg').delay(5000).fadeOut('slow');
+	$('.flash-msg').delay(5000).fadeOut('slow');
 });
 

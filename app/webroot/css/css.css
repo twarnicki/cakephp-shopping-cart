@@ -2,18 +2,18 @@ body {
 	color: #333;
 	font-family: Verdana, Arial, sans-serif;
 	font-size: 13px;
-	background: #DDD;
 }
 
 h1 {
 	font-family: Verdana, Arial, sans-serif;
 }
 
-.wrap {
-	background: #FFF;
+.content {
+	padding: 0;
 }
 
-#footer {
+.footer {
+	background: #E1E1E1;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
@@ -35,7 +35,7 @@ h1 {
 	color: red;
 }
 
-#flash_msg {
+.flash-msg {
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -49,15 +49,15 @@ h1 {
 .tl { text-align: left }
 .tr { text-align: right }
 .tc { text-align: center }
-.tb { text-align: block }
-
 
 @media (max-width: 767px) {
 
 	.content {
-		margin: -20px;
-		padding: 20px;
-		background: #FFF;
+		padding: 10px;
+	}
+
+	.footer {
+		padding: 10px;
 	}
 
 }

@@ -12,9 +12,9 @@ $(document).ready(function(){
 			dataType: "json",
 			success: function(data) {
 
-				$('#msg').html('<div class="alert alert-success" id="flash_msg">Product Added to Shopping Cart</div>');
+				$('#msg').html('<div class="alert alert-success flash-msg">Product Added to Shopping Cart</div>');
 				$('#cartbutton').show();
-				$('#flash_msg').delay(2000).fadeOut('slow');
+				$('.flash-msg').delay(2000).fadeOut('slow');
 
 			},
 			error: function() {

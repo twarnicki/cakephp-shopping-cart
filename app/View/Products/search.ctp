@@ -9,11 +9,11 @@
 
 <?php echo $this->Form->create('Product', array('type' => 'GET')); ?>
 
-<div class="col-lg-4">
+<div class="col col-lg-4">
 	<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'form-control input-small', 'autocomplete' => 'off', 'value' => $search)); ?>
 </div>
 
-<div class="col-lg-3">
+<div class="col col-lg-3">
 	<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-small btn-primary')); ?>
 </div>
 
@@ -38,7 +38,7 @@ foreach ($products as $product):
 $i++;
 if (($i % 4) == 0) { echo "\n<div class=\"row\">\n\n";}
 ?>
-<div class="col-lg-3">
+<div class="col col-lg-3">
 <?php echo $this->Html->image('/images/small/' . $product['Product']['image'], array('url' => array('controller' => 'products', 'action' => 'view', 'slug' => $product['Product']['slug']), 'alt' => $product['Product']['name'], 'width' => 150, 'height' => 150, 'class' => 'image')); ?>
 <br />
 <?php echo $this->Html->link($product['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $product['Product']['slug'])); ?>

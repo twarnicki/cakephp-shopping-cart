@@ -9,7 +9,7 @@ foreach ($products as $product):
 $i++;
 if (($i % 4) == 0) { echo "\n<div class=\"row\">\n\n";}
 ?>
-<div class="col-lg-3">
+<div class="col col-lg-3">
 <?php echo $this->Html->image('/images/small/' . $product['Product']['image'], array('url' => array('controller' => 'products', 'action' => 'view', 'slug' => $product['Product']['slug']), 'alt' => $product['Product']['name'], 'width' => 150, 'height' => 150, 'class' => 'image')); ?>
 <br />
 <?php echo $this->Html->link($product['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $product['Product']['slug'])); ?>
@@ -34,7 +34,7 @@ endforeach;
 </div>
 
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col col-lg-12">
 		<?php echo $this->Paginator->counter(array('format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')); ?>
 		<br />
 		<?php echo $this->Paginator->prev('< previous', array(), null, array('class' => 'prev disabled')); ?>&nbsp;

@@ -4,7 +4,7 @@
 
 <style type="text/css">
 	#ccbox {
-		background: transparent url("/img/cards.png");
+		background: transparent url("<?php echo $this->webroot; ?>img/cards.png");
 		margin: 0 0 10px 0;
 		padding: 0 0 0 150px;
 		width: 0;
@@ -18,7 +18,7 @@
 <hr>
 
 <div class="row">
-<div class="col-lg-4">
+<div class="col col-lg-4">
 
 First Name: <?php echo $shop['Order']['first_name'];?><br />
 Last Name: <?php echo $shop['Order']['last_name'];?><br />
@@ -28,7 +28,7 @@ Phone: <?php echo $shop['Order']['phone'];?><br />
 <br />
 
 </div>
-<div class="col-lg-4">
+<div class="col col-lg-4">
 
 Billing Address: <?php echo $shop['Order']['billing_address'];?><br />
 Billing Address 2: <?php echo $shop['Order']['billing_address2'];?><br />
@@ -40,7 +40,7 @@ Billing Country: <?php echo $shop['Order']['billing_country'];?><br />
 <br />
 
 </div>
-<div class="col-lg-4">
+<div class="col col-lg-4">
 
 Shipping Address: <?php echo $shop['Order']['shipping_address'];?><br />
 Shipping Address 2: <?php echo $shop['Order']['shipping_address2'];?><br />
@@ -57,13 +57,13 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 <hr>
 
 <div class="row">
-<div class="col-lg-1">#</div>
-<div class="col-lg-6">ITEM</div>
-<div class="col-lg-1">WEIGHT</div>
-<div class="col-lg-1">WEIGHT</div>
-<div class="col-lg-1">PRICE</div>
-<div class="col-lg-1" style="text-align: right;">QUANTITY</div>
-<div class="col-lg-1" style="text-align: right;">SUBTOTAL</div>
+<div class="col col-lg-1">#</div>
+<div class="col col-lg-6">ITEM</div>
+<div class="col col-lg-1">WEIGHT</div>
+<div class="col col-lg-1">WEIGHT</div>
+<div class="col col-lg-1">PRICE</div>
+<div class="col col-lg-1" style="text-align: right;">QUANTITY</div>
+<div class="col col-lg-1" style="text-align: right;">SUBTOTAL</div>
 </div>
 
 <br />
@@ -71,22 +71,22 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 
 <?php foreach ($shop['OrderItem'] as $item): ?>
 <div class="row">
-<div class="col-lg-1"><?php echo $this->Html->image('/images/small/' . $item['Product']['image'], array('height' => 60, 'class' => 'px60')); ?></div>
-<div class="col-lg-6"><?php echo $item['Product']['name']; ?></div>
-<div class="col-lg-1"><?php echo $item['Product']['weight']; ?></div>
-<div class="col-lg-1"><?php echo $item['totalweight']; ?></div>
-<div class="col-lg-1">$<?php echo $item['Product']['price']; ?></div>
-<div class="col-lg-1" style="text-align: right;"><?php echo $item['quantity']; ?></div>
-<div class="col-lg-1" style="text-align: right;">$<?php echo $item['subtotal']; ?></div>
+<div class="col col-lg-1"><?php echo $this->Html->image('/images/small/' . $item['Product']['image'], array('height' => 60, 'class' => 'px60')); ?></div>
+<div class="col col-lg-6"><?php echo $item['Product']['name']; ?></div>
+<div class="col col-lg-1"><?php echo $item['Product']['weight']; ?></div>
+<div class="col col-lg-1"><?php echo $item['totalweight']; ?></div>
+<div class="col col-lg-1">$<?php echo $item['Product']['price']; ?></div>
+<div class="col col-lg-1" style="text-align: right;"><?php echo $item['quantity']; ?></div>
+<div class="col col-lg-1" style="text-align: right;">$<?php echo $item['subtotal']; ?></div>
 </div>
 <?php endforeach; ?>
 
 <hr>
 
 <div class="row">
-	<div class="col-lg-10">Products: <?php echo $shop['Order']['order_item_count']; ?></div>
-	<div class="col-lg-1" style="text-align: right;">Items: <?php echo $shop['Order']['quantity']; ?></div>
-	<div class="col-lg-1" style="text-align: right;">Total<br /><strong>$<?php echo $shop['Order']['total']; ?></strong></div>
+	<div class="col col-lg-10">Products: <?php echo $shop['Order']['order_item_count']; ?></div>
+	<div class="col col-lg-1" style="text-align: right;">Items: <?php echo $shop['Order']['quantity']; ?></div>
+	<div class="col col-lg-1" style="text-align: right;">Total<br /><strong>$<?php echo $shop['Order']['total']; ?></strong></div>
 </div>
 
 <hr>
@@ -103,7 +103,7 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 </div>
 
 <div class="row">
-	<div class="col-lg-3">
+	<div class="col col-lg-3">
 		<?php echo $this->Form->input('creditcard_number', array('class' => 'form-control ccinput', 'maxLength' => 16, 'autocomplete' => 'off')); ?>
 	</div>
 </div>
@@ -111,7 +111,7 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 <br />
 
 <div class="row">
-	<div class="col-lg-2">
+	<div class="col col-lg-2">
 		<?php echo $this->Form->input('creditcard_month', array(
 			'label' => 'Expiration Month',
 			'class' => 'form-control',
@@ -131,7 +131,7 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 			)
 		)); ?>
 	</div>
-	<div class="col-lg-2">
+	<div class="col col-lg-2">
 		<?php echo $this->Form->input('creditcard_year', array(
 			'label' => 'Expiration Year',
 			'class' => 'form-control',
@@ -154,7 +154,7 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 <br />
 
 <div class="row">
-	<div class="col-lg-2">
+	<div class="col col-lg-2">
 		<?php echo $this->Form->input('creditcard_code', array('label' => 'Card Security Code', 'class' => 'form-control', 'maxLength' => 4)); ?>
 	</div>
 </div>
