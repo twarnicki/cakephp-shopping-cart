@@ -78,10 +78,10 @@ $(document).ready(function(){
 					<?php echo $this->Form->create('Product', array('type' => 'GET', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
 
 					<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'input-small', 'autocomplete' => 'off')); ?>
-					<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-small btn-primary')); ?>
+					<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-sm btn-primary')); ?>
 					&nbsp;
 					<span id="cartbutton" style="display:none;">
-					<?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart'), array('class' => 'btn btn-small btn-success')); ?>
+					<?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart'), array('class' => 'btn btn-sm btn-success')); ?>
 					</span>
 
 					<?php echo $this->Form->end(); ?>
