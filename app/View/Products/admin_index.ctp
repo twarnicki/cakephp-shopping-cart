@@ -5,8 +5,7 @@
 
 $(document).ready(function() {
 
-	var c = window.location.href.match(/c=inline/i) ? 'inline' : 'popup';
-	$.fn.editable.defaults.mode = c === 'inline' ? 'inline' : 'popup';
+	$.fn.editable.defaults.mode = 'inline';
 
 	$('.category').editable({
 		type: 'select',
