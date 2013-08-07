@@ -58,7 +58,7 @@ $(document).ready(function(){
 </head>
 <body>
 
-	<div class="navbar-inverse nabar-static-top">
+	<div class="navbar-inverse navbar-static-top">
 		<div class="container">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar"></span>
