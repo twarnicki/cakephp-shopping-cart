@@ -1,19 +1,21 @@
 body {
 	color: #333;
-	font-family: Verdana, Arial, sans-serif;
+	font-family: 'Open Sans', Verdana, Arial, sans-serif;
 	font-size: 13px;
+	background-color: #BBBBBB;
 }
 
-h1 {
-	font-family: Verdana, Arial, sans-serif;
+h1, h2, h3, h4 {
+	font-family: 'Open Sans', Verdana, Arial, sans-serif;
+	font-weight: 700;
 }
 
 .content {
-	padding: 0;
+	background-color: #FFFFFF;
 }
 
 .footer {
-	background: #E1E1E1;
+	background: #E5E5E5;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }

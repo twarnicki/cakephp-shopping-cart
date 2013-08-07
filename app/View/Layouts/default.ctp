@@ -23,11 +23,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><?php echo $title_for_layout; ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php echo $this->Html->css(array('bootstrap.css', 'css.css')); ?>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800' rel='stylesheet' type='text/css'>
+<?php echo $this->Html->css(array('bootstrap.min.css', 'css.css')); ?>
 <lin1k rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<?php echo $this->Html->script(array('bootstrap.js', 'respond.min.js', 'j/s.js')); ?>
+<?php echo $this->Html->script(array('bootstrap.min.js', 'respond.min.js', 'j/s.js')); ?>
 <?php echo $this->App->js(); ?>
 <?php echo $this->fetch('meta'); ?>
 <?php echo $this->fetch('css'); ?>
@@ -57,7 +58,7 @@ $(document).ready(function(){
 </head>
 <body>
 
-	<div class="navbar navbar-inverse navbar-static-top">
+	<div class="navbar-inverse nabar-static-top">
 		<div class="container">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar"></span>
@@ -72,9 +73,7 @@ $(document).ready(function(){
 					<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?></li>
 				</ul>
-
 				<ul class="navbar-form form-inline pull-right">
-
 					<?php echo $this->Form->create('Product', array('type' => 'GET', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
 
 					<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'input-small', 'autocomplete' => 'off')); ?>
@@ -83,26 +82,20 @@ $(document).ready(function(){
 					<span id="cartbutton" style="display:none;">
 					<?php echo $this->Html->link('Shopping Cart', array('controller' => 'shop', 'action' => 'cart'), array('class' => 'btn btn-sm btn-success')); ?>
 					</span>
-
 					<?php echo $this->Form->end(); ?>
-
 				</ul>
-
 			</div>
 		</div>
 	</div>
 
-	<div class="container content">
-
-		<?php echo $this->Session->flash(); ?>
-		<?php echo $this->fetch('content'); ?>
-
-		<br />
-
-		<div id="msg"></div>
-
-		<br />
-
+	<div class="content">
+		<div class="container">
+			<?php echo $this->Session->flash(); ?>
+			<?php echo $this->fetch('content'); ?>
+			<br />
+			<div id="msg"></div>
+			<br />
+		</div>
 	</div>
 
 	<div class="footer">
