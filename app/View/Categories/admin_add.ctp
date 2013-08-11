@@ -9,7 +9,7 @@
 <?php echo $this->Form->input('slug'); ?>
 <?php echo $this->Form->input('description'); ?>
 <br />
-<?php echo $this->Form->button('Submit', array('class' => 'btn')); ?>
+<?php echo $this->Form->button('Submit', array('class' => 'btn btn-primary')); ?>
 <?php echo $this->Form->end(); ?>
 
 <br />

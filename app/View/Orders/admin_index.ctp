@@ -29,9 +29,8 @@
 		<td><?php echo h($order['Order']['created']); ?></td>
 		<td><?php echo h($order['Order']['modified']); ?></td>
 		<td class="actions">
-			<?php echo $this->Html->link('View', array('action' => 'view', $order['Order']['id']), array('class' => 'btn btn-mini')); ?>
-			<?php echo $this->Html->link('Edit', array('action' => 'edit', $order['Order']['id']), array('class' => 'btn btn-mini')); ?>
-			<?php echo $this->Form->postLink('Delete', array('action' => 'delete', $order['Order']['id']), array('class' => 'btn btn-mini btn-danger'), __('Are you sure you want to delete # %s?', $order['Order']['id'])); ?>
+			<?php echo $this->Html->link('View', array('action' => 'view', $order['Order']['id']), array('class' => 'btn btn-default btn-xs')); ?>
+			<?php echo $this->Html->link('Edit', array('action' => 'edit', $order['Order']['id']), array('class' => 'btn btn-default btn-xs')); ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>
@@ -45,4 +44,3 @@
 
 <br />
 <br />
-

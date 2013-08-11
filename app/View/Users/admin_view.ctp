@@ -30,7 +30,7 @@
 
 <br />
 
-<?php echo $this->Html->link('Edit User', array('action' => 'edit', $user['User']['id']), array('class' => 'btn')); ?> </li>
+<?php echo $this->Html->link('Edit User', array('action' => 'edit', $user['User']['id']), array('class' => 'btn btn-default')); ?> </li>
 
 <br />
 <br />

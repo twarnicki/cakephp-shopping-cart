@@ -14,7 +14,7 @@
 <?php echo $this->Form->input('weight'); ?>
 <?php echo $this->Form->input('active', array('type' => 'checkbox')); ?>
 <br />
-<?php echo $this->Form->button('Submit', array('class' => 'btn btn')); ?>
+<?php echo $this->Form->button('Submit', array('class' => 'btn btn-primary')); ?>
 <?php echo $this->Form->end(); ?>
 
 <br />

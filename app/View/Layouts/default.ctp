@@ -76,7 +76,7 @@ $(document).ready(function(){
 				<ul class="navbar-form form-inline pull-right">
 					<?php echo $this->Form->create('Product', array('type' => 'GET', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
 
-					<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'input-small', 'autocomplete' => 'off')); ?>
+					<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'input-sm', 'autocomplete' => 'off')); ?>
 					<?php echo $this->Form->button('Search', array('div' => false, 'class' => 'btn btn-sm btn-primary')); ?>
 					&nbsp;
 					<span id="cartbutton" style="display:none;">

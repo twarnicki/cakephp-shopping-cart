@@ -29,8 +29,8 @@
 		<td><?php echo h($category['Category']['created']); ?></td>
 		<td><?php echo h($category['Category']['modified']); ?></td>
 		<td class="actions">
-			<?php echo $this->Html->link('View', array('action' => 'view', $category['Category']['id']), array('class' => 'btn btn-mini')); ?>
-			<?php echo $this->Html->link('Edit', array('action' => 'edit', $category['Category']['id']), array('class' => 'btn btn-mini')); ?>
+			<?php echo $this->Html->link('View', array('action' => 'view', $category['Category']['id']), array('class' => 'btn btn-default btn-xs')); ?>
+			<?php echo $this->Html->link('Edit', array('action' => 'edit', $category['Category']['id']), array('class' => 'btn btn-default btn-xs')); ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>
@@ -49,7 +49,7 @@
 
 <br />
 
-<?php echo $this->Html->link('New Category', array('action' => 'add'), array('class' => 'btn')); ?>
+<?php echo $this->Html->link('New Category', array('action' => 'add'), array('class' => 'btn btn-default')); ?>
 
 <br />
 <br />

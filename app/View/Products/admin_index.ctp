@@ -66,18 +66,18 @@ $(document).ready(function() {
 	<?php echo $this->Form->create('Product', array()); ?>
 	<?php echo $this->Form->hidden('search', array('value' => 1)); ?>
 
-	<div class="span2">
-		<?php echo $this->Form->input('active', array('label' => false, 'class' => 'span2', 'empty' => 'All Status', 'options' => array(1 => 'Active', 0 => 'Not Active'), 'selected' => $all['active'])); ?>
+	<div class="col-lg-1">
+		<?php echo $this->Form->input('active', array('label' => false, 'class' => 'form-control', 'empty' => 'All Status', 'options' => array(1 => 'Active', 0 => 'Not Active'), 'selected' => $all['active'])); ?>
 	</div>
 
-	<div class="span2">
-		<?php echo $this->Form->input('manufacturer_id', array('label' => false, 'class' => 'span2', 'empty' => 'Manufacturer', 'selected' => $all['manufacturer_id'])); ?>
+	<div class="col-lg-1">
+		<?php echo $this->Form->input('manufacturer_id', array('label' => false, 'class' => 'form-control', 'empty' => 'Manufacturer', 'selected' => $all['manufacturer_id'])); ?>
 	</div>
 
-	<div class="span2">
+	<div class="col-lg-1">
 		<?php echo $this->Form->input('filter', array(
 			'label' => false,
-			'class' => 'span2',
+			'class' => 'form-control',
 			'options' => array(
 				'name' => 'Name',
 				'description' => 'Description',
@@ -89,15 +89,15 @@ $(document).ready(function() {
 
 	</div>
 
-	<div class="span2">
-		<?php echo $this->Form->input('name', array('label' => false, 'id' => false, 'class' => 'span2', 'value' => $all['name'])); ?>
+	<div class="col-lg-2">
+		<?php echo $this->Form->input('name', array('label' => false, 'id' => false, 'class' => 'form-control', 'value' => $all['name'])); ?>
 
 	</div>
 
-	<div class="span4">
-		<?php echo $this->Form->button('Search', array('class' => 'btn')); ?>
+	<div class="col-lg-4">
+		<?php echo $this->Form->button('Search', array('class' => 'btn btn-default')); ?>
 		&nbsp; &nbsp;
-		<?php echo $this->Html->link('Reset Search', array('controller' => 'products', 'action' => 'reset', 'admin' => true), array('class' => 'btn')); ?>
+		<?php echo $this->Html->link('Reset Search', array('controller' => 'products', 'action' => 'reset', 'admin' => true), array('class' => 'btn btn-danger')); ?>
 
 	</div>
 
@@ -146,8 +146,8 @@ $(document).ready(function() {
 		<td><?php echo h($product['Product']['created']); ?></td>
 		<td><?php echo h($product['Product']['modified']); ?></td>
 		<td class="actions">
-			<?php echo $this->Html->link('View', array('action' => 'view', $product['Product']['id']), array('class' => 'btn btn-mini')); ?>
-			<?php echo $this->Html->link('Edit', array('action' => 'edit', $product['Product']['id']), array('class' => 'btn btn-mini')); ?>
+			<?php echo $this->Html->link('View', array('action' => 'view', $product['Product']['id']), array('class' => 'btn btn-default btn-xs')); ?>
+			<?php echo $this->Html->link('Edit', array('action' => 'edit', $product['Product']['id']), array('class' => 'btn btn-default btn-xs')); ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>
@@ -164,7 +164,7 @@ $(document).ready(function() {
 
 <h3>Actions</h3>
 
-<?php echo $this->Html->link('New Product', array('action' => 'add'), array('class' => 'btn btn-mini')); ?>
+<?php echo $this->Html->link('New Product', array('action' => 'add'), array('class' => 'btn btn-default btn-xs')); ?>
 
 <br />
 <br />

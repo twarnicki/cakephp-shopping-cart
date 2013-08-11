@@ -81,7 +81,7 @@
 
 <h3>Actions</h3>
 
-<?php echo $this->Html->link('Edit Product', array('action' => 'edit', $product['Product']['id']), array('class' => 'btn')); ?>
+<?php echo $this->Html->link('Edit Product', array('action' => 'edit', $product['Product']['id']), array('class' => 'btn btn-default')); ?>
 
 <br />
 <br />

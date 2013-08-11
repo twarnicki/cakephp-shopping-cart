@@ -18,7 +18,7 @@
 <body>
 
 	<div class="navbar navbar-inverse navbar-static-top">
-		<a class="navbar-brand" href="/admin/">SHOP ADMIN</a>
+		<a class="navbar-brand" href="#">SHOP ADMIN</a>
 		<ul class="nav navbar-nav">
 			<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index', 'admin' => true)); ?></li>
 			<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index', 'admin' => true)); ?></li>
@@ -38,16 +38,16 @@
 
 	<div class="content">
 
-	<?php echo $this->Session->flash(); ?>
-	<?php echo $this->fetch('content'); ?>
-	<?php echo $this->element('sql_dump'); ?>
+		<?php echo $this->Session->flash(); ?>
+		<?php echo $this->fetch('content'); ?>
+		<?php echo $this->element('sql_dump'); ?>
 
-	<br />
-	<br />
+		<br />
+		<br />
 
-	<footer>
-		<p>&copy; <?php echo date('Y'); ?> <?php echo env('HTTP_HOST'); ?></p>
-	</footer>
+		<div class="footetr">
+			<p>&copy; <?php echo date('Y'); ?> <?php echo env('HTTP_HOST'); ?></p>
+		</div>
 
 	</div>
 

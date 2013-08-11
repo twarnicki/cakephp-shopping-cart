@@ -21,8 +21,8 @@
 		<td><?php echo h($manufacturer['Manufacturer']['created']); ?></td>
 		<td><?php echo h($manufacturer['Manufacturer']['modified']); ?></td>
 		<td class="actions">
-			<?php echo $this->Html->link('View', array('action' => 'view', $manufacturer['Manufacturer']['id']), array('class' => 'btn btn-mini')); ?>
-			<?php echo $this->Html->link('Edit', array('action' => 'edit', $manufacturer['Manufacturer']['id']), array('class' => 'btn btn-mini')); ?>
+			<?php echo $this->Html->link('View', array('action' => 'view', $manufacturer['Manufacturer']['id']), array('class' => 'btn btn-default btn-xs')); ?>
+			<?php echo $this->Html->link('Edit', array('action' => 'edit', $manufacturer['Manufacturer']['id']), array('class' => 'btn btn-default btn-xs')); ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>
@@ -39,7 +39,7 @@
 
 <h3>Actions</h3>
 
-<?php echo $this->Html->link('New Manufacturer', array('action' => 'add'), array('class' => 'btn')); ?>
+<?php echo $this->Html->link('New Manufacturer', array('action' => 'add'), array('class' => 'btn btn-default')); ?>
 
 <br />
 <br />

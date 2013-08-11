@@ -17,8 +17,8 @@
 		<td><?php echo h($user['User']['created']); ?></td>
 		<td><?php echo h($user['User']['modified']); ?></td>
 		<td class="actions">
-			<?php echo $this->Html->link('View', array('action' => 'view', $user['User']['id']), array('class' => 'btn btn-mini')); ?>
-			<?php echo $this->Html->link('Edit', array('action' => 'edit', $user['User']['id']), array('class' => 'btn btn-mini')); ?>
+			<?php echo $this->Html->link('View', array('action' => 'view', $user['User']['id']), array('class' => 'btn btn-default btn-xs')); ?>
+			<?php echo $this->Html->link('Edit', array('action' => 'edit', $user['User']['id']), array('class' => 'btn btn-default btn-xs')); ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>

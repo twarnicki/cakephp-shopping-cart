@@ -2,31 +2,31 @@
 
 <table class="table-striped table-bordered table-condensed table-hover">
 <tr>
-<td><?php echo __('Id'); ?></td>
+<td>Id</td>
 <td><?php echo h($manufacturer['Manufacturer']['id']); ?></td>
 </tr>
 <tr>
-<td><?php echo __('Name'); ?></td>
+<td>Name</td>
 <td><?php echo h($manufacturer['Manufacturer']['name']); ?></td>
 </tr>
 <tr>
-<td><?php echo __('Slug'); ?></td>
+<td>Slug</td>
 <td><?php echo h($manufacturer['Manufacturer']['slug']); ?></td>
 </tr>
 <tr>
-<td><?php echo __('Product Count'); ?></td>
+<td>Product Count</td>
 <td><?php echo h($manufacturer['Manufacturer']['product_count']); ?></td>
 </tr>
 <tr>
-<td><?php echo __('Active'); ?></td>
+<td>Active</td>
 <td><?php echo h($manufacturer['Manufacturer']['active']); ?></td>
 </tr>
 <tr>
-<td><?php echo __('Created'); ?></td>
+<td>Created</td>
 <td><?php echo h($manufacturer['Manufacturer']['created']); ?></td>
 </tr>
 <tr>
-<td><?php echo __('Modified'); ?></td>
+<td>Modified</td>
 <td><?php echo h($manufacturer['Manufacturer']['modified']); ?></td>
 </tr>
 </table>
@@ -36,7 +36,7 @@
 
 <h3>Actions</h3>
 
-<?php echo $this->Html->link('Edit Manufacturer', array('action' => 'edit', $manufacturer['Manufacturer']['id']), array('class' => 'btn')); ?> </li>
+<?php echo $this->Html->link('Edit Manufacturer', array('action' => 'edit', $manufacturer['Manufacturer']['id']), array('class' => 'btn btn-default')); ?> </li>
 
 <br />
 <br />
