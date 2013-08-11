@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 	$('.numeric').on('keyup change', function(event) {
 
-		var quantity = $(this).val();
+		var quantity = Math.round($(this).val());
 
 		if ((event.keyCode == 46 || event.keyCode == 8) && quantity > 0) {
 		} else {
