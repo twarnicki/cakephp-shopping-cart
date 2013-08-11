@@ -12,7 +12,6 @@ class CategoriesController extends AppController {
 				'Category.lft' => 'ASC'
 			),
 			'conditions' => array(
-				// 'Category.product_count >' => 0
 			),
 		));
 		$this->set(compact('categories'));

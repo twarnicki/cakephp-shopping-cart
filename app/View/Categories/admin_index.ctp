@@ -9,7 +9,6 @@
 		<th><?php echo $this->Paginator->sort('name'); ?></th>
 		<th><?php echo $this->Paginator->sort('slug'); ?></th>
 		<th><?php echo $this->Paginator->sort('description'); ?></th>
-		<th><?php echo $this->Paginator->sort('product_count'); ?></th>
 		<th><?php echo $this->Paginator->sort('created'); ?></th>
 		<th><?php echo $this->Paginator->sort('modified'); ?></th>
 		<th class="actions">Actions</th>
@@ -25,7 +24,6 @@
 		<td><?php echo h($category['Category']['name']); ?></td>
 		<td><?php echo h($category['Category']['slug']); ?></td>
 		<td><?php echo h($category['Category']['description']); ?></td>
-		<td><?php echo h($category['Category']['product_count']); ?></td>
 		<td><?php echo h($category['Category']['created']); ?></td>
 		<td><?php echo h($category['Category']['modified']); ?></td>
 		<td class="actions">

@@ -14,7 +14,6 @@ class BrandFixture extends CakeTestFixture {
 		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary', 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
 		'slug' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_unicode_ci', 'charset' => 'utf8'),
-		'product_count' => array('type' => 'integer', 'null' => false, 'default' => '0'),
 		'active' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 1),
 		'created' => array('type' => 'datetime', 'null' => false, 'default' => null),
 		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null, 'key' => 'index'),
@@ -37,7 +36,6 @@ class BrandFixture extends CakeTestFixture {
 			'id' => '50c30cc9-f914-4c8a-9200-0707173e866a',
 			'name' => 'Lorem ipsum dolor sit amet',
 			'slug' => 'Lorem ipsum dolor sit amet',
-			'product_count' => 1,
 			'active' => 1,
 			'created' => '2012-12-08 01:47:53',
 			'modified' => '2012-12-08 01:47:53'

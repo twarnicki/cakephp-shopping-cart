@@ -162,7 +162,7 @@ CREATE TABLE `products` (
   KEY `modified` (`modified`),
   KEY `name_slug` (`slug`),
   KEY `category_id` (`category_id`),
-  KEY `manufacturer_id` (`brand_id`)
+  KEY `brand_id` (`brand_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 -- ----------------------------

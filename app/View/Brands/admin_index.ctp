@@ -5,7 +5,6 @@
 		<th><?php echo $this->Paginator->sort('id'); ?></th>
 		<th><?php echo $this->Paginator->sort('name'); ?></th>
 		<th><?php echo $this->Paginator->sort('slug'); ?></th>
-		<th><?php echo $this->Paginator->sort('product_count'); ?></th>
 		<th><?php echo $this->Paginator->sort('active'); ?></th>
 		<th><?php echo $this->Paginator->sort('created'); ?></th>
 		<th><?php echo $this->Paginator->sort('modified'); ?></th>
@@ -16,7 +15,6 @@
 		<td><?php echo h($brand['Brand']['id']); ?></td>
 		<td><?php echo h($brand['Brand']['name']); ?></td>
 		<td><?php echo h($brand['Brand']['slug']); ?></td>
-		<td><?php echo h($brand['Brand']['product_count']); ?></td>
 		<td><?php echo $this->Html->link($this->Html->image('icon_' . $brand['Brand']['active'] . '.png'), array('controller' => 'brands', 'action' => 'switch', 'active', $brand['Brand']['id']), array('class' => 'status', 'escape' => false)); ?></td>
 		<td><?php echo h($brand['Brand']['created']); ?></td>
 		<td><?php echo h($brand['Brand']['modified']); ?></td>

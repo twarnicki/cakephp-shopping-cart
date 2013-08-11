@@ -14,10 +14,6 @@
 		<td><?php echo h($brand['Brand']['slug']); ?></td>
 	</tr>
 	<tr>
-		<td>Product Count</td>
-		<td><?php echo h($brand['Brand']['product_count']); ?></td>
-	</tr>
-	<tr>
 		<td>Active</td>
 		<td><?php echo h($brand['Brand']['active']); ?></td>
 	</tr>
