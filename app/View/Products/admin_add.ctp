@@ -3,7 +3,7 @@
 <br />
 
 <?php echo $this->Form->create('Product'); ?>
-<?php echo $this->Form->input('manufacturer_id'); ?>
+<?php echo $this->Form->input('brand_id'); ?>
 <?php echo $this->Form->input('name'); ?>
 <?php echo $this->Form->input('slug'); ?>
 <?php echo $this->Form->input('description'); ?>

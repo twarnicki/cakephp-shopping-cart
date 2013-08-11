@@ -1,11 +1,11 @@
 <?php
-App::uses('Manufacturer', 'Model');
+App::uses('Brand', 'Model');
 
 /**
- * Manufacturer Test Case
+ * Brand Test Case
  *
  */
-class ManufacturerTest extends CakeTestCase {
+class BrandTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -13,7 +13,7 @@ class ManufacturerTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.manufacturer',
+		'app.brand',
 		'app.product'
 	);
 
@@ -24,7 +24,7 @@ class ManufacturerTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Manufacturer = ClassRegistry::init('Manufacturer');
+		$this->Brand = ClassRegistry::init('Brand');
 	}
 
 /**
@@ -33,7 +33,7 @@ class ManufacturerTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Manufacturer);
+		unset($this->Brand);
 
 		parent::tearDown();
 	}

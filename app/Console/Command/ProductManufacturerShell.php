@@ -1,7 +1,7 @@
 <?php
-class ProductManufacturerShell extends Shell {
+class ProductBrandShell extends Shell {
 
-	public $uses = array('Product', 'Manufacturer');
+	public $uses = array('Product', 'Brand');
 
 	public function main() {
 
@@ -11,8 +11,8 @@ class ProductManufacturerShell extends Shell {
 
 		foreach($products as $product) {
 			$d['Product']['id'] = $product['Product']['id'];
-			$mid = $this->Manufacturer->field('id', array('name' => $product['Product']['manufacturer']));
-			$d['Product']['manufacturer_id'] = $mid;
+			$mid = $this->Brand->field('id', array('name' => $product['Product']['brand']));
+			$d['Product']['brand_id'] = $mid;
 			print_r($d);
 			$this->Product->save($d, false);
 		}

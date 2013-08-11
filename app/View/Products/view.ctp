@@ -23,7 +23,7 @@ $ <?php echo $product['Product']['price']; ?>
 <br />
 <br />
 
-Manufacturer: <?php echo $this->Html->link($product['Manufacturer']['name'], array('controller' => 'manufacturers', 'action' => 'view', 'slug' => $product['Manufacturer']['slug'])); ?>
+Brand: <?php echo $this->Html->link($product['Brand']['name'], array('controller' => 'brands', 'action' => 'view', 'slug' => $product['Brand']['slug'])); ?>
 
 <br />
 <br />

@@ -1,23 +1,8 @@
 <?php echo $this->Html->script(array('addtocart.js'), array('inline' => false)); ?>
 
-<?php
-$this->Html->addCrumb('Categories', '/categories/');
-foreach ($parents as $parent) {
-	$this->Html->addCrumb($parent['Category']['name'], '/category/' . $parent['Category']['slug']);
-}
-?>
+<h1><?php echo $brand['Brand']['name']; ?><small> Products</small></h1>
 
 <br />
-
-<div class="row">
-	<div class="col-lg-12">
-		<ul class="breadcrumb">
-			<?php echo $this->Html->getCrumbs(' > '); ?>
-		</ul>
-	</div>
-</div>
-
-<h2><?php echo $category['Category']['name']; ?><small> Category</small></h1>
 
 <?php if (!empty($products)): ?>
 

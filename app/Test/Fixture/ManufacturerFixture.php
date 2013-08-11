@@ -1,9 +1,9 @@
 <?php
 /**
- * ManufacturerFixture
+ * BrandFixture
  *
  */
-class ManufacturerFixture extends CakeTestFixture {
+class BrandFixture extends CakeTestFixture {
 
 /**
  * Fields

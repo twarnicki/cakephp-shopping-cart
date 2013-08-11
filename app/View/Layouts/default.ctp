@@ -69,7 +69,7 @@ $(document).ready(function(){
 			<div class="nav-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?></li>
-					<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index')); ?></li>
+					<li><?php echo $this->Html->link('Brands', array('controller' => 'brands', 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?></li>
 				</ul>

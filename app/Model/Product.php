@@ -72,15 +72,13 @@ class Product extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
-			'counterCache' => true
 		),
-		'Manufacturer' => array(
-			'className' => 'Manufacturer',
-			'foreignKey' => 'manufacturer_id',
+		'Brand' => array(
+			'className' => 'Brand',
+			'foreignKey' => 'brand_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
-			'counterCache' => true
 		),
 	);
 

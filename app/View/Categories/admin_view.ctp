@@ -121,8 +121,8 @@
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('Category Id'); ?></th>
 		<th><?php echo __('Category'); ?></th>
-		<th><?php echo __('Manufacturer Id'); ?></th>
-		<th><?php echo __('Manufacturer'); ?></th>
+		<th><?php echo __('Brand Id'); ?></th>
+		<th><?php echo __('Brand'); ?></th>
 		<th><?php echo __('Name'); ?></th>
 		<th><?php echo __('Slug'); ?></th>
 		<th><?php echo __('Description'); ?></th>
@@ -142,8 +142,8 @@
 			<td><?php echo $product['id']; ?></td>
 			<td><?php echo $product['category_id']; ?></td>
 			<td><?php echo $product['category']; ?></td>
-			<td><?php echo $product['manufacturer_id']; ?></td>
-			<td><?php echo $product['manufacturer']; ?></td>
+			<td><?php echo $product['brand_id']; ?></td>
+			<td><?php echo $product['brand']; ?></td>
 			<td><?php echo $product['name']; ?></td>
 			<td><?php echo $product['slug']; ?></td>
 			<td><?php echo $product['description']; ?></td>

@@ -19,12 +19,12 @@ class ProductsController extends AppController {
 		$this->paginate = array(
 			'recursive' => -1,
 			'contain' => array(
-				'Manufacturer'
+				'Brand'
 			),
 			'limit' => 20,
 			'conditions' => array(
 				'Product.active' => 1,
-				'Manufacturer.active' => 1
+				'Brand.active' => 1
 			),
 			'order' => array(
 				'Product.name' => 'ASC'
@@ -47,10 +47,10 @@ class ProductsController extends AppController {
 			'recursive' => -1,
 			'contain' => array(
 				'Category',
-				'Manufacturer'
+				'Brand'
 			),
 			'conditions' => array(
-				'Manufacturer.active' => 1,
+				'Brand.active' => 1,
 				'Product.active' => 1,
 				'Product.slug' => $id
 			)
@@ -83,7 +83,7 @@ class ProductsController extends AppController {
 			$terms = explode(' ', trim($search));
 			$terms = array_diff($terms, array(''));
 			$conditions = array(
-				'Manufacturer.active' => 1,
+				'Brand.active' => 1,
 				'Product.active' => 1,
 			);
 			foreach($terms as $term) {
@@ -93,7 +93,7 @@ class ProductsController extends AppController {
 			$products = $this->Product->find('all', array(
 				'recursive' => -1,
 				'contain' => array(
-					'Manufacturer'
+					'Brand'
 				),
 				'conditions' => $conditions,
 				'limit' => 200,
@@ -132,7 +132,7 @@ class ProductsController extends AppController {
 			$terms = explode(' ', trim($search));
 			$terms = array_diff($terms, array(''));
 			$conditions = array(
-				'Manufacturer.active' => 1,
+				'Brand.active' => 1,
 				'Product.active' => 1
 			);
 			foreach($terms as $term) {
@@ -141,7 +141,7 @@ class ProductsController extends AppController {
 			$products = $this->Product->find('all', array(
 				'recursive' => -1,
 				'contain' => array(
-					'Manufacturer'
+					'Brand'
 				),
 				'fields' => array(
 					'Product.name',
@@ -162,13 +162,13 @@ class ProductsController extends AppController {
 		$products = $this->Product->find('all', array(
 			'recursive' => -1,
 			'contain' => array(
-				'Manufacturer'
+				'Brand'
 			),
 			'fields' => array(
 				'Product.slug'
 			),
 			'conditions' => array(
-				'Manufacturer.active' => 1,
+				'Brand.active' => 1,
 				'Product.active' => 1
 			),
 			'order' => array(
@@ -206,13 +206,13 @@ class ProductsController extends AppController {
 				$this->Session->write('Product.active', '');
 			}
 
-			if(!empty($this->request->data['Product']['manufacturer_id'])) {
+			if(!empty($this->request->data['Product']['brand_id'])) {
 				$conditions[] = array(
-					'Product.manufacturer_id' => $this->request->data['Product']['manufacturer_id']
+					'Product.brand_id' => $this->request->data['Product']['brand_id']
 				);
-				$this->Session->write('Product.manufacturer_id', $this->request->data['Product']['manufacturer_id']);
+				$this->Session->write('Product.brand_id', $this->request->data['Product']['brand_id']);
 			} else {
-				$this->Session->write('Product.manufacturer_id', '');
+				$this->Session->write('Product.brand_id', '');
 			}
 
 			if(!empty($this->request->data['Product']['name'])) {
@@ -238,7 +238,7 @@ class ProductsController extends AppController {
 		} else {
 			$all = array(
 				'active' => '',
-				'manufacturer_id' => '',
+				'brand_id' => '',
 				'name' => '',
 				'filter' => '',
 				'conditions' => ''
@@ -249,7 +249,7 @@ class ProductsController extends AppController {
 		$this->paginate = array(
 			'contain' => array(
 				'Category',
-				'Manufacturer',
+				'Brand',
 			),
 			'recursive' => -1,
 			'limit' => 50,
@@ -261,11 +261,11 @@ class ProductsController extends AppController {
 		);
 		$products = $this->paginate('Product');
 
-		$manufacturers = $this->Product->Manufacturer->findList();
+		$brands = $this->Product->Brand->findList();
 
-		$manufacturerseditable = array();
-		foreach ($manufacturers as $key => $value) {
-			$manufacturerseditable[] = array(
+		$brandseditable = array();
+		foreach ($brands as $key => $value) {
+			$brandseditable[] = array(
 				'value' => $key,
 				'text' => $value,
 			);
@@ -287,7 +287,7 @@ class ProductsController extends AppController {
 			);
 		}
 
-		$this->set(compact('products', 'manufacturers', 'manufacturerseditable', 'categorieseditable'));
+		$this->set(compact('products', 'brands', 'brandseditable', 'categorieseditable'));
 
 	}
 
@@ -333,7 +333,7 @@ class ProductsController extends AppController {
 			'recursive' => -1,
 			'contain' => array(
 				'Category',
-				'Manufacturer',
+				'Brand',
 			),
 			'conditions' => array(
 				'Product.id' => $id
@@ -354,8 +354,8 @@ class ProductsController extends AppController {
 				$this->Session->setFlash('The product could not be saved. Please, try again.');
 			}
 		}
-		$manufacturers = $this->Product->Manufacturer->find('list');
-		$this->set(compact('manufacturers'));
+		$brands = $this->Product->Brand->find('list');
+		$this->set(compact('brands'));
 
 		$categories = $this->Product->Category->generateTreeList(null, null, null, '--');
 		$this->set(compact('categories'));
@@ -382,8 +382,8 @@ class ProductsController extends AppController {
 			));
 			$this->request->data = $product;
 		}
-		$manufacturers = $this->Product->Manufacturer->find('list');
-		$this->set(compact('manufacturers'));
+		$brands = $this->Product->Brand->find('list');
+		$this->set(compact('brands'));
 
 		$categories = $this->Product->Category->generateTreeList(null, null, null, '--');
 		$this->set(compact('categories'));

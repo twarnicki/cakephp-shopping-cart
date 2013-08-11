@@ -16,12 +16,12 @@ $(document).ready(function() {
 		placement: 'right',
 	});
 
-	$('.manufacturer').editable({
+	$('.brand').editable({
 		type: 'select',
-		name: 'manufacturer_id',
+		name: 'brand_id',
 		url: '<?php echo $this->webroot; ?>admin/products/editable',
-		title: 'Manufacturer',
-		source: <?php echo json_encode($manufacturerseditable); ?>,
+		title: 'Brand',
+		source: <?php echo json_encode($brandseditable); ?>,
 		placement: 'right',
 	});
 
@@ -71,7 +71,7 @@ $(document).ready(function() {
 	</div>
 
 	<div class="col-lg-1">
-		<?php echo $this->Form->input('manufacturer_id', array('label' => false, 'class' => 'form-control', 'empty' => 'Manufacturer', 'selected' => $all['manufacturer_id'])); ?>
+		<?php echo $this->Form->input('brand_id', array('label' => false, 'class' => 'form-control', 'empty' => 'Brand', 'selected' => $all['brand_id'])); ?>
 	</div>
 
 	<div class="col-lg-1">
@@ -117,7 +117,7 @@ $(document).ready(function() {
 	<tr>
 		<th><?php echo $this->Paginator->sort('image'); ?></th>
 		<th><?php echo $this->Paginator->sort('category_id'); ?></th>
-		<th><?php echo $this->Paginator->sort('manufacturer_id'); ?></th>
+		<th><?php echo $this->Paginator->sort('brand_id'); ?></th>
 		<th><?php echo $this->Paginator->sort('name'); ?></th>
 		<th><?php echo $this->Paginator->sort('slug'); ?></th>
 		<th><?php echo $this->Paginator->sort('description'); ?></th>
@@ -134,7 +134,7 @@ $(document).ready(function() {
 	<tr>
 		<td><?php echo $this->Html->Image('/images/small/' . $product['Product']['image'], array('width' => 100, 'height' => 100, 'alt' => $product['Product']['image'], 'class' => 'image')); ?></td>
 		<td><span class="category" data-value="<?php echo $product['Category']['id']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Category']['name']; ?></span></td>
-		<td><span class="manufacturer" data-value="<?php echo $product['Manufacturer']['id']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Manufacturer']['name']; ?></span></td>
+		<td><span class="brand" data-value="<?php echo $product['Brand']['id']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Brand']['name']; ?></span></td>
 		<td><span class="name" data-value="<?php echo $product['Product']['name']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['name']; ?></span></td>
 		<td><?php echo h($product['Product']['slug']); ?></td>
 		<td><span class="description" data-value="<?php echo $product['Product']['description']; ?>" data-pk="<?php echo $product['Product']['id']; ?>"><?php echo $product['Product']['description']; ?></span></td>

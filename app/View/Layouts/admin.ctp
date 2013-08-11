@@ -20,7 +20,7 @@
 	<div class="navbar navbar-inverse navbar-static-top">
 		<a class="navbar-brand" href="#">SHOP ADMIN</a>
 		<ul class="nav navbar-nav">
-			<li><?php echo $this->Html->link('Manufacturers', array('controller' => 'manufacturers', 'action' => 'index', 'admin' => true)); ?></li>
+			<li><?php echo $this->Html->link('Brands', array('controller' => 'brands', 'action' => 'index', 'admin' => true)); ?></li>
 			<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index', 'admin' => true)); ?></li>
 			<li><?php echo $this->Html->link('Products', array('controller' => 'products', 'action' => 'index', 'admin' => true)); ?></li>
 			<li><?php echo $this->Html->link('Orders', array('controller' => 'orders', 'action' => 'index', 'admin' => true)); ?></li>

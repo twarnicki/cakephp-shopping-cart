@@ -1,6 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
-class Manufacturer extends AppModel {
+class Brand extends AppModel {
 
 ////////////////////////////////////////////////////////////
 
@@ -49,7 +49,7 @@ class Manufacturer extends AppModel {
 	public $hasMany = array(
 		'Product' => array(
 			'className' => 'Product',
-			'foreignKey' => 'manufacturer_id',
+			'foreignKey' => 'brand_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
@@ -67,7 +67,7 @@ class Manufacturer extends AppModel {
 	public function findList() {
 		return $this->find('list', array(
 			'order' => array(
-				'Manufacturer.name' => 'ASC'
+				'Brand.name' => 'ASC'
 			)
 		));
 	}
