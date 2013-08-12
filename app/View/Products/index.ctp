@@ -2,6 +2,8 @@
 
 <h1><?php echo Configure::read('Settings.SHOP_TITLE'); ?></h1>
 
+<br />
+
 <div class="row">
 <?php
 $i = 0;
@@ -33,12 +35,3 @@ endforeach;
 
 </div>
 
-<div class="row">
-	<div class="col col-lg-12">
-		<?php echo $this->Paginator->counter(array('format' => 'Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')); ?>
-		<br />
-		<?php echo $this->Paginator->prev('< previous', array(), null, array('class' => 'prev disabled')); ?>&nbsp;
-		<?php echo $this->Paginator->numbers(array('separator' => ' | ')); ?>&nbsp;
-		<?php echo $this->Paginator->next('next >', array(), null, array('class' => 'next disabled')); ?>&nbsp;
-	</div>
-</div>

@@ -1,5 +1,7 @@
 <h1>Brands</h1>
 
+<?php $this->Html->addCrumb('Brands'); ?>
+
 <br />
 
 <table class="table-striped table-bordered table-condensed table-hover">

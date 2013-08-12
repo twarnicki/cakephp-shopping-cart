@@ -84,4 +84,29 @@ class Product extends AppModel {
 
 ////////////////////////////////////////////////////////////
 
+	public function updateViews($products) {
+
+		if(!isset($products[0])) {
+			$a = $products;
+			unset($products);
+			$products[0] = $a;
+		}
+
+		$this->unbindModel(
+			array('belongsTo' => array('Category', 'Brand'))
+		);
+
+		foreach($products as $product) {
+			$this->updateAll(
+				array(
+					'Product.views' => 'Product.views + 1',
+				),
+				array('Product.id' => $product['Product']['id'])
+			);
+		}
+
+	}
+
+////////////////////////////////////////////////////////////
+
 }

@@ -7,16 +7,6 @@ foreach ($parents as $parent) {
 }
 ?>
 
-<br />
-
-<div class="row">
-	<div class="col-lg-12">
-		<ul class="breadcrumb">
-			<?php echo $this->Html->getCrumbs(' > '); ?>
-		</ul>
-	</div>
-</div>
-
 <h2><?php echo $category['Category']['name']; ?><small> Category</small></h1>
 
 <?php if (!empty($products)): ?>

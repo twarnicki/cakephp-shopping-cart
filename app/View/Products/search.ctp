@@ -1,6 +1,9 @@
 <?php echo $this->Html->script('addtocart.js', array('inline' => false)); ?>
 
 <?php if($ajax != 1): ?>
+
+<?php $this->Html->addCrumb('Search'); ?>
+
 <h1>Search</h1>
 
 <br />
@@ -29,6 +32,9 @@
 <?php // echo $this->Html->script('search.js', array('inline' => false)); ?>
 
 <?php if(!empty($search)) : ?>
+
+<?php $this->Html->addCrumb($search); ?>
+
 <?php if(!empty($products)) : ?>
 
 <div class="row">

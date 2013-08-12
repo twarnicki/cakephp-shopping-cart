@@ -67,8 +67,12 @@ class BrandsController extends AppController {
 		if (!$this->Brand->exists($id)) {
 			throw new NotFoundException('Invalid brand');
 		}
-		$options = array('conditions' => array('Brand.' . $this->Brand->primaryKey => $id));
-		$this->set('brand', $this->Brand->find('first', $options));
+		$brand = $this->Brand->find('first', array(
+			'conditions' => array(
+				'Brand.id'
+			)
+		));
+		$this->set(compact('brand'));
 	}
 
 ////////////////////////////////////////////////////////////
@@ -99,8 +103,12 @@ class BrandsController extends AppController {
 				$this->Session->setFlash('The brand could not be saved. Please, try again.');
 			}
 		} else {
-			$options = array('conditions' => array('Brand.' . $this->Brand->primaryKey => $id));
-			$this->request->data = $this->Brand->find('first', $options);
+			$brands = $this->Brand->find('first', array(
+				'conditions' => array(
+					'Brand.id'
+				)
+			));
+			$this->request->data = $brands;
 		}
 	}
 

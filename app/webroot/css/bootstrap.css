@@ -346,7 +346,7 @@ img {
 }
 
 .img-circle {
-  border-radius: 500px;
+  border-radius: 50%;
 }
 
 hr {
@@ -2426,6 +2426,14 @@ a.list-group-item.active .list-group-item-text {
   border-bottom: 0;
 }
 
+.panel-heading + .list-group {
+  margin-top: -15px;
+}
+
+.panel-heading + .list-group .list-group-item:first-child {
+  border-top-width: 0;
+}
+
 .panel-heading {
   padding: 10px 15px;
   margin: -15px -15px 15px;
@@ -4127,6 +4135,10 @@ a.thumbnail:focus {
   cursor: pointer;
 }
 
+.label:empty {
+  display: none;
+}
+
 .label-default {
   background-color: #999999;
 }
@@ -4463,7 +4475,6 @@ a.list-group-item.active > .badge,
   filter: alpha(opacity=90);
 }
 
-.carousel-control .glyphicon,
 .carousel-control .icon-prev,
 .carousel-control .icon-next {
   position: absolute;

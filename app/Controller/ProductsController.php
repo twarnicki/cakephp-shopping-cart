@@ -15,8 +15,7 @@ class ProductsController extends AppController {
 ////////////////////////////////////////////////////////////
 
 	public function index() {
-
-		$this->paginate = array(
+		$products = $this->Product->find('all', array(
 			'recursive' => -1,
 			'contain' => array(
 				'Brand'
@@ -27,15 +26,39 @@ class ProductsController extends AppController {
 				'Brand.active' => 1
 			),
 			'order' => array(
+				'Product.views' => 'ASC'
+			)
+		));
+		$this->set(compact('products'));
+
+		$this->Product->updateViews($products);
+
+		$this->set('title_for_layout', Configure::read('Settings.SHOP_TITLE'));
+	}
+
+////////////////////////////////////////////////////////////
+
+	public function products() {
+
+		$this->paginate = array(
+			'recursive' => -1,
+			'contain' => array(
+				'Brand'
+			),
+			'limit' => 40,
+			'conditions' => array(
+				'Product.active' => 1,
+				'Brand.active' => 1
+			),
+			'order' => array(
 				'Product.name' => 'ASC'
 			),
 			'paramType' => 'querystring',
 		);
 		$products = $this->paginate('Product');
-
 		$this->set(compact('products'));
 
-		$this->set('title_for_layout', Configure::read('Settings.SHOP_TITLE'));
+		$this->set('title_for_layout', 'All Products - ' . Configure::read('Settings.SHOP_TITLE'));
 
 	}
 
@@ -59,12 +82,7 @@ class ProductsController extends AppController {
 			$this->redirect(array('action' => 'index'), 301);
 		}
 
-		$this->Product->updateAll(
-			array(
-				'Product.views' => 'Product.views + 1',
-			),
-			array('Product.id' => $product['Product']['id'])
-		);
+		$this->Product->updateViews($product);
 
 		$this->set(compact('product'));
 

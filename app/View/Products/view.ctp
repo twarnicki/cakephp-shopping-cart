@@ -1,5 +1,12 @@
 <?php echo $this->Html->script(array('addtocart.js'), array('inline' => false)); ?>
 
+<?php
+$this->Html->addCrumb($product['Brand']['name'], array('controller' => 'brands', 'action' => 'view', 'slug' => $product['Brand']['slug']));
+$this->Html->addCrumb($product['Category']['name'], array('controller' => 'categories', 'action' => 'view', 'slug' => $product['Category']['slug']));
+$this->Html->addCrumb($product['Product']['name']);
+?>
+
+
 <h1><?php echo $product['Product']['name']; ?></h1>
 
 <div class="row">

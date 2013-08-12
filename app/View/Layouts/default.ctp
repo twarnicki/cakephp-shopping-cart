@@ -69,6 +69,7 @@ $(document).ready(function(){
 			<div class="nav-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?></li>
+					<li><?php echo $this->Html->link('Products', array('controller' => 'products', 'action' => 'products')); ?></li>
 					<li><?php echo $this->Html->link('Brands', array('controller' => 'brands', 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?></li>
@@ -91,6 +92,18 @@ $(document).ready(function(){
 	<div class="content">
 		<div class="container">
 			<?php echo $this->Session->flash(); ?>
+
+			<br />
+
+			<div class="row">
+				<div class="col-lg-12">
+					<ul class="breadcrumb">
+						<?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?>
+						/ <?php echo $this->Html->getCrumbs(' / '); ?>
+					</ul>
+				</div>
+			</div>
+
 			<?php echo $this->fetch('content'); ?>
 			<br />
 			<div id="msg"></div>
