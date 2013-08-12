@@ -1,5 +1,3 @@
-<?php echo $this->Html->script(array('addtocart.js'), array('inline' => false)); ?>
-
 <?php $this->Html->addCrumb('Products'); ?>
 
 <h1><?php echo Configure::read('Settings.SHOP_TITLE'); ?></h1>

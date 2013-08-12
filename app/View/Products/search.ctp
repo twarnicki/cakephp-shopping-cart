@@ -1,5 +1,3 @@
-<?php echo $this->Html->script('addtocart.js', array('inline' => false)); ?>
-
 <?php if($ajax != 1): ?>
 
 <?php $this->Html->addCrumb('Search'); ?>

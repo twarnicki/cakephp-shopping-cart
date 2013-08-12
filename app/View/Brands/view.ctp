@@ -1,5 +1,3 @@
-<?php echo $this->Html->script(array('addtocart.js'), array('inline' => false)); ?>
-
 <?php $this->Html->addCrumb($brand['Brand']['name']); ?>
 
 <h1><?php echo $brand['Brand']['name']; ?><small> Products</small></h1>

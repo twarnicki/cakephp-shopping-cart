@@ -1,5 +1,3 @@
-<?php echo $this->Html->script(array('addtocart.js'), array('inline' => false)); ?>
-
 <?php
 $this->Html->addCrumb('Categories', '/categories/');
 foreach ($parents as $parent) {

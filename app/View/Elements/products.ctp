@@ -12,11 +12,6 @@ if (($i % 4) == 0) { echo "\n<div class=\"row\">\n\n";}
 <br />
 $<?php echo $product['Product']['price']; ?>
 <br />
-<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'add'))); ?>
-<?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $product['Product']['id'])); ?>
-<?php echo $this->Form->button('Add to Cart', array('class' => 'btn btn-primary btn-sm addtocart', 'id' => $product['Product']['id'], 'escape' => false));?>
-<?php echo $this->Form->end();?>
-<br />
 <br />
 </div>
 <?php

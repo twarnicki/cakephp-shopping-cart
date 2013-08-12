@@ -92,18 +92,10 @@ $(document).ready(function(){
 	<div class="content">
 		<div class="container">
 			<?php echo $this->Session->flash(); ?>
-
 			<br />
-
-			<div class="row">
-				<div class="col-lg-12">
-					<ul class="breadcrumb">
-						<?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?>
-						/ <?php echo $this->Html->getCrumbs(' / '); ?>
-					</ul>
-				</div>
-			</div>
-
+			<ul class="breadcrumb">
+				<?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'index')); ?> / <?php echo $this->Html->getCrumbs(' / '); ?>
+			</ul>
 			<?php echo $this->fetch('content'); ?>
 			<br />
 			<div id="msg"></div>
