@@ -117,13 +117,16 @@ $(document).ready(function(){
 			<br />
 			<?php echo $this->Html->link('CakePHP Shopping Cart - github.com/andraskende/cakephp-shopping-cart', 'https://github.com/andraskende/cakephp-shopping-cart'); ?>
 			<br />
+			<?php echo $this->Html->link('www.shoppingcartcore.com', 'http://www.shoppingcartcore.com'); ?> - <?php echo $this->Html->link('www.kende.com', 'http://www.kende.com'); ?>
+			<br />
 			&copy; <?php echo date('Y'); ?> <?php echo env('HTTP_HOST'); ?>
 			<br />
 			<br />
-			<?php echo $this->element('sql_dump'); ?>
-			<br />
-			<br />
 		</div>
+	</div>
+
+	<div class="debug">
+		<?php echo $this->element('sql_dump'); ?>
 	</div>
 
 </body>

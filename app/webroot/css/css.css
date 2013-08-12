@@ -37,6 +37,11 @@ h1, h2, h3, h4 {
 	color: red;
 }
 
+.debug {
+	font-size: 12px;
+	padding: 10px;
+}
+
 .flash-msg {
 	position: absolute;
 	top: 10px;
