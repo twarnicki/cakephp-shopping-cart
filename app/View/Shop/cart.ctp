@@ -1,5 +1,7 @@
 <?php echo $this->set('title_for_layout', 'Shopping Cart'); ?>
 
+<?php $this->Html->addCrumb('Shopping Cart'); ?>
+
 <?php echo $this->Html->script(array('cart.js'), array('inline' => false)); ?>
 
 <h1>Shopping Cart</h1>

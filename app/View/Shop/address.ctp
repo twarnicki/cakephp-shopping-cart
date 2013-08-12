@@ -1,5 +1,7 @@
 <?php echo $this->set('title_for_layout', 'Address'); ?>
 
+<?php $this->Html->addCrumb('Address'); ?>
+
 <?php echo $this->Html->script(array('shop_address.js'), array('inline' => false)); ?>
 
 <h1>Address</h1>
