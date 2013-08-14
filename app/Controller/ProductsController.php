@@ -79,7 +79,7 @@ class ProductsController extends AppController {
 			)
 		));
 		if (empty($product)) {
-			$this->redirect(array('action' => 'index'), 301);
+			return $this->redirect(array('action' => 'index'), 301);
 		}
 
 		$this->Product->updateViews($product);
@@ -117,7 +117,7 @@ class ProductsController extends AppController {
 				'limit' => 200,
 			));
 			if(count($products) == 1) {
-				$this->redirect(array('controller' => 'products', 'action' => 'view', 'slug' => $products[0]['Product']['slug']));
+				return $this->redirect(array('controller' => 'products', 'action' => 'view', 'slug' => $products[0]['Product']['slug']));
 			}
 			$terms1 = array_diff($terms1, array(''));
 			$this->set(compact('products', 'terms1'));
@@ -206,7 +206,7 @@ class ProductsController extends AppController {
 
 	public function admin_reset() {
 		$this->Session->delete('Product');
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 
 ////////////////////////////////////////////////////////////
@@ -247,7 +247,7 @@ class ProductsController extends AppController {
 			}
 
 			$this->Session->write('Product.conditions', $conditions);
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 
 		}
 
@@ -338,7 +338,7 @@ class ProductsController extends AppController {
 
 			if ($this->Product->save($this->request->data)) {
 				$this->Session->setFlash($upload);
-				$this->redirect($this->referer());
+				return $this->redirect($this->referer());
 			} else {
 				$this->Session->setFlash('The Product could not be saved. Please, try again.');
 			}
@@ -367,7 +367,7 @@ class ProductsController extends AppController {
 			$this->Product->create();
 			if ($this->Product->save($this->request->data)) {
 				$this->Session->setFlash('The product has been saved');
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('The product could not be saved. Please, try again.');
 			}
@@ -388,7 +388,7 @@ class ProductsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Product->save($this->request->data)) {
 				$this->Session->setFlash('The product has been saved');
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('The product could not be saved. Please, try again.');
 			}
@@ -428,10 +428,10 @@ class ProductsController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Product->delete()) {
 			$this->Session->setFlash('Product deleted');
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash('Product was not deleted');
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 
 ////////////////////////////////////////////////////////////

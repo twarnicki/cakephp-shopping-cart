@@ -27,7 +27,7 @@ class ShopController extends AppController {
 	public function clear() {
 		$this->Cart->clear();
 		$this->Session->setFlash('All item(s) removed from your shopping cart', 'flash_error');
-		$this->redirect('/');
+		return $this->redirect('/');
 	}
 
 //////////////////////////////////////////////////
@@ -40,7 +40,7 @@ class ShopController extends AppController {
 		if(!empty($product)) {
 			$this->Session->setFlash($product['Product']['name'] . ' was added to your shopping cart.', 'flash_success');
 		}
-		$this->redirect($this->referer());
+		return $this->redirect($this->referer());
 	}
 
 //////////////////////////////////////////////////
@@ -67,7 +67,7 @@ class ShopController extends AppController {
 		if(!empty($product)) {
 			$this->Session->setFlash($product['Product']['name'] . ' was removed from your shopping cart', 'flash_error');
 		}
-		$this->redirect(array('action' => 'cart'));
+		return $this->redirect(array('action' => 'cart'));
 	}
 
 //////////////////////////////////////////////////
@@ -80,7 +80,7 @@ class ShopController extends AppController {
 			}
 			$this->Session->setFlash('Shopping Cart is updated.', 'flash_success');
 		}
-		$this->redirect(array('action' => 'cart'));
+		return $this->redirect(array('action' => 'cart'));
 	}
 
 //////////////////////////////////////////////////
@@ -104,7 +104,7 @@ class ShopController extends AppController {
 
 		$shop = $this->Session->read('Shop');
 		if(!$shop['Order']['total']) {
-			$this->redirect('/');
+			return $this->redirect('/');
 		}
 
 		if ($this->request->is('post')) {
@@ -114,7 +114,7 @@ class ShopController extends AppController {
 				$order = $this->request->data['Order'];
 				$order['order_type'] = 'creditcard';
 				$this->Session->write('Shop.Order', $order + $shop['Order']);
-				$this->redirect(array('action' => 'review'));
+				return $this->redirect(array('action' => 'review'));
 			} else {
 				$this->Session->setFlash('The form could not be saved. Please, try again.', 'flash_error');
 			}
@@ -130,7 +130,7 @@ class ShopController extends AppController {
 	public function step1() {
 		$paymentAmount = $this->Session->read('Shop.Order.total');
 		if(!$paymentAmount) {
-			$this->redirect('/');
+			return $this->redirect('/');
 		}
 		$this->Session->write('Shop.Order.order_type', 'paypal');
 		$this->Paypal->step1($paymentAmount);
@@ -143,20 +143,20 @@ class ShopController extends AppController {
 		$token = $this->request->query['token'];
 		$paypal = $this->Paypal->GetShippingDetails($token);
 
-		$ack = strtoupper($paypal["ACK"]);
-		if($ack == "SUCCESS" || $ack == "SUCESSWITHWARNING") {
+		$ack = strtoupper($paypal['ACK']);
+		if($ack == 'SUCCESS' || $ack == 'SUCESSWITHWARNING') {
 			$this->Session->write('Shop.Paypal.Details', $paypal);
-			$this->redirect(array('action' => 'review'));
+			return $this->redirect(array('action' => 'review'));
 		} else {
-			$ErrorCode = urldecode($paypal["L_ERRORCODE0"]);
-			$ErrorShortMsg = urldecode($paypal["L_SHORTMESSAGE0"]);
-			$ErrorLongMsg = urldecode($paypal["L_LONGMESSAGE0"]);
-			$ErrorSeverityCode = urldecode($paypal["L_SEVERITYCODE0"]);
-			echo "GetExpressCheckoutDetails API call failed. ";
-			echo "Detailed Error Message: " . $ErrorLongMsg;
-			echo "Short Error Message: " . $ErrorShortMsg;
-			echo "Error Code: " . $ErrorCode;
-			echo "Error Severity Code: " . $ErrorSeverityCode;
+			$ErrorCode = urldecode($paypal['L_ERRORCODE0']);
+			$ErrorShortMsg = urldecode($paypal['L_SHORTMESSAGE0']);
+			$ErrorLongMsg = urldecode($paypal['L_LONGMESSAGE0']);
+			$ErrorSeverityCode = urldecode($paypal['L_SEVERITYCODE0']);
+			echo 'GetExpressCheckoutDetails API call failed. ';
+			echo 'Detailed Error Message: ' . $ErrorLongMsg;
+			echo 'Short Error Message: ' . $ErrorShortMsg;
+			echo 'Error Code: ' . $ErrorCode;
+			echo 'Error Severity Code: ' . $ErrorSeverityCode;
 			die();
 		}
 
@@ -169,7 +169,7 @@ class ShopController extends AppController {
 		$shop = $this->Session->read('Shop');
 
 		if(empty($shop)) {
-			$this->redirect('/');
+			return $this->redirect('/');
 		}
 
 		if ($this->request->is('post')) {
@@ -203,7 +203,7 @@ class ShopController extends AppController {
 						$authorizeNet = $this->AuthorizeNet->charge($shop['Order'], $payment);
 					} catch(Exception $e) {
 						$this->Session->setFlash($e->getMessage());
-						$this->redirect(array('action' => 'review'));
+						return $this->redirect(array('action' => 'review'));
 					}
 					$order['Order']['authorization'] = $authorizeNet[4];
 					$order['Order']['transaction'] = $authorizeNet[6];
@@ -224,7 +224,7 @@ class ShopController extends AppController {
 							->emailFormat('text')
 							->viewVars(array('shop' => $shop))
 							->send();
-					$this->redirect(array('action' => 'success'));
+					return $this->redirect(array('action' => 'success'));
 				} else {
 					$errors = $this->Order->invalidFields();
 					$this->set(compact('errors'));
@@ -266,7 +266,7 @@ class ShopController extends AppController {
 		$shop = $this->Session->read('Shop');
 		$this->Cart->clear();
 		if(empty($shop)) {
-			$this->redirect('/');
+			return $this->redirect('/');
 		}
 		$this->set(compact('shop'));
 	}

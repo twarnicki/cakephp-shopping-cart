@@ -28,7 +28,7 @@ class CategoriesController extends AppController {
 			)
 		));
 		if(empty($category)) {
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->set(compact('category'));
 
@@ -92,7 +92,7 @@ class CategoriesController extends AppController {
 			$this->Category->create();
 			if ($this->Category->save($this->request->data)) {
 				$this->Session->setFlash('The category has been saved');
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('The category could not be saved. Please, try again.');
 			}
@@ -112,7 +112,7 @@ class CategoriesController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Category->save($this->request->data)) {
 				$this->Session->setFlash('The category has been saved');
-				$this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('The category could not be saved. Please, try again.');
 			}
@@ -136,10 +136,10 @@ class CategoriesController extends AppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Category->delete()) {
 			$this->Session->setFlash('Category deleted');
-			$this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash('Category was not deleted');
-		$this->redirect(array('action' => 'index'));
+		return $this->redirect(array('action' => 'index'));
 	}
 
 ////////////////////////////////////////////////////////////

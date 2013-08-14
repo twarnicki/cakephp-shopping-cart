@@ -19,15 +19,17 @@ class MysqldumpsController extends AppController {
 		$db = get_class_vars('DATABASE_CONFIG');
 
 		system('mysqldump --user ' . $db['default']['login'] . ' --password=' . $db['default']['password'] . ' --host=' . $db['default']['host'] . ' ' . $db['default']['database'] . ' > ' . WWW_ROOT . 'backups/' . $db['default']['database'] . '-' . date('Y-m-d-H-i') . '.sql', $retval);
-		$this->redirect(array('action' => 'index', 'admin' => true));
+		return $this->redirect(array('action' => 'index', 'admin' => true));
 	}
 
 ////////////////////////////////////////////////////////////
 
 	public function admin_delete() {
 		$file = $this->params['data']['mysqldump']['file'];
-		unlink(WWW_ROOT . 'backups/' . $file);
-		$this->redirect(array('action' => 'index', 'admin' => true));
+		if(is_file((WWW_ROOT . 'backups/' . $file))) {
+			unlink(WWW_ROOT . 'backups/' . $file);
+		}
+		return $this->redirect(array('action' => 'index', 'admin' => true));
 	}
 
 ////////////////////////////////////////////////////////////

@@ -83,7 +83,7 @@ class AppController extends Controller {
 			return $this->$model->updateAll(array($field => '1 -' . $field), array($this->$model->escapeField() => $id));
 		}
 		if(!$this->RequestHandler->isAjax()) {
-			$this->redirect($this->referer());
+			return $this->redirect($this->referer());
 		}
 	}
 
