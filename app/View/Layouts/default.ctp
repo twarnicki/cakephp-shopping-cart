@@ -58,15 +58,18 @@ $(document).ready(function(){
 </head>
 <body>
 
-	<div class="navbar-inverse navbar-static-top">
+	<div class="navbar navbar-inverse navbar-static-top" role="navigation">
 		<div class="container">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="<?php echo $this->Html->url('/'); ?>">CakePHP Cart</a>
-			<div class="nav-collapse collapse">
+				</button>
+				<a class="navbar-brand" href="<?php echo $this->Html->url('/'); ?>">CakePHP Cart</a>
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
 					<li><?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'view')); ?></li>
 					<li><?php echo $this->Html->link('Products', array('controller' => 'products', 'action' => 'products')); ?></li>
@@ -74,7 +77,7 @@ $(document).ready(function(){
 					<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Search', array('controller' => 'products', 'action' => 'search')); ?></li>
 				</ul>
-				<ul class="navbar-form form-inline pull-right">
+				<ul class="navbar-form form-inline navbar-right">
 					<?php echo $this->Form->create('Product', array('type' => 'GET', 'url' => array('controller' => 'products', 'action' => 'search'))); ?>
 
 					<?php echo $this->Form->input('search', array('label' => false, 'div' => false, 'class' => 'input-sm', 'autocomplete' => 'off')); ?>
