@@ -28,7 +28,8 @@
 <lin1k rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<?php echo $this->Html->script(array('bootstrap.min.js', 'respond.min.js', 'js.js')); ?>
+<!--[if lt IE 9]><?php echo $this->Html->script(array('html5shiv.js', 'respond.min.js')); ?><![endif]-->
+<?php echo $this->Html->script(array('bootstrap.min.js', 'js.js')); ?>
 <?php echo $this->App->js(); ?>
 <?php echo $this->fetch('meta'); ?>
 <?php echo $this->fetch('css'); ?>

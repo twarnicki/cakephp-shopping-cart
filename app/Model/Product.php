@@ -96,14 +96,15 @@ class Product extends AppModel {
 			array('belongsTo' => array('Category', 'Brand'))
 		);
 
-		foreach($products as $product) {
-			$this->updateAll(
-				array(
-					'Product.views' => 'Product.views + 1',
-				),
-				array('Product.id' => $product['Product']['id'])
-			);
-		}
+		$productIds = Set::extract('/Product/id', $products);
+
+		$this->updateAll(
+			array(
+				'Product.views' => 'Product.views + 1',
+			),
+			array('Product.id' => $productIds)
+		);
+
 
 	}
 
