@@ -31,24 +31,28 @@ class BrandsController extends AppController {
 		}
 		$this->set(compact('brand'));
 
-		$this->paginate = array(
-			'recursive' => -1,
-			'contain' => array(
-				'Brand'
-			),
-			'limit' => 20,
-			'conditions' => array(
-				'Product.active' => 1,
-				'Product.brand_id' => $brand['Brand']['id'],
-				'Brand.active' => 1,
+		$this->Paginator = $this->Components->load('Paginator');
 
-			),
-			'order' => array(
-				'Product.name' => 'ASC'
-			),
-			'paramType' => 'querystring',
+		$this->Paginator->settings = array(
+			'Product' => array(
+				'recursive' => -1,
+				'contain' => array(
+					'Brand'
+				),
+				'limit' => 40,
+				'conditions' => array(
+					'Product.active' => 1,
+					'Product.brand_id' => $brand['Brand']['id'],
+					'Brand.active' => 1,
+
+				),
+				'order' => array(
+					'Product.name' => 'ASC'
+				),
+				'paramType' => 'querystring',
+			)
 		);
-		$products = $this->paginate($this->Brand->Product);
+		$products = $this->Paginator->paginate($this->Brand->Product);
 
 		$this->set(compact('products'));
 
@@ -57,8 +61,8 @@ class BrandsController extends AppController {
 ////////////////////////////////////////////////////////////
 
 	public function admin_index() {
-		$this->Brand->recursive = -1;
-		$this->set('brands', $this->paginate());
+		$this->Paginator = $this->Components->load('Paginator');
+		$this->set('brands', $this->Paginator->paginate());
 	}
 
 ////////////////////////////////////////////////////////////

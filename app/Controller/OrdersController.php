@@ -6,19 +6,23 @@ class OrdersController extends AppController {
 
 	public function admin_index() {
 
-		$this->paginate = array(
-			'recursive' => -1,
-			'contain' => array(
-			),
-			'conditions' => array(
-			),
-			'order' => array(
-				'Order.created' => 'DESC'
-			),
-			'limit' => 20,
-			'paramType' => 'querystring',
+		$this->Paginator = $this->Components->load('Paginator');
+
+		$this->Paginator->settings = array(
+			'Order' => array(
+				'recursive' => -1,
+				'contain' => array(
+				),
+				'conditions' => array(
+				),
+				'order' => array(
+					'Order.created' => 'DESC'
+				),
+				'limit' => 20,
+				'paramType' => 'querystring',
+			)
 		);
-		$orders = $this->paginate('Order');
+		$orders = $this->Paginator->paginate();
 
 		$this->set(compact('orders'));
 	}

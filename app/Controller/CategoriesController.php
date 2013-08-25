@@ -67,8 +67,13 @@ class CategoriesController extends AppController {
 ////////////////////////////////////////////////////////////
 
 	public function admin_index() {
-		$this->Category->recursive = 0;
-		$this->set('categories', $this->paginate());
+		$this->Paginator = $this->Components->load('Paginator');
+		$this->Paginator->settings = array(
+			'Category' => array(
+				'recursive' => 0,
+			)
+		);
+		$this->set('categories', $this->Paginator->paginate());
 	}
 
 ////////////////////////////////////////////////////////////

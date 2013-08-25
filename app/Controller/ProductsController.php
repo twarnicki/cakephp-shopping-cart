@@ -4,7 +4,9 @@ class ProductsController extends AppController {
 
 ////////////////////////////////////////////////////////////
 
-	public $components = array('RequestHandler');
+	public $components = array(
+		'RequestHandler',
+	);
 
 ////////////////////////////////////////////////////////////
 
@@ -40,22 +42,26 @@ class ProductsController extends AppController {
 
 	public function products() {
 
-		$this->paginate = array(
-			'recursive' => -1,
-			'contain' => array(
-				'Brand'
-			),
-			'limit' => 40,
-			'conditions' => array(
-				'Product.active' => 1,
-				'Brand.active' => 1
-			),
-			'order' => array(
-				'Product.name' => 'ASC'
-			),
-			'paramType' => 'querystring',
+		$this->Paginator = $this->Components->load('Paginator');
+
+		$this->Paginator->settings = array(
+			'Product' => array(
+				'recursive' => -1,
+				'contain' => array(
+					'Brand'
+				),
+				'limit' => 4,
+				'conditions' => array(
+					'Product.active' => 1,
+					'Brand.active' => 1
+				),
+				'order' => array(
+					'Product.name' => 'ASC'
+				),
+				'paramType' => 'querystring',
+			)
 		);
-		$products = $this->paginate('Product');
+		$products = $this->Paginator->paginate();
 		$this->set(compact('products'));
 
 		$this->set('title_for_layout', 'All Products - ' . Configure::read('Settings.SHOP_TITLE'));
@@ -264,20 +270,24 @@ class ProductsController extends AppController {
 		}
 		$this->set(compact('all'));
 
-		$this->paginate = array(
-			'contain' => array(
-				'Category',
-				'Brand',
-			),
-			'recursive' => -1,
-			'limit' => 50,
-			'conditions' => $all['conditions'],
-			'order' => array(
-				'Product.name' => 'ASC'
-			),
-			'paramType' => 'querystring',
+		$this->Paginator = $this->Components->load('Paginator');
+
+		$this->Paginator->settings = array(
+			'Product' => array(
+				'contain' => array(
+					'Category',
+					'Brand',
+				),
+				'recursive' => -1,
+				'limit' => 50,
+				'conditions' => $all['conditions'],
+				'order' => array(
+					'Product.name' => 'ASC'
+				),
+				'paramType' => 'querystring',
+			)
 		);
-		$products = $this->paginate('Product');
+		$products = $this->Paginator->paginate();
 
 		$brands = $this->Product->Brand->findList();
 

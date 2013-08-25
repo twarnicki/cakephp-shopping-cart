@@ -36,20 +36,21 @@ class UsersController extends AppController {
 ////////////////////////////////////////////////////////////
 
 	public function admin_index() {
-		$this->paginate = array(
-			'recursive' => -1,
-			'contain' => array(
-			),
-			'conditions' => array(
-			),
-			'order' => array(
-				'Users.name' => 'ASC'
-			),
-			'limit' => 20,
-			'paramType' => 'querystring',
+		$this->Paginator->settings = array(
+			'User' => array(
+				'recursive' => -1,
+				'contain' => array(
+				),
+				'conditions' => array(
+				),
+				'order' => array(
+					'Users.name' => 'ASC'
+				),
+				'limit' => 20,
+				'paramType' => 'querystring',
+			)
 		);
-		$users = $this->paginate('User');
-
+		$users = $this->Paginator->paginate();
 		$this->set(compact('users'));
 	}
 
