@@ -5,8 +5,6 @@
 
 $(document).ready(function() {
 
-	$.fn.editable.defaults.mode = 'inline';
-
 	$('.category').editable({
 		type: 'select',
 		name: 'category_id',
