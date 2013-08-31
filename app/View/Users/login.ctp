@@ -2,7 +2,7 @@
 
 <br />
 
-<div class="col-lg-3">
+<div class="col-sm-3">
 
 <?php echo $this->Form->create('User', array('action' => 'login')); ?>
 <?php echo $this->Form->input('username', array('class' => 'form-control', 'autofocus' => 'autofocus')); ?>

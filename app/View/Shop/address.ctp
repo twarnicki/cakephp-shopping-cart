@@ -11,7 +11,7 @@
 <hr>
 
 <div class="row">
-<div class="col col-lg-4">
+<div class="col col-sm-4">
 
 <?php echo $this->Form->input('first_name', array('class' => 'form-control')); ?>
 <br />
@@ -24,7 +24,7 @@
 <br />
 
 </div>
-<div class="col col-lg-4">
+<div class="col col-sm-4">
 
 <?php echo $this->Form->input('billing_address', array('class' => 'form-control')); ?>
 <br />
@@ -43,7 +43,7 @@
 <?php echo $this->Form->input('sameaddress', array('type' => 'checkbox', 'label' => 'Copy Billing Address to Shipping')); ?>
 
 </div>
-<div class="col col-lg-4">
+<div class="col col-sm-4">
 
 <?php echo $this->Form->input('shipping_address', array('class' => 'form-control')); ?>
 <br />

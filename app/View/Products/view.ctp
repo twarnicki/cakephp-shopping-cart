@@ -10,11 +10,11 @@ $this->Html->addCrumb($product['Product']['name']);
 
 <div class="row">
 
-	<div class="col col-lg-7">
+	<div class="col col-sm-7">
 	<?php echo $this->Html->Image('/images/large/' . $product['Product']['image'], array('alt' => $product['Product']['name'], 'class' => 'img-thumbnail img-responsive')); ?>
 	</div>
 
-	<div class="col col-lg-5">
+	<div class="col col-sm-5">
 
 		<strong><?php echo $product['Product']['name']; ?></strong>
 

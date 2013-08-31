@@ -17,30 +17,30 @@ Shopping Cart is empty
 <hr>
 
 <div class="row">
-	<div class="col col-lg-1">#</div>
-	<div class="col col-lg-7">ITEM</div>
-	<div class="col col-lg-1">PRICE</div>
-	<div class="col col-lg-1">QUANTITY</div>
-	<div class="col col-lg-1">SUBTOTAL</div>
-	<div class="col col-lg-1">REMOVE</div>
+	<div class="col col-sm-1">#</div>
+	<div class="col col-sm-7">ITEM</div>
+	<div class="col col-sm-1">PRICE</div>
+	<div class="col col-sm-1">QUANTITY</div>
+	<div class="col col-sm-1">SUBTOTAL</div>
+	<div class="col col-sm-1">REMOVE</div>
 </div>
 
 <?php $tabindex = 1; ?>
 <?php foreach ($shop['OrderItem'] as $item): ?>
 	<div class="row" id="row-<?php echo $item['Product']['id']; ?>">
-		<div class="col col-lg-1"><?php echo $this->Html->image('/images/small/' . $item['Product']['image'], array('class' => 'px60')); ?></div>
-		<div class="col col-lg-7"><strong><?php echo $this->Html->link($item['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $item['Product']['slug'])); ?></strong></div>
-		<div class="col col-lg-1" id="price-<?php echo $item['Product']['id']; ?>"><?php echo $item['Product']['price']; ?></div>
-		<div class="col col-lg-1"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric form-control input-small', 'label' => false, 'size' => 2, 'maxlength' => 2, 'tabindex' => $tabindex++, 'data-id' => $item['Product']['id'], 'value' => $item['quantity'])); ?></div>
-		<div class="col col-lg-1" id="subtotal-<?php echo $item['Product']['id']; ?>"><?php echo $item['subtotal']; ?></div>
-		<div class="col col-lg-1"><span class="remove" id="<?php echo $item['Product']['id']; ?>"></span></div>
+		<div class="col col-sm-1"><?php echo $this->Html->image('/images/small/' . $item['Product']['image'], array('class' => 'px60')); ?></div>
+		<div class="col col-sm-7"><strong><?php echo $this->Html->link($item['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $item['Product']['slug'])); ?></strong></div>
+		<div class="col col-sm-1" id="price-<?php echo $item['Product']['id']; ?>"><?php echo $item['Product']['price']; ?></div>
+		<div class="col col-sm-1"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric form-control input-small', 'label' => false, 'size' => 2, 'maxlength' => 2, 'tabindex' => $tabindex++, 'data-id' => $item['Product']['id'], 'value' => $item['quantity'])); ?></div>
+		<div class="col col-sm-1" id="subtotal-<?php echo $item['Product']['id']; ?>"><?php echo $item['subtotal']; ?></div>
+		<div class="col col-sm-1"><span class="remove" id="<?php echo $item['Product']['id']; ?>"></span></div>
 	</div>
 <?php endforeach; ?>
 
 <hr>
 
 <div class="row">
-	<div class="col col-lg-12">
+	<div class="col col-sm-12">
 		<div class="pull-right">
 		<?php echo $this->Html->link('<i class="icon-remove icon"></i> Clear Cart', array('controller' => 'shop', 'action' => 'clear'), array('class' => 'btn btn-danger', 'escape' => false)); ?>
 		&nbsp; &nbsp;
@@ -53,7 +53,7 @@ Shopping Cart is empty
 <hr>
 
 <div class="row">
-	<div class="col col-lg-12 pull-right tr">
+	<div class="col col-sm-12 pull-right tr">
 		Subtotal: <span class="normal" id="subtotal">$<?php echo $shop['Order']['subtotal']; ?></span>
 		<br />
 		<br />
