@@ -697,10 +697,6 @@ class CakeRequestTest extends CakeTestCase {
 		$result = $request->referer(false);
 		$this->assertSame($result, Configure::read('App.fullBaseUrl') . '/some/path');
 
-		$_SERVER['HTTP_REFERER'] = Configure::read('App.fullBaseUrl') . '/some/path';
-		$result = $request->referer(true);
-		$this->assertSame($result, '/some/path');
-
 		$_SERVER['HTTP_REFERER'] = Configure::read('App.fullBaseUrl') . '/recipes/add';
 		$result = $request->referer(true);
 		$this->assertSame($result, '/recipes/add');
@@ -941,7 +937,7 @@ class CakeRequestTest extends CakeTestCase {
 		$this->assertEquals('posts', $request->controller);
 		$this->assertEquals('view', $request->action);
 		$this->assertEquals('blogs', $request->plugin);
-		$this->assertSame($request->banana, null);
+		$this->assertNull($request->banana);
 	}
 
 /**
@@ -1056,7 +1052,7 @@ class CakeRequestTest extends CakeTestCase {
  * Helper function for testing callbacks.
  *
  * @param $request
- * @return bool
+ * @return boolean
  */
 	public function detectCallback($request) {
 		return (bool)$request->return;

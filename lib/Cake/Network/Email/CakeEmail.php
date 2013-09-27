@@ -24,7 +24,6 @@ App::uses('AbstractTransport', 'Network/Email');
 App::uses('File', 'Utility');
 App::uses('String', 'Utility');
 App::uses('View', 'View');
-App::import('I18n', 'Multibyte');
 
 /**
  * Cake e-mail class.
@@ -762,6 +761,10 @@ class CakeEmail {
 /**
  * Format addresses
  *
+ * If the address contains non alphanumeric/whitespace characters, it will
+ * be quoted as characters like `:` and `,` are known to cause issues
+ * in address header fields.
+ *
  * @param array $address
  * @return array
  */
@@ -771,10 +774,11 @@ class CakeEmail {
 			if ($email === $alias) {
 				$return[] = $email;
 			} else {
-				if (strpos($alias, ',') !== false) {
-					$alias = '"' . $alias . '"';
+				$encoded = $this->_encode($alias);
+				if ($encoded === $alias && preg_match('/[^a-z0-9 ]/i', $encoded)) {
+					$encoded = '"' . str_replace('"', '\"', $encoded) . '"';
 				}
-				$return[] = sprintf('%s <%s>', $this->_encode($alias), $email);
+				$return[] = sprintf('%s <%s>', $encoded, $email);
 			}
 		}
 		return $return;
@@ -975,7 +979,7 @@ class CakeEmail {
  *		'contentDisposition' => false
  * ));
  * }}}
- * 
+ *
  * Attach a file from string and specify additional properties:
  *
  * {{{
@@ -1611,6 +1615,7 @@ class CakeEmail {
 		$View = new $viewClass(null);
 		$View->viewVars = $this->_viewVars;
 		$View->helpers = $this->_helpers;
+		$View->loadHelpers();
 
 		list($templatePlugin, $template) = pluginSplit($this->_template);
 		list($layoutPlugin, $layout) = pluginSplit($this->_layout);

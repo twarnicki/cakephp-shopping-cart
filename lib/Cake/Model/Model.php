@@ -3142,10 +3142,12 @@ class Model extends Object implements CakeEventListener {
 	}
 
 /**
- * Returns an array of fields that have failed validation. On the current model.
+ * Returns an array of fields that have failed the validation of the current model.
+ *
+ * Additionally it populates the validationErrors property of the model with the same array.
  *
  * @param string $options An optional array of custom options to be made available in the beforeValidate callback
- * @return array Array of invalid fields
+ * @return array Array of invalid fields and their error messages
  * @see Model::validates()
  */
 	public function invalidFields($options = array()) {
@@ -3392,12 +3394,12 @@ class Model extends Object implements CakeEventListener {
  * Called before each find operation. Return false if you want to halt the find
  * call, otherwise return the (modified) query data.
  *
- * @param array $queryData Data used to execute this query, i.e. conditions, order, etc.
+ * @param array $query Data used to execute this query, i.e. conditions, order, etc.
  * @return mixed true if the operation should continue, false if it should abort; or, modified
- *               $queryData to continue with new $queryData
+ *  $query to continue with new $query
  * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforefind
  */
-	public function beforeFind($queryData) {
+	public function beforeFind($query) {
 		return true;
 	}
 
@@ -3418,9 +3420,10 @@ class Model extends Object implements CakeEventListener {
  * Called before each save operation, after validation. Return a non-true result
  * to halt the save.
  *
- * @param array $options
+ * @param array $options Options passed from Model::save().
  * @return boolean True if the operation should continue, false if it should abort
  * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforesave
+ * @see Model::save()
  */
 	public function beforeSave($options = array()) {
 		return true;
@@ -3430,10 +3433,12 @@ class Model extends Object implements CakeEventListener {
  * Called after each successful save operation.
  *
  * @param boolean $created True if this save created a new record
+ * @param array $options Options passed from Model::save().
  * @return void
  * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave
+ * @see Model::save()
  */
-	public function afterSave($created) {
+	public function afterSave($created, $options = array()) {
 	}
 
 /**
@@ -3460,9 +3465,10 @@ class Model extends Object implements CakeEventListener {
  * Called during validation operations, before validation. Please note that custom
  * validation rules can be defined in $validate.
  *
- * @param array $options Options passed from model::save(), see $options of model::save().
+ * @param array $options Options passed from Model::save().
  * @return boolean True if validate operation should continue, false to abort
  * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate
+ * @see Model::save()
  */
 	public function beforeValidate($options = array()) {
 		return true;

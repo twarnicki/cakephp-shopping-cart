@@ -165,7 +165,11 @@ Shipping Country: <?php echo $shop['Order']['shipping_country'];?><br />
 
 <?php endif; ?>
 
-<?php echo $this->Form->button('<i class="icon-thumbs-up icon-white"></i> Submit Order', array('class' => 'btn btn-primary', 'ecape' => false)); ?>
+<div class="alert alert-danger">
+	<strong>ATTENTION: THIS IS A DEMO SHOPPING CART !</strong>
+</div>
+
+<?php echo $this->Form->button('Submit Order', array('class' => 'btn btn-primary', 'ecape' => false)); ?>
 
 <?php echo $this->Form->end(); ?>
 

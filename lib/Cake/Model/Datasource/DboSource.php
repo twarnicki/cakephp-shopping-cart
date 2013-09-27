@@ -861,7 +861,7 @@ class DboSource extends DataSource {
  * @return boolean True if the result is valid else false
  */
 	public function hasResult() {
-		return is_a($this->_result, 'PDOStatement');
+		return $this->_result instanceof PDOStatement;
 	}
 
 /**
@@ -952,14 +952,14 @@ class DboSource extends DataSource {
 
 		if ($quote) {
 			if ($schema && !empty($schemaName)) {
-				if (false == strstr($table, '.')) {
+				if (strstr($table, '.') === false) {
 					return $this->name($schemaName) . '.' . $this->name($table);
 				}
 			}
 			return $this->name($table);
 		}
 		if ($schema && !empty($schemaName)) {
-			if (false == strstr($table, '.')) {
+			if (strstr($table, '.') === false) {
 				return $schemaName . '.' . $table;
 			}
 		}
@@ -1065,7 +1065,7 @@ class DboSource extends DataSource {
 					if ($bypass) {
 						$assocData['fields'] = false;
 					}
-					if (true === $this->generateAssociationQuery($model, $linkModel, $type, $assoc, $assocData, $queryData, $external, $null)) {
+					if ($this->generateAssociationQuery($model, $linkModel, $type, $assoc, $assocData, $queryData, $external, $null) === true) {
 						$linkedModels[$type . '/' . $assoc] = true;
 					}
 				}
@@ -1730,8 +1730,10 @@ class DboSource extends DataSource {
  * @return string
  */
 	public function renderJoinStatement($data) {
-		extract($data);
-		return trim("{$type} JOIN {$table} {$alias} ON ({$conditions})");
+		if (strtoupper($data['type']) === 'CROSS') {
+			return "{$data['type']} JOIN {$data['table']} {$data['alias']}";
+		}
+		return trim("{$data['type']} JOIN {$data['table']} {$data['alias']} ON ({$data['conditions']})");
 	}
 
 /**
@@ -2279,6 +2281,7 @@ class DboSource extends DataSource {
 			$fields,
 			$quote,
 			ConnectionManager::getSourceName($this),
+			$model->schemaName,
 			$model->table
 		);
 		$cacheKey = md5(serialize($cacheKey));
@@ -2959,7 +2962,7 @@ class DboSource extends DataSource {
  * @return string
  */
 	public function createSchema($schema, $tableName = null) {
-		if (!is_a($schema, 'CakeSchema')) {
+		if (!$schema instanceof CakeSchema) {
 			trigger_error(__d('cake_dev', 'Invalid schema object'), E_USER_WARNING);
 			return null;
 		}
