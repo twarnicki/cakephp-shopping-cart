@@ -684,6 +684,22 @@ class DboSourceTest extends CakeTestCase {
 	}
 
 /**
+ * Test that flushMethodCache works as expected
+ *
+ * @return void
+ */
+	public function testFlushMethodCache() {
+		$this->testDb->cacheMethods = true;
+		$this->testDb->cacheMethod('name', 'some-key', 'stuff');
+
+		Cache::write('method_cache', DboTestSource::$methodCache, '_cake_core_');
+
+		$this->testDb->flushMethodCache();
+		$result = $this->testDb->cacheMethod('name', 'some-key');
+		$this->assertNull($result);
+	}
+
+/**
  * testLog method
  *
  * @outputBuffering enabled
@@ -1127,7 +1143,7 @@ class DboSourceTest extends CakeTestCase {
 			),
 			$this->Model
 		);
-		$expected = 'SELECT DISTINCT(AssetsTag.asset_id) FROM assets_tags AS AssetsTag   WHERE Tag.name = foo bar  GROUP BY AssetsTag.asset_id  ';
+		$expected = 'SELECT DISTINCT(AssetsTag.asset_id) FROM assets_tags AS AssetsTag   WHERE Tag.name = foo bar  GROUP BY AssetsTag.asset_id';
 		$this->assertEquals($expected, $subQuery);
 	}
 
