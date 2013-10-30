@@ -50,7 +50,7 @@ class ProductsController extends AppController {
 				'contain' => array(
 					'Brand'
 				),
-				'limit' => 4,
+				'limit' => 20,
 				'conditions' => array(
 					'Product.active' => 1,
 					'Brand.active' => 1

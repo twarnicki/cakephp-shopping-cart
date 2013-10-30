@@ -11,6 +11,8 @@ $(document).ready(function() {
 
 	$('.modselector').change(function(){
 		$('#productprice').html($(this).find(':selected').data('price'));
+
+		 $('#addtocart').attr('mods').val($(this).find(':selected').val());
 	});
 
 });
@@ -48,7 +50,7 @@ $(document).ready(function() {
 
 		<?php endif;?>
 
-		<?php echo $this->Form->button('Add to Cart', array('class' => 'btn btn-primary addtocart', 'id' => $product['Product']['id']));?>
+		<?php echo $this->Form->button('Add to Cart', array('class' => 'btn btn-primary addtocart', 'id' => 'addtocart', 'mods' => 0, 'id' => $product['Product']['id']));?>
 		<?php echo $this->Form->end(); ?>
 
 		<br />

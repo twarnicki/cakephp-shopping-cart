@@ -60,7 +60,14 @@ class ShopController extends AppController {
 
 			$quantity = isset($this->request->data['quantity']) ? $this->request->data['quantity'] : null;
 
-			$productmodId = isset($this->request->data['mods']) ? $this->request->data['mods'] : null;
+			if(isset($this->request->data['mods']) && ($this->request->data['mods'] > 0)) {
+				$productmodId = $this->request->data['mods'];
+			} else {
+				$productmodId = null;
+			}
+
+			// echo $productmodId ;
+			// die;
 
 			$product = $this->Cart->add($id, $quantity, $productmodId);
 
