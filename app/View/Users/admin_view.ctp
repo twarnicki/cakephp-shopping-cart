@@ -2,16 +2,24 @@
 
 <table class="table-striped table-bordered table-condensed table-hover">
 	<tr>
-		<td><?php echo __('Id'); ?></td>
+		<td>Id</td>
 		<td><?php echo h($user['User']['id']); ?></td>
 	</tr>
 	<tr>
-		<td><?php echo __('Username'); ?></td>
+		<td>Role</td>
+		<td><?php echo h($user['User']['role']); ?></td>
+	</tr>
+	<tr>
+		<td>Username</td>
 		<td><?php echo h($user['User']['username']); ?></td>
 	</tr>
 	<tr>
-		<td><?php echo __('Password'); ?></td>
+		<td>Password</td>
 		<td><?php echo h($user['User']['password']); ?></td>
+	</tr>
+	<tr>
+		<td>Active</td>
+		<td><?php echo h($user['User']['active']); ?></td>
 	</tr>
 	<tr>
 		<td>Created</td>
@@ -35,7 +43,7 @@
 <br />
 <br />
 
-<?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), array('class' => 'btn btn-danger'), __('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
+<?php echo $this->Form->postLink('Delete User', array('action' => 'delete', $user['User']['id']), array('class' => 'btn btn-danger'), __('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
 
 <br />
 <br />

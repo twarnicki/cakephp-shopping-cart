@@ -49,6 +49,7 @@ class AppController extends Controller {
 		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login', 'admin' => false);
 		$this->Auth->loginRedirect = array('controller' => 'orders', 'action' => 'index', 'admin' => true);
 		$this->Auth->logoutRedirect = array('controller' => 'products', 'action' => 'index', 'admin' => false);
+		$this->Auth->authorize = array('Controller');
 
 		$this->Auth->authenticate = array(
 			AuthComponent::ALL => array(
@@ -58,19 +59,43 @@ class AppController extends Controller {
 					'password' => 'password'
 				),
 				'scope' => array(
-					'User.active' => 1
+					'User.active' => 1,
 				)
 			), 'Form'
 		);
 
 		if(isset($this->request->params['admin']) && ($this->request->params['prefix'] == 'admin')) {
 			if($this->Session->check('Auth.User')) {
+				$this->set('authUser', $this->Auth->user());
+				$loggedin = $this->Session->read('Auth.User');
+				$this->set(compact('loggedin'));
 				$this->layout = 'admin';
+			}
+		} elseif(isset($this->request->params['customer']) && ($this->request->params['prefix'] == 'customer')) {
+			if($this->Session->check('Auth.User')) {
+				$this->set('authUser', $this->Auth->user());
+				$loggedin = $this->Session->read('Auth.User');
+				$this->set(compact('loggedin'));
+				$this->layout = 'customer';
 			}
 		} else {
 			$this->Auth->allow();
 		}
 
+	}
+
+////////////////////////////////////////////////////////////
+
+	public function isAuthorized($user) {
+		if (($this->params['prefix'] === 'admin') && ($user['role'] != 'admin')) {
+			echo '<a href="/users/logout">Logout</a><br />';
+			die('Invalid request for '. $user['role'] . ' user.');
+		}
+		if (($this->params['prefix'] === 'customer') && ($user['role'] != 'customer')) {
+			echo '<a href="/users/logout">Logout</a><br />';
+			die('Invalid request for '. $user['role'] . ' user.');
+		}
+		return true;
 	}
 
 ////////////////////////////////////////////////////////////

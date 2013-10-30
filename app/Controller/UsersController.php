@@ -12,9 +12,33 @@ class UsersController extends AppController {
 ////////////////////////////////////////////////////////////
 
 	public function login() {
+
+		// echo AuthComponent::password('admin');
+
 		if ($this->request->is('post')) {
 			if($this->Auth->login()) {
-				return $this->redirect($this->Auth->redirect());
+
+				$this->User->id = $this->Auth->user('id');
+				$this->User->saveField('logins', $this->Auth->user('logins') + 1);
+				$this->User->saveField('last_login', date('Y-m-d H:i:s'));
+
+				if ($this->Auth->user('role') == 'customer') {
+					return $this->redirect(array(
+						'controller' => 'users',
+						'action' => 'dashboard',
+						'customer' => true,
+						'admin' => false
+					));
+				} elseif ($this->Auth->user('role') == 'admin') {
+					return $this->redirect(array(
+						'controller' => 'users',
+						'action' => 'dashboard',
+						'manager' => false,
+						'admin' => true
+					));
+				} else {
+					$this->Session->setFlash('Login is incorrect');
+				}
 			} else {
 				$this->Session->setFlash('Login is incorrect');
 			}
@@ -30,12 +54,20 @@ class UsersController extends AppController {
 
 ////////////////////////////////////////////////////////////
 
+	public function customer_dashboard() {
+	}
+
+////////////////////////////////////////////////////////////
+
 	public function admin_dashboard() {
 	}
 
 ////////////////////////////////////////////////////////////
 
 	public function admin_index() {
+
+		$this->Paginator = $this->Components->load('Paginator');
+
 		$this->Paginator->settings = array(
 			'User' => array(
 				'recursive' => -1,
@@ -89,6 +121,25 @@ class UsersController extends AppController {
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash('The user has been saved');
 				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash('The user could not be saved. Please, try again.');
+			}
+		} else {
+			$this->request->data = $this->User->read(null, $id);
+		}
+	}
+
+////////////////////////////////////////////////////////////
+
+	public function admin_password($id = null) {
+		$this->User->id = $id;
+		if (!$this->User->exists()) {
+			throw new NotFoundException('Invalid user');
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash('The user has been saved');
+				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash('The user could not be saved. Please, try again.');
 			}
