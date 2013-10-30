@@ -8,6 +8,9 @@ A simple PHP Shopping Cart built with CakePHP PHP framework.
 - PayPal Express Checkout
 - Google Checkout
 - AJAX functions for search autocomplete, shopping cart updates
+- Product Categories
+- Product Brands
+- Product Options
 
 INCOMPLETE !
 
@@ -28,6 +31,12 @@ mysql -u db_username -p db_password db_name < app/Config/Schema/shop.sql
 cp app/Config/settings-default.php app/Config/settings.php
 cp app/Config/database.php.default app/Config/database.php
 
+/admin
+username: admin
+password: admin
+
+Dont forget to change passwords, salt in core.php, etc...
+
 ////////////////////////////////////////////////////////////////////
 
 http://andraskende.github.com/cakephp-shopping-cart/
@@ -35,4 +44,3 @@ http://andraskende.github.com/cakephp-shopping-cart/
 http://www.shoppingcartcore.com/
 
 Andras Kende http://www.kende.com/
-

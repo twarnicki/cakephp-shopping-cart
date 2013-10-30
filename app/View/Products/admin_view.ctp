@@ -61,7 +61,7 @@
 
 <div class="row">
 
-	<div class="span3">
+	<div class="col-sm-4">
 	<?php echo $this->Form->input('image', array('type' => 'file')); ?>
 	</div>
 

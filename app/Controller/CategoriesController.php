@@ -83,6 +83,9 @@ class CategoriesController extends AppController {
 			throw new NotFoundException('Invalid category');
 		}
 		$category = $this->Category->find('first', array(
+			'contain' => array(
+				'ParentCategory'
+			),
 			'conditions' => array(
 				'Category.id' => $id
 			)
