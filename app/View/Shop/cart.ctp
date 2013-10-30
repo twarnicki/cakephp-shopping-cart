@@ -29,7 +29,13 @@ Shopping Cart is empty
 <?php foreach ($shop['OrderItem'] as $item): ?>
 	<div class="row" id="row-<?php echo $item['Product']['id']; ?>">
 		<div class="col col-sm-1"><?php echo $this->Html->image('/images/small/' . $item['Product']['image'], array('class' => 'px60')); ?></div>
-		<div class="col col-sm-7"><strong><?php echo $this->Html->link($item['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $item['Product']['slug'])); ?></strong></div>
+		<div class="col col-sm-7">
+			<strong><?php echo $this->Html->link($item['Product']['name'], array('controller' => 'products', 'action' => 'view', 'slug' => $item['Product']['slug'])); ?></strong>
+			<?php if(isset($item['Product']['productmod_name'])) : ?>
+			<br />
+			<small><?php echo $item['Product']['productmod_name']; ?></small>
+			<?php endif; ?>
+		</div>
 		<div class="col col-sm-1" id="price-<?php echo $item['Product']['id']; ?>"><?php echo $item['Product']['price']; ?></div>
 		<div class="col col-sm-1"><?php echo $this->Form->input('quantity-' . $item['Product']['id'], array('div' => false, 'class' => 'numeric form-control input-small', 'label' => false, 'size' => 2, 'maxlength' => 2, 'tabindex' => $tabindex++, 'data-id' => $item['Product']['id'], 'value' => $item['quantity'])); ?></div>
 		<div class="col col-sm-1" id="subtotal-<?php echo $item['Product']['id']; ?>"><?php echo $item['subtotal']; ?></div>

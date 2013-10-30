@@ -6,6 +6,16 @@ $this->Html->addCrumb($product['Category']['name'], array('controller' => 'categ
 $this->Html->addCrumb($product['Product']['name']);
 ?>
 
+<script>
+$(document).ready(function() {
+
+	$('.modselector').change(function(){
+		$('#productprice').html($(this).find(':selected').data('price'));
+	});
+
+});
+</script>
+
 <h1><?php echo $product['Product']['name']; ?></h1>
 
 <div class="row">
@@ -21,13 +31,23 @@ $this->Html->addCrumb($product['Product']['name']);
 		<br />
 		<br />
 
-		$ <?php echo $product['Product']['price']; ?>
+		$ <span id="productprice"><?php echo $product['Product']['price']; ?></span>
 
 		<br />
 		<br />
 
 		<?php echo $this->Form->create(NULL, array('url' => array('controller' => 'shop', 'action' => 'add'))); ?>
 		<?php echo $this->Form->input('id', array('type' => 'hidden', 'value' => $product['Product']['id'])); ?>
+
+		<?php if(!empty($productmodshtml)):?>
+
+			<br />
+			<span style="font-weight:bold">Product Options:</span> <?php echo $productmodshtml;?>
+			<br />
+			<br />
+
+		<?php endif;?>
+
 		<?php echo $this->Form->button('Add to Cart', array('class' => 'btn btn-primary addtocart', 'id' => $product['Product']['id']));?>
 		<?php echo $this->Form->end(); ?>
 

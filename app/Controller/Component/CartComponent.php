@@ -28,7 +28,18 @@ class CartComponent extends Component {
 
 //////////////////////////////////////////////////
 
-	public function add($id, $quantity = 1) {
+	public function add($id, $quantity = 1, $productmodId = null) {
+
+
+		if($productmodId) {
+			$productmod = ClassRegistry::init('Productmod')->find('first', array(
+				'recursive' => -1,
+				'conditions' => array(
+					'Productmod.id' => $productmodId,
+					'Productmod.product_id' => $id,
+				)
+			));
+		}
 
 		if(!is_numeric($quantity)) {
 			$quantity = 1;
@@ -55,6 +66,28 @@ class CartComponent extends Component {
 			return false;
 		}
 
+		if($this->Session->check('Shop.OrderItem.' . $id . '.Product.productmod_name')) {
+			$productmod['Productmod']['id'] = $this->Session->read('Shop.OrderItem.' . $id . '.Product.productmod_id');
+			$productmod['Productmod']['name'] = $this->Session->read('Shop.OrderItem.' . $id . '.Product.productmod_name');
+			$productmod['Productmod']['price'] = $this->Session->read('Shop.OrderItem.' . $id . '.Product.price');
+
+		}
+
+		if($productmod) {
+			$product['Product']['productmod_id'] = $productmod['Productmod']['id'];
+			$product['Product']['productmod_name'] = $productmod['Productmod']['name'];
+			$product['Product']['price'] = $productmod['Productmod']['price'];
+			$productmodId = $productmod['Productmod']['id'];
+			$data['productmod_id'] = $product['Product']['productmod_id'];
+			$data['productmod_name'] = $product['Product']['productmod_name'];
+		} else {
+			$product['Product']['productmod_id'] = '';
+			$product['Product']['productmod_name'] = '';
+			$productmodId = 0;
+			$data['productmod_id'] = '';
+			$data['productmod_name'] = '';
+		}
+
 		$data['product_id'] = $product['Product']['id'];
 		$data['name'] = $product['Product']['name'];
 		$data['weight'] = $product['Product']['weight'];
@@ -63,7 +96,7 @@ class CartComponent extends Component {
 		$data['subtotal'] = sprintf('%01.2f', $product['Product']['price'] * $quantity);
 		$data['totalweight'] = sprintf('%01.2f', $product['Product']['weight'] * $quantity);
 		$data['Product'] = $product['Product'];
-		$this->Session->write('Shop.OrderItem.' . $id, $data);
+		$this->Session->write('Shop.OrderItem.' . $id . '-' . $productmodId, $data);
 		$this->Session->write('Shop.Order.shop', 1);
 
 		$this->Cart = ClassRegistry::init('Cart');

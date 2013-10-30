@@ -92,6 +92,9 @@ class ProductsController extends AppController {
 
 		$this->set(compact('product'));
 
+		$productmods = $this->Product->Productmod->getAllProductMods($product['Product']['id']);
+		$this->set('productmodshtml', $productmods['productmodshtml']);
+
 		$this->set('title_for_layout', $product['Product']['name'] . ' ' . Configure::read('Settings.SHOP_TITLE'));
 
 	}
@@ -410,11 +413,21 @@ class ProductsController extends AppController {
 			));
 			$this->request->data = $product;
 		}
+
+		$this->set(compact('product'));
+
 		$brands = $this->Product->Brand->find('list');
 		$this->set(compact('brands'));
 
 		$categories = $this->Product->Category->generateTreeList(null, null, null, '--');
 		$this->set(compact('categories'));
+
+		$productmods = $this->Product->Productmod->find('all', array(
+			'conditions' => array(
+				'Productmod.product_id' => $product['Product']['id']
+			)
+		));
+		$this->set(compact('productmods'));
 
 	}
 

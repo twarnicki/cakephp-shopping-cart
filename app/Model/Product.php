@@ -84,6 +84,12 @@ class Product extends AppModel {
 
 ////////////////////////////////////////////////////////////
 
+	public $hasMany = array(
+		'Productmod'
+	);
+
+////////////////////////////////////////////////////////////
+
 	public function updateViews($products) {
 
 		if(!isset($products[0])) {

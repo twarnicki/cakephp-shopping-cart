@@ -34,20 +34,36 @@ class ShopController extends AppController {
 
 	public function add() {
 		if ($this->request->is('post')) {
+
 			$id = $this->request->data['Product']['id'];
-			$product = $this->Cart->add($id, 1);
+
+			$quantity = isset($this->request->data['Product']['quantity']) ? $this->request->data['Product']['quantity'] : null;
+
+			$productmodId = isset($this->request->data['mods']) ? $this->request->data['mods'] : null;
+
+			$product = $this->Cart->add($id, $quantity, $productmodId);
 		}
 		if(!empty($product)) {
 			$this->Session->setFlash($product['Product']['name'] . ' was added to your shopping cart.', 'flash_success');
+		} else {
+			$this->Session->setFlash('Unable to add this product to your shopping cart.', 'flash_error');
 		}
-		return $this->redirect($this->referer());
+		$this->redirect($this->referer());
 	}
 
 //////////////////////////////////////////////////
 
 	public function itemupdate() {
 		if ($this->request->is('ajax')) {
-			$this->Cart->add($this->request->data['id'], $this->request->data['quantity']);
+
+			$id = $this->request->data['id'];
+
+			$quantity = isset($this->request->data['quantity']) ? $this->request->data['quantity'] : null;
+
+			$productmodId = isset($this->request->data['mods']) ? $this->request->data['mods'] : null;
+
+			$product = $this->Cart->add($id, $quantity, $productmodId);
+
 		}
 		$cart = $this->Session->read('Shop');
 		echo json_encode($cart);
