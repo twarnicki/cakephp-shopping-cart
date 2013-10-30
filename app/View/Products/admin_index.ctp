@@ -162,7 +162,7 @@ $(document).ready(function() {
 
 <h3>Actions</h3>
 
-<?php echo $this->Html->link('New Product', array('action' => 'add'), array('class' => 'btn btn-default btn-xs')); ?>
+<?php echo $this->Html->link('New Product', array('action' => 'add'), array('class' => 'btn btn-default')); ?>
 
 <br />
 <br />
