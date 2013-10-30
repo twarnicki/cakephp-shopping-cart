@@ -92,7 +92,7 @@ class ProductsController extends AppController {
 
 		$this->set(compact('product'));
 
-		$productmods = $this->Product->Productmod->getAllProductMods($product['Product']['id']);
+		$productmods = $this->Product->Productmod->getAllProductMods($product['Product']['id'], $product['Product']['price']);
 		$this->set('productmodshtml', $productmods['productmodshtml']);
 
 		$this->set('title_for_layout', $product['Product']['name'] . ' ' . Configure::read('Settings.SHOP_TITLE'));

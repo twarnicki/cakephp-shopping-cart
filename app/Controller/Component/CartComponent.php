@@ -30,7 +30,6 @@ class CartComponent extends Component {
 
 	public function add($id, $quantity = 1, $productmodId = null) {
 
-
 		if($productmodId) {
 			$productmod = ClassRegistry::init('Productmod')->find('first', array(
 				'recursive' => -1,
@@ -96,7 +95,7 @@ class CartComponent extends Component {
 		$data['subtotal'] = sprintf('%01.2f', $product['Product']['price'] * $quantity);
 		$data['totalweight'] = sprintf('%01.2f', $product['Product']['weight'] * $quantity);
 		$data['Product'] = $product['Product'];
-		$this->Session->write('Shop.OrderItem.' . $id . '-' . $productmodId, $data);
+		$this->Session->write('Shop.OrderItem.' . $id . '_' . $productmodId, $data);
 		$this->Session->write('Shop.Order.shop', 1);
 
 		$this->Cart = ClassRegistry::init('Cart');

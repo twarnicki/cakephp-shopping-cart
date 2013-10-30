@@ -99,7 +99,8 @@ class ShopController extends AppController {
 		if ($this->request->is('post')) {
 			foreach($this->request->data['Product'] as $key => $value) {
 				$p = explode('-', $key);
-				$this->Cart->add($p[1], $value);
+				$p = explode('_', $p[1]);
+				$this->Cart->add($p[0], $value, $p[1]);
 			}
 			$this->Session->setFlash('Shopping Cart is updated.', 'flash_success');
 		}

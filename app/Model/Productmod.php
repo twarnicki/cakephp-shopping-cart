@@ -16,7 +16,7 @@ class Productmod extends AppModel {
 
 ////////////////////////////////////////////////////////////
 
-	public function getAllProductMods($id) {
+	public function getAllProductMods($id, $price) {
 
 		$productmods = $this->find('all', array(
 			'conditions' => array(
@@ -30,8 +30,8 @@ class Productmod extends AppModel {
 
 		$product_mods = '';
 		if(!empty($productmods)) {
-			$productmodshtml = '<select class="modselector" name="mods" id="mods">';
-			//$productmodshtml .= '<option selected="Make a choice" value="" data-price="'.$price.'"></option>';
+			$productmodshtml = '<select name="mods" id="modselector" class="form-control">';
+			$productmodshtml .= '<option value="" data-price="' . $price . '"></option>';
 			foreach ($productmods as $productmod) {
 				$productmodshtml .= '<option value="' . $productmod['Productmod']['id'] . '" data-price="' . $productmod['Productmod']['price'] . '">' . $productmod['Productmod']['name'] . ' - ($'. $productmod['Productmod']['price'] . ')</option>';
 			}

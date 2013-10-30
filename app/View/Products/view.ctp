@@ -9,10 +9,9 @@ $this->Html->addCrumb($product['Product']['name']);
 <script>
 $(document).ready(function() {
 
-	$('.modselector').change(function(){
+	$('#modselector').change(function(){
 		$('#productprice').html($(this).find(':selected').data('price'));
-
-		 $('#addtocart').attr('mods').val($(this).find(':selected').val());
+		$('#modselected').val($(this).find(':selected').val());
 	});
 
 });
@@ -43,14 +42,17 @@ $(document).ready(function() {
 
 		<?php if(!empty($productmodshtml)):?>
 
-			<br />
+			<div class="row">
+  			<div class="col-sm-5">
 			<span style="font-weight:bold">Product Options:</span> <?php echo $productmodshtml;?>
+			</div>
+			</div>
 			<br />
-			<br />
+			<input type="hidden" id="modselected" value="" />
 
 		<?php endif;?>
 
-		<?php echo $this->Form->button('Add to Cart', array('class' => 'btn btn-primary addtocart', 'id' => 'addtocart', 'mods' => 0, 'id' => $product['Product']['id']));?>
+		<?php echo $this->Form->button('Add to Cart', array('class' => 'btn btn-primary addtocart', 'id' => 'addtocart', 'id' => $product['Product']['id']));?>
 		<?php echo $this->Form->end(); ?>
 
 		<br />

@@ -7,7 +7,7 @@ $(document).ready(function(){
 			url: Shop.basePath + "shop/itemupdate",
 			data: {
 				id: $(this).attr("id"),
-				mods: $(this).attr("mods"),
+				mods: $("#modselected").attr("value"),
 				quantity: 1
 			},
 			dataType: "json",
