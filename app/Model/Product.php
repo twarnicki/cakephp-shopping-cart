@@ -7,38 +7,36 @@ class Product extends AppModel {
 	public $validate = array(
 		'name' => array(
 			'rule1' => array(
-				'rule' => array('notempty'),
-				'message' => 'Name is invalid',
-				//'allowEmpty' => false,
-				//'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'rule' => array('between', 3, 60),
+				'message' => 'Name is required',
+				'allowEmpty' => false,
+				'required' => false,
 			),
 			'rule2' => array(
 				'rule' => array('isUnique'),
-				'message' => 'Name is not uniqie',
-				//'allowEmpty' => false,
-				//'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'message' => 'Name already exists',
+				'allowEmpty' => false,
+				'required' => false,
 			),
 		),
 		'slug' => array(
 			'rule1' => array(
-				'rule' => array('notempty'),
-				'message' => 'Slug is invalid',
-				//'allowEmpty' => false,
-				//'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'rule' => array('between', 3, 50),
+				'message' => 'Slug is required',
+				'allowEmpty' => false,
+				'required' => false,
 			),
 			'rule2' => array(
+				'rule' => '/^[a-z\-]{3,50}$/',
+				'message' => 'Only lowercase letters and dashes, between 3-50 characters',
+				'allowEmpty' => false,
+				'required' => false,
+			),
+			'rule3' => array(
 				'rule' => array('isUnique'),
-				'message' => 'Slug is not uniqie',
-				//'allowEmpty' => false,
-				//'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'message' => 'Slug already exists',
+				'allowEmpty' => false,
+				'required' => false,
 			),
 		),
 		'price' => array(

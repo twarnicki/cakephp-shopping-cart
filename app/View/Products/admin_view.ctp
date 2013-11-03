@@ -30,6 +30,18 @@
 		<td><?php echo h($product['Product']['weight']); ?></td>
 	</tr>
 	<tr>
+		<td>Brand</td>
+		<td><?php echo h($product['Brand']['name']); ?></td>
+	</tr>
+	<tr>
+		<td>Category</td>
+		<td><?php echo h($product['Category']['name']); ?></td>
+	</tr>
+	<tr>
+		<td>Tags</td>
+		<td><?php echo h($product['Product']['tags']); ?></td>
+	</tr>
+	<tr>
 		<td>Active</td>
 		<td><?php echo $this->Html->link($this->Html->image('icon_' . $product['Product']['active'] . '.png'), array('controller' => 'products', 'action' => 'switch', 'active', $product['Product']['id']), array('class' => 'status', 'escape' => false)); ?></td>
 	</tr>
@@ -83,8 +95,11 @@
 
 <?php echo $this->Html->link('Edit Product', array('action' => 'edit', $product['Product']['id']), array('class' => 'btn btn-default')); ?>
 
-<br />
-<br />
+&nbsp; &nbsp;
+
+<?php echo $this->Html->link('Edit Product Tags', array('action' => 'tags', $product['Product']['id']), array('class' => 'btn btn-default')); ?>
+
+&nbsp; &nbsp;
 
 <?php echo $this->Form->postLink('Delete Product', array('action' => 'delete', $product['Product']['id']), array('class' => 'btn btn-danger'), __('Are you sure you want to delete # %s?', $product['Product']['id'])); ?>
 

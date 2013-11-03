@@ -31,6 +31,7 @@
 			<ul class="nav navbar-nav">
 				<li><?php echo $this->Html->link('Brands', array('controller' => 'brands', 'action' => 'index', 'admin' => true)); ?></li>
 				<li><?php echo $this->Html->link('Categories', array('controller' => 'categories', 'action' => 'index', 'admin' => true)); ?></li>
+				<li><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index', 'admin' => true)); ?></li>
 				<li><?php echo $this->Html->link('Products', array('controller' => 'products', 'action' => 'index', 'admin' => true)); ?></li>
 				<li><?php echo $this->Html->link('Product Mods', array('controller' => 'productmods', 'action' => 'index', 'admin' => true)); ?></li>
 				<li><?php echo $this->Html->link('Orders', array('controller' => 'orders', 'action' => 'index', 'admin' => true)); ?></li>

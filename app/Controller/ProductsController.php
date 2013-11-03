@@ -308,6 +308,7 @@ class ProductsController extends AppController {
 		// 		'Category.name' => 'ASC'
 		// 	)
 		// ));
+
 		$categories = $this->Product->Category->generateTreeList(null, null, null, '--');
 
 		$categorieseditable = array();
@@ -318,7 +319,13 @@ class ProductsController extends AppController {
 			);
 		}
 
-		$this->set(compact('products', 'brands', 'brandseditable', 'categorieseditable'));
+		$tags = ClassRegistry::init('Tag')->find('all', array(
+			'order' => array(
+				'Tag.name' => 'ASC'
+			),
+		));
+
+		$this->set(compact('products', 'brands', 'brandseditable', 'categorieseditable', 'tags'));
 
 	}
 
@@ -428,6 +435,60 @@ class ProductsController extends AppController {
 			)
 		));
 		$this->set(compact('productmods'));
+
+	}
+
+////////////////////////////////////////////////////////////
+
+	public function admin_tags($id = null) {
+
+		$tags = ClassRegistry::init('Tag')->find('all', array(
+			'recursive' => -1,
+			'fields' => array(
+				'Tag.name'
+			),
+			'order' => array(
+				'Tag.name' => 'ASC'
+			),
+		));
+		$tags = Hash::combine($tags, '{n}.Tag.name', '{n}.Tag.name');
+		$this->set(compact('tags'));
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+
+			$tagstring = '';
+
+			foreach($this->request->data['Product']['tags'] as $tag) {
+				$tagstring .= $tag . ', ';
+			}
+
+			$tagstring = trim($tagstring);
+			$tagstring = rtrim($tagstring, ',');
+
+			$this->request->data['Product']['tags'] = $tagstring;
+
+			$this->Product->save($this->request->data, false);
+
+			return $this->redirect(array('action' => 'tags', $this->request->data['Product']['id']));
+
+		}
+
+		$product = $this->Product->find('first', array(
+			'conditions' => array(
+				'Product.id' => $id
+			)
+		));
+		if (empty($product)) {
+			throw new NotFoundException('Invalid product');
+		}
+		$this->set(compact('product'));
+
+		$selectedTags = explode(',', $product['Product']['tags']);
+		$selectedTags = array_map('trim', $selectedTags);
+		$this->set(compact('selectedTags'));
+
+		$neighbors = $this->Product->find('neighbors', array('field' => 'id', 'value' => $id));
+		$this->set(compact('neighbors'));
 
 	}
 
