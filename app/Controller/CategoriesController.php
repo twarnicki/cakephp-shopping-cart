@@ -20,7 +20,6 @@ class CategoriesController extends AppController {
 ////////////////////////////////////////////////////////////
 
 	public function view($slug = null) {
-
 		$category = $this->Category->find('first', array(
 			'recursive' => -1,
 			'conditions' => array(
@@ -61,7 +60,6 @@ class CategoriesController extends AppController {
 			'limit' => 50
 		));
 		$this->set(compact('products'));
-
 	}
 
 ////////////////////////////////////////////////////////////
@@ -74,6 +72,17 @@ class CategoriesController extends AppController {
 			)
 		);
 		$this->set('categories', $this->Paginator->paginate());
+
+		$this->helpers[] = 'Tree';
+		$categoriestree = $this->Category->find('all', array(
+			'recursive' => -1,
+			'order' => array(
+				'Category.lft' => 'ASC'
+			),
+			'conditions' => array(
+			),
+		));
+		$this->set(compact('categoriestree'));
 	}
 
 ////////////////////////////////////////////////////////////
@@ -106,9 +115,8 @@ class CategoriesController extends AppController {
 			}
 		}
 
-		$categories = $this->Category->generateTreeList(null, null, null, '--');
-		$this->set(compact('categories'));
-
+		$parents = $this->Category->generateTreeList(null, null, null, ' -- ');
+		$this->set(compact('parents'));
 	}
 
 ////////////////////////////////////////////////////////////
@@ -128,10 +136,8 @@ class CategoriesController extends AppController {
 			$this->request->data = $this->Category->find('first', array('conditions' => array('Category.id' => $id)));
 		}
 
-		$categories = $this->Category->generateTreeList(null, null, null, '--');
-
-		$this->set(compact('categories'));
-
+		$parents = $this->Category->generateTreeList(null, null, null, ' -- ');
+		$this->set(compact('parents'));
 	}
 
 ////////////////////////////////////////////////////////////

@@ -51,3 +51,8 @@
 
 <br />
 <br />
+
+<?php echo $this->Tree->generate($categoriestree, array('element' => 'categories/tree_item', 'class' => 'categorytree', 'id' => 'categorytree')); ?>
+
+<br />
+<br />

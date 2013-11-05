@@ -48,7 +48,7 @@ class Category extends AppModel {
 ////////////////////////////////////////////////////////////
 
 	public $actsAs = array(
-		'Tree' => array('parent' => 'category_id'),
+		'Tree'
 	);
 
 ////////////////////////////////////////////////////////////
@@ -56,7 +56,7 @@ class Category extends AppModel {
 	public $belongsTo = array(
 		'ParentCategory' => array(
 			'className' => 'Category',
-			'foreignKey' => 'category_id',
+			'foreignKey' => 'parent_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -68,7 +68,7 @@ class Category extends AppModel {
 	public $hasMany = array(
 		'ChildCategory' => array(
 			'className' => 'Category',
-			'foreignKey' => 'category_id',
+			'foreignKey' => 'parent_id',
 			'dependent' => false
 		),
 		'Product' => array(

@@ -6,7 +6,7 @@
 
 <?php echo $this->Form->create('Category'); ?>
 <br />
-<?php echo $this->Form->input('category_id', array('class' => 'form-control', 'empty' => true)); ?>
+<?php echo $this->Form->input('parent_id', array('class' => 'form-control', 'empty' => true)); ?>
 <br />
 <?php echo $this->Form->input('name', array('class' => 'form-control')); ?>
 <br />
