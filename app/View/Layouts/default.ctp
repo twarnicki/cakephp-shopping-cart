@@ -89,15 +89,22 @@ $(document).ready(function(){
 
 	<div class="content">
 		<div class="container">
+
 			<?php echo $this->Session->flash(); ?>
 			<br />
 			<ul class="breadcrumb">
 				<?php echo $this->Html->link('Home', array('controller' => 'products', 'action' => 'index')); ?> / <?php echo $this->Html->getCrumbs(' / '); ?>
 			</ul>
+
 			<?php echo $this->fetch('content'); ?>
 			<br />
 			<div id="msg"></div>
 			<br />
+
+			<div class="alert alert-danger">
+				<span class="glyphicon glyphicon-info-sign"></span> THIS IS A DEMO CAKEPHP SHOPPING CART !
+			</div>
+
 		</div>
 	</div>
 

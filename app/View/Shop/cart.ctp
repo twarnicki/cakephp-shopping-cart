@@ -78,10 +78,6 @@ Shopping Cart is empty
 		<br />
 		<br />
 
-		<div class="alert alert-danger">
-			<strong>ATTENTION: THIS IS A DEMO SHOPPING CART !</strong>
-		</div>
-
 		<?php echo $this->Html->link('<i class="glyphicon glyphicon-arrow-right"></i> Checkout', array('controller' => 'shop', 'action' => 'address'), array('class' => 'btn btn-primary', 'escape' => false)); ?>
 
 		<br />

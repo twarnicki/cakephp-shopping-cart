@@ -3,7 +3,7 @@
 <table class="table-striped table-bordered table-condensed table-hover">
 	<tr>
 		<th><?php echo $this->Paginator->sort('id'); ?></th>
-		<th><?php echo $this->Paginator->sort('category_id'); ?></th>
+		<th><?php echo $this->Paginator->sort('parent_id'); ?></th>
 		<th><?php echo $this->Paginator->sort('lft'); ?></th>
 		<th><?php echo $this->Paginator->sort('rght'); ?></th>
 		<th><?php echo $this->Paginator->sort('name'); ?></th>
