@@ -8,8 +8,9 @@ A simple PHP Shopping Cart built with CakePHP PHP framework.
 - PayPal Express Checkout
 - Google Checkout
 - AJAX functions for search autocomplete, shopping cart updates
-- Product Categories
 - Product Brands
+- Product Categories
+- Product Tags
 - Product Options
 
 INCOMPLETE !

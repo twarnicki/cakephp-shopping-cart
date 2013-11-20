@@ -4,8 +4,6 @@
  *
  * DBO-backed object data model, for mapping database tables to CakePHP objects.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -1127,10 +1125,13 @@ class Model extends Object implements CakeEventListener {
 	public function setSource($tableName) {
 		$this->setDataSource($this->useDbConfig);
 		$db = ConnectionManager::getDataSource($this->useDbConfig);
-		$db->cacheSources = ($this->cacheSources && $db->cacheSources);
 
 		if (method_exists($db, 'listSources')) {
+			$restore = $db->cacheSources;
+			$db->cacheSources = ($restore && $this->cacheSources);
 			$sources = $db->listSources();
+			$db->cacheSources = $restore;
+
 			if (is_array($sources) && !in_array(strtolower($this->tablePrefix . $tableName), array_map('strtolower', $sources))) {
 				throw new MissingTableException(array(
 					'table' => $this->tablePrefix . $tableName,
@@ -3196,7 +3197,7 @@ class Model extends Object implements CakeEventListener {
 	}
 
 /**
- * Passes query results through model and behavior afterFilter() methods.
+ * Passes query results through model and behavior afterFind() methods.
  *
  * @param array $results Results to filter
  * @param boolean $primary If this is the primary model results (results from model where the find operation was performed)
