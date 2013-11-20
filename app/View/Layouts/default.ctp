@@ -35,6 +35,13 @@
 <?php echo $this->fetch('css'); ?>
 <?php echo $this->fetch('script'); ?>
 
+<?php if($this->Session->check('Shop')) : ?>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#cartbutton').show();
+});
+</script>
+<?php endif; ?>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -45,15 +52,6 @@
   ga('send', 'pageview');
 
 </script>
-
-<?php if($this->Session->check('Shop')) : ?>
-<script type="text/javascript">
-$(document).ready(function(){
-	$('#cartbutton').show();
-});
-</script>
-<?php endif; ?>
-
 </head>
 <body>
 
