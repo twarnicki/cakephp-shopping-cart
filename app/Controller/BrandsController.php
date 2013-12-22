@@ -107,12 +107,12 @@ class BrandsController extends AppController {
 				$this->Session->setFlash('The brand could not be saved. Please, try again.');
 			}
 		} else {
-			$brands = $this->Brand->find('first', array(
+			$brand = $this->Brand->find('first', array(
 				'conditions' => array(
-					'Brand.id'
+					'Brand.id' => $id
 				)
 			));
-			$this->request->data = $brands;
+			$this->request->data = $brand;
 		}
 	}
 
