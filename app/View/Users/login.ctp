@@ -2,6 +2,7 @@
 
 <br />
 
+<div class="row">
 <div class="col-sm-3">
 
 <?php echo $this->Form->create('User', array('action' => 'login')); ?>
@@ -15,4 +16,5 @@
 <br />
 <br />
 
+</div>
 </div>
