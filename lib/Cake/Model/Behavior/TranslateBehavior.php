@@ -139,6 +139,8 @@ class TranslateBehavior extends ModelBehavior {
 			}
 			unset($this->_joinTable, $this->_runtimeModel);
 			return $query;
+		} elseif (is_string($query['fields'])) {
+			$query['fields'] = String::tokenize($query['fields']);
 		}
 
 		$fields = array_merge(
@@ -305,7 +307,7 @@ class TranslateBehavior extends ModelBehavior {
 					}
 				} else {
 					$value = '';
-					if (!empty($row[$Model->alias][$aliasVirtual])) {
+					if (isset($row[$Model->alias][$aliasVirtual])) {
 						$value = $row[$Model->alias][$aliasVirtual];
 					}
 					$row[$Model->alias][$aliasField] = $value;
