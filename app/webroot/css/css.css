@@ -46,9 +46,9 @@ h1, h2, h3, h4 {
 	color: red;
 }
 
-.debug {
-	font-size: 12px;
-	padding: 10px;
+.sqldump {
+	font-size: 80%;
+	padding: 15px;
 }
 
 .flash-msg {

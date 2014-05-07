@@ -51,18 +51,16 @@
 	</div>
 
 	<div class="content">
-
 		<?php echo $this->Session->flash(); ?>
 		<?php echo $this->fetch('content'); ?>
+	</div>
+
+	<div class="footer">
+		<p>&copy; <?php echo date('Y'); ?> <?php echo env('HTTP_HOST'); ?></p>
+	</div>
+
+	<div class="sqldump">
 		<?php echo $this->element('sql_dump'); ?>
-
-		<br />
-		<br />
-
-		<div class="footetr">
-			<p>&copy; <?php echo date('Y'); ?> <?php echo env('HTTP_HOST'); ?></p>
-		</div>
-
 	</div>
 
 </body>

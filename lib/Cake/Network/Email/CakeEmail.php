@@ -1623,6 +1623,11 @@ class CakeEmail {
 		$View = new $viewClass(null);
 		$View->viewVars = $this->_viewVars;
 		$View->helpers = $this->_helpers;
+
+		if ($this->_theme) {
+			$View->theme = $this->_theme;
+		}
+
 		$View->loadHelpers();
 
 		list($templatePlugin, $template) = pluginSplit($this->_template);
@@ -1632,24 +1637,22 @@ class CakeEmail {
 		} elseif ($layoutPlugin) {
 			$View->plugin = $layoutPlugin;
 		}
-		if ($this->_theme) {
-			$View->theme = $this->_theme;
-		}
-		// Convert null to false, as View needs false to disable
-		// the layout.
-		if ($layout === null) {
-			$layout = false;
-		}
 
 		if ($View->get('content') === null) {
 			$View->set('content', $content);
+		}
+
+		// Convert null to false, as View needs false to disable
+		// the layout.
+		if ($this->_layout === null) {
+			$this->_layout = false;
 		}
 
 		foreach ($types as $type) {
 			$View->hasRendered = false;
 			$View->viewPath = $View->layoutPath = 'Emails' . DS . $type;
 
-			$render = $View->render($template, $layout);
+			$render = $View->render($this->_template, $this->_layout);
 			$render = str_replace(array("\r\n", "\r"), "\n", $render);
 			$rendered[$type] = $this->_encodeString($render, $this->charset);
 		}

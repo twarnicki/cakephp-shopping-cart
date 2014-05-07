@@ -124,7 +124,7 @@ $(document).ready(function(){
 		</div>
 	</div>
 
-	<div class="debug">
+	<div class="sqldump">
 		<?php echo $this->element('sql_dump'); ?>
 	</div>
 
