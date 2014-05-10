@@ -62,6 +62,16 @@ h1, h2, h3, h4 {
 	height: 60px;
 }
 
+.checkbox {
+	padding-left: 20px;
+}
+
+.radio label,
+.checkbox label {
+	display: inline;
+	padding-left: 0px;
+}
+
 .tl { text-align: left }
 .tr { text-align: right }
 .tc { text-align: center }
