@@ -152,18 +152,7 @@
 		<?php echo $this->Form->input('creditcard_year', array(
 			'label' => 'Expiration Year',
 			'class' => 'form-control',
-			'options' => array(
-				'13' => '2013',
-				'14' => '2014',
-				'15' => '2015',
-				'16' => '2016',
-				'17' => '2017',
-				'18' => '2018',
-				'19' => '2019',
-				'20' => '2020',
-				'21' => '2021',
-				'22' => '2022',
-			)
+			'options' => array_combine(range(date('y'), date('y') + 10), range(date('Y'), date('Y') + 10))
 		));?>
 	</div>
 </div>
