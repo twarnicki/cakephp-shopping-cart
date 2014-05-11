@@ -30,6 +30,7 @@ class UsersController extends AppController {
 						'admin' => false
 					));
 				} elseif ($this->Auth->user('role') == 'admin') {
+					$_SESSION['KCEDITOR']['disabled'] = false;
 					return $this->redirect(array(
 						'controller' => 'users',
 						'action' => 'dashboard',
@@ -49,6 +50,8 @@ class UsersController extends AppController {
 
 	public function logout() {
 		$this->Session->setFlash('Good-Bye');
+		$_SESSION['KCEDITOR']['disabled'] = true;
+		unset($_SESSION['KCEDITOR']['disabled']);
 		return $this->redirect($this->Auth->logout());
 	}
 
