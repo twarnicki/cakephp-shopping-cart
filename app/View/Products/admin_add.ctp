@@ -3,7 +3,7 @@
 <br />
 
 <div class="row">
-<div class="col-sm-4">
+<div class="col-sm-5">
 
 <?php echo $this->Form->create('Product'); ?>
 <br />

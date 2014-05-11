@@ -1,9 +1,11 @@
+<?php echo $this->Html->script('ckeditor/ckeditor', array('inline' => false)); ?>
+
 <h2>Admin Edit Product</h2>
 
 <br />
 
 <div class="row">
-<div class="col-sm-4">
+<div class="col-sm-5">
 
 <?php echo $this->Form->create('Product'); ?>
 <?php echo $this->Form->input('id'); ?>
@@ -16,7 +18,7 @@
 <br />
 <?php echo $this->Form->input('slug', array('class' => 'form-control')); ?>
 <br />
-<?php echo $this->Form->input('description', array('class' => 'form-control')); ?>
+<?php echo $this->Form->input('description', array('class' => 'form-control ckeditor')); ?>
 <br />
 <?php echo $this->Form->input('image', array('class' => 'form-control')); ?>
 <br />
