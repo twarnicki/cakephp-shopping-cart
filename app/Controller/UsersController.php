@@ -30,7 +30,12 @@ class UsersController extends AppController {
 						'admin' => false
 					));
 				} elseif ($this->Auth->user('role') == 'admin') {
-					$_SESSION['KCEDITOR']['disabled'] = false;
+					$uploadURL = Router::url('/') . 'app/webroot/upload';
+					$_SESSION['KCFINDER'] = array(
+						'disabled' => false,
+						'uploadURL' => $uploadURL,
+						'uploadDir' => ''
+					);
 					return $this->redirect(array(
 						'controller' => 'users',
 						'action' => 'dashboard',
@@ -51,7 +56,7 @@ class UsersController extends AppController {
 	public function logout() {
 		$this->Session->setFlash('Good-Bye');
 		$_SESSION['KCEDITOR']['disabled'] = true;
-		unset($_SESSION['KCEDITOR']['disabled']);
+		unset($_SESSION['KCEDITOR']);
 		return $this->redirect($this->Auth->logout());
 	}
 

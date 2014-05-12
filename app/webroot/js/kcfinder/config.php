@@ -16,16 +16,16 @@
    even if you are using session configuration.
    See http://kcfinder.sunhater.com/install for setting descriptions */
 
-session_name("CAKEPHP"); //Same as the value you have for 'Session.cookie' in core.php
+session_name("CAKEPHP");
 session_start();
-$auth = !isset($_SESSION['KCEDITOR']['disabled']) ? true : false;
 
 $_CONFIG = array(
 
+
 // GENERAL SETTINGS
 
-    'disabled' => $auth,
-    'uploadURL' => "/app/webroot/upload",
+    'disabled' => true,
+    'uploadURL' => "upload",
     'uploadDir' => "",
     'theme' => "default",
 
@@ -68,7 +68,7 @@ $_CONFIG = array(
 // PERMISSION SETTINGS
 
     'dirPerms' => 0755,
-    'filePerms' => 0644,
+    'filePerms' => 0755,
 
     'access' => array(
 

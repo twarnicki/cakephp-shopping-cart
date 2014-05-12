@@ -1,4 +1,4 @@
-<?php echo $this->Html->script('ckeditor/ckeditor', array('inline' => false)); ?>
+
 
 <h2>Admin Edit Product</h2>
 
@@ -36,6 +36,23 @@
 
 </div>
 </div>
+
+<?php echo $this->Html->script('ckeditor/ckeditor', array('inline' => false)); ?>
+
+<script type="text/javascript">
+
+	var basePath = "<?php echo Router::url('/'); ?>";
+
+	CKEDITOR.replace('ProductDescription', {
+		filebrowserBrowseUrl : basePath + 'js/kcfinder/browse.php?type=files',
+		filebrowserImageBrowseUrl : basePath + 'js/kcfinder/browse.php?type=images',
+		filebrowserFlashBrowseUrl : basePath + 'js/kcfinder/browse.php?type=flash',
+		filebrowserUploadUrl : basePath + 'js/kcfinder/upload.php?type=files',
+		filebrowserImageUploadUrl : basePath + 'js/kcfinder/upload.php?type=images',
+		filebrowserFlashUploadUrl : basePath + 'js/kcfinder/upload.php?type=flash'
+	});
+
+</script>
 
 
 <br />
