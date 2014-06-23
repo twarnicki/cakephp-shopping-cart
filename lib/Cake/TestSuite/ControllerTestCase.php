@@ -48,6 +48,8 @@ class ControllerTestDispatcher extends Dispatcher {
 /**
  * Returns the test controller
  *
+ * @param CakeRequest $request The request instance.
+ * @param CakeResponse $response The response instance.
  * @return Controller
  */
 	protected function _getController($request, $response) {
@@ -215,11 +217,11 @@ abstract class ControllerTestCase extends CakeTestCase {
 	protected function _testAction($url = '', $options = array()) {
 		$this->vars = $this->result = $this->view = $this->contents = $this->headers = null;
 
-		$options = array_merge(array(
+		$options += array(
 			'data' => array(),
 			'method' => 'POST',
 			'return' => 'result'
-		), $options);
+		);
 
 		$restore = array('get' => $_GET, 'post' => $_POST);
 

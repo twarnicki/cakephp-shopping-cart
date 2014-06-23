@@ -79,9 +79,11 @@ class ShellDispatcher {
 		}
 
 		if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-			define('DS', DIRECTORY_SEPARATOR);
 			define('CAKE_CORE_INCLUDE_PATH', dirname(dirname(dirname(__FILE__))));
 			define('CAKEPHP_SHELL', true);
+			if (!defined('DS')) {
+				define('DS', DIRECTORY_SEPARATOR);
+			}
 			if (!defined('CORE_PATH')) {
 				define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
 			}
@@ -311,13 +313,13 @@ class ShellDispatcher {
 			$params = str_replace('/', '\\', $params);
 		}
 
-		$this->params = array_merge($this->params, $params);
+		$this->params = $params + $this->params;
 	}
 
 /**
  * Parses out the paths from from the argv
  *
- * @param array $args
+ * @param array $args The argv to parse.
  * @return void
  */
 	protected function _parsePaths($args) {

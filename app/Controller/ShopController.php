@@ -116,14 +116,6 @@ class ShopController extends AppController {
 
 //////////////////////////////////////////////////
 
-	public function googlecheckout() {
-		$this->helpers[] = 'Google';
-		$shop = $this->Session->read('Shop');
-		$this->set(compact('shop'));
-	}
-
-//////////////////////////////////////////////////
-
 	public function address() {
 
 		$shop = $this->Session->read('Shop');

@@ -87,8 +87,6 @@ Shopping Cart is empty
 		<input type='image' name='submit' src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' border='0' align='top' alt='Check out with PayPal' class="sbumit" />
 		<?php echo $this->Form->end(); ?>
 
-		<?php echo $this->Html->image('https://checkout.google.com/buttons/checkout.gif?w=180&h=46&style=white&variant=text&loc=en_US', array('url' => array('controller' => 'shop', 'action' => 'googlecheckout'))); ?>
-
 	</div>
 </div>
 

@@ -1,12 +1,11 @@
 A simple PHP Shopping Cart built with CakePHP PHP framework.
 
-- CakePHP 2.4 rapid development php framework
+- CakePHP 2.5 rapid development php framework
 - CakePHP DebugKit
 - Bootstrap 3 front-end framework with Mobile Friendly Responsive design
-- jQuery, jQuery UI JavaScript Library,
+- jQuery, jQuery UI JavaScript Library
 - Authorize.net Payment Gateway for Credit Card Payment
 - PayPal Express Checkout
-- Google Checkout
 - AJAX functions for search autocomplete, shopping cart updates
 - Product Brands
 - Product Categories
@@ -19,7 +18,7 @@ INCOMPLETE !
 
 CakePHP Shopping Cart Demo:
 
-http://www.shoppingcartcore.com/
+http://www.shoppingcartcore.com
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -40,8 +39,8 @@ Dont forget to change passwords, salt in core.php, etc...
 
 ////////////////////////////////////////////////////////////////////
 
-http://andraskende.github.com/cakephp-shopping-cart/
+http://andraskende.github.com/cakephp-shopping-cart
 
-http://www.shoppingcartcore.com/
+http://www.shoppingcartcore.com
 
-Andras Kende http://www.kende.com/
+Andras Kende http://www.kende.com

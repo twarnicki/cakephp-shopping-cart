@@ -365,6 +365,7 @@ class AuthComponent extends Component {
 			return false;
 		}
 		if (!empty($this->ajaxLogin)) {
+			$controller->response->statusCode(403);
 			$controller->viewPath = 'Elements';
 			echo $controller->render($this->ajaxLogin, $this->RequestHandler->ajaxLayout);
 			$this->_stop();
@@ -511,7 +512,7 @@ class AuthComponent extends Component {
  * `$this->Auth->allow('edit', 'add');` or
  * `$this->Auth->allow();` to allow all actions
  *
- * @param string|array $action,... Controller action name or array of actions
+ * @param string|array $action Controller action name or array of actions
  * @return void
  * @link http://book.cakephp.org/2.0/en/core-libraries/components/authentication.html#making-actions-public
  */
@@ -536,7 +537,7 @@ class AuthComponent extends Component {
  * `$this->Auth->deny('edit', 'add');` or
  * `$this->Auth->deny();` to remove all items from the allowed list
  *
- * @param string|array $action,... Controller action name or array of actions
+ * @param string|array $action Controller action name or array of actions
  * @return void
  * @see AuthComponent::allow()
  * @link http://book.cakephp.org/2.0/en/core-libraries/components/authentication.html#making-actions-require-authorization
@@ -775,6 +776,10 @@ class AuthComponent extends Component {
 			unset($config[AuthComponent::ALL]);
 		}
 		foreach ($config as $class => $settings) {
+			if (!empty($settings['className'])) {
+				$class = $settings['className'];
+				unset($settings['className']);
+			}
 			list($plugin, $class) = pluginSplit($class, true);
 			$className = $class . 'Authenticate';
 			App::uses($className, $plugin . 'Controller/Component/Auth');
@@ -808,6 +813,7 @@ class AuthComponent extends Component {
  * Check whether or not the current user has data in the session, and is considered logged in.
  *
  * @return boolean true if the user is logged in, false otherwise
+ * @deprecated Since 2.5. Use AuthComponent::user() directly.
  */
 	public function loggedIn() {
 		return (bool)$this->user();

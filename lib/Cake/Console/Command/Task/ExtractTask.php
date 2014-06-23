@@ -127,7 +127,7 @@ class ExtractTask extends AppShell {
 			);
 			$response = $this->in($message, null, $defaultPath);
 			if (strtoupper($response) === 'Q') {
-				$this->out(__d('cake_console', 'Extract Aborted'));
+				$this->err(__d('cake_console', 'Extract Aborted'));
 				return $this->_stop();
 			} elseif (strtoupper($response) === 'D' && count($this->_paths)) {
 				$this->out();
@@ -204,7 +204,7 @@ class ExtractTask extends AppShell {
 			while (true) {
 				$response = $this->in($message, null, rtrim($this->_paths[0], DS) . DS . 'Locale');
 				if (strtoupper($response) === 'Q') {
-					$this->out(__d('cake_console', 'Extract Aborted'));
+					$this->err(__d('cake_console', 'Extract Aborted'));
 					return $this->_stop();
 				} elseif ($this->_isPathUsable($response)) {
 					$this->_output = $response . DS;
@@ -242,10 +242,10 @@ class ExtractTask extends AppShell {
  *
  * Takes care of duplicate translations
  *
- * @param string $category
- * @param string $domain
- * @param string $msgid
- * @param array $details
+ * @param string $category The category
+ * @param string $domain The domain
+ * @param string $msgid The message string
+ * @param array $details The file and line references
  * @return void
  */
 	protected function _addTranslation($category, $domain, $msgid, $details = array()) {
@@ -296,52 +296,55 @@ class ExtractTask extends AppShell {
 	}
 
 /**
- * Get & configure the option parser
+ * Gets the option parser instance and configures it.
  *
- * @return void
+ * @return ConsoleOptionParser
  */
 	public function getOptionParser() {
 		$parser = parent::getOptionParser();
-		return $parser->description(__d('cake_console', 'CakePHP Language String Extraction:'))
-			->addOption('app', array('help' => __d('cake_console', 'Directory where your application is located.')))
-			->addOption('paths', array('help' => __d('cake_console', 'Comma separated list of paths.')))
-			->addOption('merge', array(
-				'help' => __d('cake_console', 'Merge all domain and category strings into the default.po file.'),
-				'choices' => array('yes', 'no')
-			))
-			->addOption('output', array('help' => __d('cake_console', 'Full path to output directory.')))
-			->addOption('files', array('help' => __d('cake_console', 'Comma separated list of files.')))
-			->addOption('exclude-plugins', array(
-				'boolean' => true,
-				'default' => true,
-				'help' => __d('cake_console', 'Ignores all files in plugins if this command is run inside from the same app directory.')
-			))
-			->addOption('plugin', array(
-				'help' => __d('cake_console', 'Extracts tokens only from the plugin specified and puts the result in the plugin\'s Locale directory.')
-			))
-			->addOption('ignore-model-validation', array(
-				'boolean' => true,
-				'default' => false,
-				'help' => __d('cake_console', 'Ignores validation messages in the $validate property.' .
-					' If this flag is not set and the command is run from the same app directory,' .
-					' all messages in model validation rules will be extracted as tokens.')
-			))
-			->addOption('validation-domain', array(
-				'help' => __d('cake_console', 'If set to a value, the localization domain to be used for model validation messages.')
-			))
-			->addOption('exclude', array(
-				'help' => __d('cake_console', 'Comma separated list of directories to exclude.' .
-					' Any path containing a path segment with the provided values will be skipped. E.g. test,vendors')
-			))
-			->addOption('overwrite', array(
-				'boolean' => true,
-				'default' => false,
-				'help' => __d('cake_console', 'Always overwrite existing .pot files.')
-			))
-			->addOption('extract-core', array(
-				'help' => __d('cake_console', 'Extract messages from the CakePHP core libs.'),
-				'choices' => array('yes', 'no')
-			));
+
+		$parser->description(
+			__d('cake_console', 'CakePHP Language String Extraction:')
+		)->addOption('app', array(
+			'help' => __d('cake_console', 'Directory where your application is located.')
+		))->addOption('paths', array(
+			'help' => __d('cake_console', 'Comma separated list of paths.')
+		))->addOption('merge', array(
+			'help' => __d('cake_console', 'Merge all domain and category strings into the default.po file.'),
+			'choices' => array('yes', 'no')
+		))->addOption('output', array(
+			'help' => __d('cake_console', 'Full path to output directory.')
+		))->addOption('files', array(
+			'help' => __d('cake_console', 'Comma separated list of files.')
+		))->addOption('exclude-plugins', array(
+			'boolean' => true,
+			'default' => true,
+			'help' => __d('cake_console', 'Ignores all files in plugins if this command is run inside from the same app directory.')
+		))->addOption('plugin', array(
+			'help' => __d('cake_console', 'Extracts tokens only from the plugin specified and puts the result in the plugin\'s Locale directory.')
+		))->addOption('ignore-model-validation', array(
+			'boolean' => true,
+			'default' => false,
+			'help' => __d('cake_console', 'Ignores validation messages in the $validate property.' .
+				' If this flag is not set and the command is run from the same app directory,' .
+				' all messages in model validation rules will be extracted as tokens.'
+			)
+		))->addOption('validation-domain', array(
+			'help' => __d('cake_console', 'If set to a value, the localization domain to be used for model validation messages.')
+		))->addOption('exclude', array(
+			'help' => __d('cake_console', 'Comma separated list of directories to exclude.' .
+				' Any path containing a path segment with the provided values will be skipped. E.g. test,vendors'
+			)
+		))->addOption('overwrite', array(
+			'boolean' => true,
+			'default' => false,
+			'help' => __d('cake_console', 'Always overwrite existing .pot files.')
+		))->addOption('extract-core', array(
+			'help' => __d('cake_console', 'Extract messages from the CakePHP core libs.'),
+			'choices' => array('yes', 'no')
+		));
+
+		return $parser;
 	}
 
 /**
@@ -579,10 +582,10 @@ class ExtractTask extends AppShell {
 /**
  * Prepare a file to be stored
  *
- * @param string $category
- * @param string $domain
- * @param string $header
- * @param string $sentence
+ * @param string $category The category
+ * @param string $domain The domain
+ * @param string $header The header content.
+ * @param string $sentence The sentence to store.
  * @return void
  */
 	protected function _store($category, $domain, $header, $sentence) {
@@ -675,7 +678,7 @@ class ExtractTask extends AppShell {
 /**
  * Get the strings from the position forward
  *
- * @param integer $position Actual position on tokens array
+ * @param integer &$position Actual position on tokens array
  * @param integer $target Number of strings to extract
  * @return array Strings extracted
  */
@@ -731,16 +734,16 @@ class ExtractTask extends AppShell {
  * @return void
  */
 	protected function _markerError($file, $line, $marker, $count) {
-		$this->out(__d('cake_console', "Invalid marker content in %s:%s\n* %s(", $file, $line, $marker));
+		$this->err(__d('cake_console', "Invalid marker content in %s:%s\n* %s(", $file, $line, $marker));
 		$count += 2;
 		$tokenCount = count($this->_tokens);
 		$parenthesis = 1;
 
 		while ((($tokenCount - $count) > 0) && $parenthesis) {
 			if (is_array($this->_tokens[$count])) {
-				$this->out($this->_tokens[$count][1], false);
+				$this->err($this->_tokens[$count][1], false);
 			} else {
-				$this->out($this->_tokens[$count], false);
+				$this->err($this->_tokens[$count], false);
 				if ($this->_tokens[$count] === '(') {
 					$parenthesis++;
 				}
@@ -751,7 +754,7 @@ class ExtractTask extends AppShell {
 			}
 			$count++;
 		}
-		$this->out("\n", true);
+		$this->err("\n", true);
 	}
 
 /**
