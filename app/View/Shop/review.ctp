@@ -113,7 +113,7 @@
 
 <?php echo $this->Form->create('Order'); ?>
 
-<?php if($shop['Order']['order_type'] == 'creditcard'): ?>
+<?php if((Configure::read('Settings.AUTHORIZENET_ENABLED') == 1) && $shop['Order']['order_type'] == 'creditcard') : ?>
 
 <div id="ccbox">
 	Credit Card Type.
