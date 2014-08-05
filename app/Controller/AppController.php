@@ -52,7 +52,7 @@ class AppController extends Controller {
 		$this->Auth->authorize = array('Controller');
 
 		$this->Auth->authenticate = array(
-			AuthComponent::ALL => array(
+			'Form' => array(
 				'userModel' => 'User',
 				'fields' => array(
 					'username' => 'username',
@@ -61,7 +61,7 @@ class AppController extends Controller {
 				'scope' => array(
 					'User.active' => 1,
 				)
-			), 'Form'
+			)
 		);
 
 		if(isset($this->request->params['admin']) && ($this->request->params['prefix'] == 'admin')) {
